@@ -9,7 +9,7 @@ RUN apt-get update; \
  
 RUN apt-get -y install g++ cmake 
 RUN  mkdir -p  /home/git/gitProjectForEclipse/src
-COPY ./src/*  /home/git/gitProjectForEclipse/src/
+COPY src  /home/git/gitProjectForEclipse/src/
 RUN  mkdir  /home/git/gitProjectForEclipse/src/build
 
 WORKDIR  /home/git/gitProjectForEclipse/src/build
