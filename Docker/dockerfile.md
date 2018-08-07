@@ -38,6 +38,15 @@ ldd hello
     
     
 
+构建：
+基于最后一步成功的镜像，测试dockerfile
+
+docker run -t -i secess_imagsId /bin/bash 
+
+
+
+Dockerfile语法
+
 
 
 ENV REFRESH_AT XXXX_XX_XX
