@@ -1,0 +1,25 @@
+
+
+本文件是为了练习 git的使用的
+
+第二次修改
+第三次修改
+   change in stash the filce 
+dev 第一次修改
+冲突行11111111
+
+fast forward test 
+
+NO FAST FORWOARD test
+
+
+some change to stash 
+第 5次修改
+
+git diff tool
+
+
+第六次修改
+
+# eight edit
+# nie  edit

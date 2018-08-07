@@ -1,0 +1,14 @@
+/*
+ * Simple1.cpp
+ *
+ *  Created on: 2017Äê9ÔÂ27ÈÕ
+ *      Author: Administrator
+ */
+
+
+
+#include "Simple1.h"
+int Add (int i ,int j)
+{
+    return (i+j);
+}

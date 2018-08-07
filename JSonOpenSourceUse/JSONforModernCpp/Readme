@@ -1,0 +1,5 @@
+JSONforModernCpp 
+
+
+#使用 single_include\nlohmann\json.hpp这一个单独的文件即可
+# 一篇使用示例 https://blog.csdn.net/forrid/article/details/78867679

@@ -1,0 +1,39 @@
+#cmake 会生成makefile 和这个makefile冲突了，将其改名为makefile_lpf
+# 目标文件
+objects=0main.o\
+		char.o\
+		copyControl.o\
+		Define.o\
+		derector.o\
+		Diameter.o\
+		duck.o\
+		erweiChar.o\
+		file.o\
+		FuncPointer.o\
+		MyMapTest.o\
+		PointerAndRef.o\
+		reloadOpr.o\
+		skiplist2.o\
+		skiplist.o\
+		SmartPointer.o\
+		struct.o\
+		test.o\
+		testiostream.o\
+		time.o\
+		za.o\
+		zuhe.o\
+		c11.o\
+		debugTest.o
+# 编译选项	
+# CC Compiler Flags  
+CXXFLAGS=  -g -Wall -std=c++11
+
+
+# 编译规则		
+all:$(objects)
+	$(CXX)  -o  mygitEclipse $(objects)
+
+PHONY : clean
+clean :
+	-rm mygitEclipse $(objects)
+	

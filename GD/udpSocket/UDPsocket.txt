@@ -1,0 +1,14 @@
+tcp和udp区别主要在于以下几点
+1. UDP Server不需要调用listen和accept
+2. UDP收发数据用 sendto/recvfrom函数
+3. TCP：地址信息在connect/accept时确定
+4. UDP：在 sendto/recvfrom函数中每次均 需指定地址信息
+
+在建立一个sokcet的时候（sockfd = socket(AF_INET, SOCK_DGRAM,
+0);）对于UDP的socket，一般指明socket的类型为SOCK_DGRAM类型。
+在UDP的sendto中sendto(sockfd, mesg, n, 0, pcliaddr,
+len);指明了需要发送的客户端地址，而在tcp的socket中send函数需要指明的
+是一个客户端连接服务器端的连接的标志。
+
+
+

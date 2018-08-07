@@ -1,0 +1,463 @@
+zkCli.sh
+./zkCli.sh -server  10.45.7.168:2181
+
+
+分布式服务管理框架-Zookeeper节点ACL
+https://blog.csdn.net/xyang81/article/details/53147894
+
+
+https://blog.csdn.net/xyang81/article/details/53053642
+
+1、查询子节点列表
+语法：ls path 
+path：节点路径
+
+shell> ls /
+[zookeeper]
+1
+2
+目前根节点下只有zookeeper一个节点，是zk默认创建的，用于存储节点的一些状态信息，比如节点配额。
+
+2、创建节点
+语法：create path [-s] [-e] data acl 
+path：节点路径 
+-s：指定该节点是一个序列节点，创建同名的节点时，会给节点自动加上编号 
+-e：指定该节点是一个临时节点，默认是永久节点。临时节点会在客户端与服务器断开连接时，zk会将其创建的所有临时节点全部删除 
+data：存储在节点中的数据 
+acl：设置子节点访问权限，默认所有人都可以对该节点进行读写操作
+
+# 1> 在根目录创建了一个`node_01`的节点，指定的数据为mydata
+shell> create /node_01 mydata
+Created /node_01
+shell> ls /
+[node_01, zookeeper]
+
+# 2> 创建一个临时节点（创建之后，可退出客户端重新登录查看该节点是否存在，来验证临时节点是否被删除）
+shell> create -e /node_02 "i is a ephemeral node"
+Created /node_02
+
+# 3> 创建一个序列临时节点
+shell> create -s -e /node_03 'i is a ephemeral sequence node'
+Created /node_03
+
+# 4> 创建一个永久序列节点（节点会自动加上编号）
+shell> create -s /node_04 data
+Created /node_040000000012
+shell> create -s /node_04 data
+Created /node_040000000013
+shell> create -s /node_04 data
+Created /node_040000000014
+
+# 5> 创建一个带权限的节点，限制只能IP为192.168.1.101这台机器访问
+## c：创建子节点权限  
+## d：删除子节点权限
+## r：读取子节点列表的权限
+## w：写权限，即修改子节点数据权限
+## a：管理子节点权限
+shell> create /node_04 mydata ip:192.168.1.101:cdrwa
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+注意：创建节点必须要为节点设置数据，否则会创建不成功。
+
+3、获取节点状态
+每个节点都包含描述该节点的一些状态信息，比如：节点数据、版本号等。 
+语法：stat path [watch] 
+path：节点全路径 
+watch：监听节点状态变化
+
+shell> stat /node_01 
+cZxid = 0x2f
+ctime = Sat Nov 12 15:54:05 CST 2016
+mZxid = 0x2f
+mtime = Sat Nov 12 15:54:05 CST 2016
+pZxid = 0x2f
+cversion = 0
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x0
+dataLength = 6
+numChildren = 0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+在ZK中，ZK客户端对服务器每一个数据节点的写操作，ZK会认为都是一次完整的事务操作，要么成功，要么失败，保证了数据的原子性。而每次事务都会分配一个唯一的事务id，以标识这次事务操作的数据信息。下面详细理解一下节点状态各个字段的含义： 
+cZxid：创建节点的事务id 
+ctime：创建节点的时间 
+mZxid：修改节点的事务id 
+mtime：修改节点的时间 
+pZxid：子节点列表最后一次修改的事务id。删除或添加子节点，不包含修改子节点的数据。 
+cversion：子节点的版本号，删除或添加子节点，版本号会自增 
+dataVersion：节点数据版本号，数据写入操作，版本号会递增 
+aclVersion：节点ACL权限版本，权限写入操作，版本号会递增 
+ephemeralOwner：临时节点创建时的事务id，如果节点是永久节点，则它的值为0 
+dataLength：节点数据长度（单位：byte），中文占3个byte 
+numChildren：子节点数量
+
+4、获取节点数据
+语法：get path [watch] 
+path：节点路径 
+watch：监听节点数据变化。如果其它客户端修改了该节点的数据，则会通知监听了该节点的所有客户端
+
+shell> get /node_01
+mydata
+cZxid = 0x2f
+ctime = Sat Nov 12 15:54:05 CST 2016
+mZxid = 0x2f
+mtime = Sat Nov 12 15:54:05 CST 2016
+pZxid = 0x2f
+cversion = 0
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x0
+dataLength = 6
+numChildren = 0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+/node_01的节点数据为mydata，即节点状态信息的第一行
+
+5、设置节点数据
+语法：set path data [version] 
+path：节点路径 
+data：节点数据 
+version：数据版本号（节点状态dataVersion的值）
+
+shell> set /node_01 hello
+cZxid = 0x2f
+ctime = Sat Nov 12 15:54:05 CST 2016
+mZxid = 0x30
+mtime = Sat Nov 12 15:55:01 CST 2016
+pZxid = 0x2f
+cversion = 0
+dataVersion = 1
+aclVersion = 0
+ephemeralOwner = 0x0
+dataLength = 5
+numChildren = 0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+此时可以看到dataVersion状态的值变成了1。默认不加版本号则会覆盖节点之前设置的数据，如果加上版本号，版本号必须和服务器上的版本号一致，否则会报错，如下所示：
+
+shell> set /node_01 updatedata 2
+version No is not valid : /node_01
+1
+2
+这种机制和数据库中的乐观索机制非常相似。
+
+想象一种场景，在获取某个节点的数据之后，利用数据处理完业务逻辑，不加版本号，直接修改节点的数据。但在获取和修改节点数据的这一小段时间窗内，很有可能有其它客户端也修改了该节点的数据，而节点数据变化会使节点状态的dataVersion值递增。如果我们获取节点数据处理完成自己的业务逻辑，然后不加上版本号直接修改节点数据时，则会覆盖掉其它客户端修改的最新数据，从而导致数据不一致的情况。所以要保证数据的一致性时，修改节点数据时，应该加上最新的版本号。而在这个场景中，我们在处理完业务逻辑，再修改节点数据时带上节点的版本号，这时若有其它节点修改了数据，修改则会失败。此时我们应该马上再获取一次节点的最新版本号，再做修改。
+
+6、查询子节点列表及状态信息
+语法：ls2 path [watch] 
+path：节点路径 
+watch：是否监听子节点列表变化通知
+
+# 先在/node_1节点下创建几个子节点
+shell> create /node_01/node_01_01 abc
+Created /node_01/node_01_01
+shell> create /node_01/node_01_02 def
+Created /node_01/node_01_02
+shell> ls2 /node_01
+[node_01_01, node_01_02]
+cZxid = 0x2f
+ctime = Sat Nov 12 15:54:05 CST 2016
+mZxid = 0x30
+mtime = Sat Nov 12 15:55:01 CST 2016
+pZxid = 0x39
+cversion = 2
+dataVersion = 1
+aclVersion = 0
+ephemeralOwner = 0x0
+dataLength = 5
+numChildren = 2
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+第一行是/node_01的子节点列表，后面的信息是/node_01节点的状态信息。和ls命令不一样的是，ls2不仅能查询节点的子节点列表，同时也能查询到节点的状态信息。
+
+7、删除节点
+语法：delete path [version] 
+path：节点路径 
+version：节点版本号（节点状态cversion的值），可选。如果传递了版本号，则必须保证和服务器的版本号一致，否则会报错：version No is not valid : 节点路径
+
+shell> delete /path/node_01/node_01_01
+1
+注意：delete只能删除没有子节点的节点，否则会报错，如下所示：
+
+shell> delete /node_01
+Node not empty: /node_01
+1
+2
+8、删除节点（包括子节点）
+语法：rmr path 
+path：节点路径
+
+shell> rmr /node_01
+1
+rmr会递归删除子节点，再删除节点本身
+
+9、设置节点配额
+节点可以存储数据，也可以创建子节点，但是如果不做控制，节点数据可以无限大，子节点数量也可以创建无数个，所以在有些场景下需要对节点的数据和子节点的数量需要做一些限制，zk为我们提供了setauota命令实现对子节点的限制功能。但是，zk并不是真正在的物理上对节点做了限制，而是如果超过了节点限制，会在zk的日志文件中记录配额超限的警告信息。
+
+语法：setquota -n|-b val path 
+-n：限制子节点的数量 
+-b：限制节点的数据长度 
+val：根据-n和-b参数不同，val值的意义也不一样。如果是-n参数，val表示限制子节点的数量。如果是-b参数，val表示限制节点的数据长度 
+path：节点路径
+
+shell> setquota -n 2 /node_01
+Comment: the parts are option -n val 2 path /node_01
+1
+2
+上面我对/node_01限制它最多只能有2个子节点，下面我在/node_01节点下创建3个节点看看效果：
+
+shell> create /node_01/node_01_01 abc
+Created /node_01/node_01_01
+shell> create /node_01/node_01_02 abc
+Created /node_01/node_01_02
+shell> create /node_01/node_01_03 abc
+Created /node_01/node_01_03
+1
+2
+3
+4
+5
+6
+你可能会觉得奇怪，我明明限制了/node_01节点最多只能有2个节点，在创建第3个节点的时候并没有报错，也创建成功了，为什么限制没有起作用呢？ 在上面我也提到了，zk并没有在物理上限制节点的数量和数据的长度，当节点超过了限制，zk只会在后台记录节点限制的日志信息。下面我们看下zk日志文件中输出的节点配额限制警告信息：
+
+shell> tail /var/log/zookeeper/zookeeper.log
+...
+2016-11-12 17:29:20,196 [myid:] - WARN  [SyncThread:0:DataTree@301] - Quota exceeded: /node_01 count=3 limit=2
+1
+2
+3
+日志中输出的警告信息count=3，表示/node_01节点当前有3个子节点。limit=2，表示/node_01节点最多只能有2个节点。
+
+zk默认会在启动服务的目录生成一个zookeeper.out日志文件，即执行zkServer.sh start命令的目录。我修改了zk默认日志文件目录为/var/log/zookeeper，你也可以参考《分布式服务管理框架-Zookeeper日志配置》自行修改。
+
+10、查询节点配额
+语法：listquota path 
+path：节点路径
+
+shell> listquota /node_01
+absolute path is /zookeeper/quota/node_01/zookeeper_limits
+Output quota for /node_01 count=2,bytes=-1
+Output stat for /node_01 count=4,bytes=12
+1
+2
+3
+4
+Output quota：表示节点的配额信息，限制该节点最多有2个子节点，节点数据为-1，表示不限制 
+Output stat：表示当前节点的状态信息，该节点有4个子节点，节点数据长度为12
+
+11、删除节点配额
+语法：delquota [-n|-b] path 
+-n：删除子节点数量配额限制 
+-b：删除节点数据长度配额限制 
+path：节点路径
+
+# 删除/node_01节点子节点数量限制
+shell> delquota -n /node_01
+shell> listquota /node_01
+absolute path is /zookeeper/quota/node_01/zookeeper_limits
+# count=-1表示没有子节点数量限制
+Output quota for /node_01 count=-1,bytes=-1
+Output stat for /node_01 count=4,bytes=12
+1
+2
+3
+4
+5
+6
+7
+12、获取节点ACL
+ACL是zk对节点权限控制的一种策略 
+语法：getAcl path 
+path：节点路径
+
+shell> getAcl /node_01
+'world,'anyone
+: cdrwa
+1
+2
+3
+创建节点时如果没有设置acl权限，默认为所有用户都可以对该节点进行读写操作。
+
+13、设置节点ACL
+语法：setAcl path acl 
+path：节点路径 
+acl：ACL权限模式
+
+shell> setAcl /node_01 ip:192.168.1.101:rcdwa
+cZxid = 0x65
+ctime = Sat Nov 12 17:29:06 CST 2016
+mZxid = 0x65
+mtime = Sat Nov 12 17:29:06 CST 2016
+pZxid = 0x68
+cversion = 3
+dataVersion = 0
+aclVersion = 1
+ephemeralOwner = 0x0
+dataLength = 3
+numChildren = 3
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+设置/node_01节点，只允许IP为192.168.1.101的客户端访读写/node_01的数据，但不允许创建、查询、删除子节点和不允许设置节点权限。节点ACL详细介绍请参考《分布式服务管理框架-Zookeeper节点ACL》
+
+14、给当前客户端添加授权信息
+语法：addauth scheme auth 
+scheme：授权方式 
+auth：权限 
+addauth一般用于digest授权方式添加授权信息。digest是用户名和密码授权，语法：username:BASE64(SHA1(password))
+
+shell> addauth digest yangxin:123456
+1
+给当前客户端添加授权信息，授权模式为digest（用户名/密码授权），用户名为yangxin，密码为123456
+
+15、查看历史命令
+可查询之前执行过的命令，会列出前最后10条命令，和linux中的history命令功能一样
+
+shell> history
+11 - setAcl /node_04 ip:192.168.1.101:cra
+12 - setAcl /node_04 ip:192.168.1.101:craw
+13 - create /node_04/node_04_01 aaa
+14 - delete /node_04/node_04_01
+15 - get /node_04/node_04_01
+16 - getAcl /node_04/node_04_01
+17 - getAcl /node_04
+18 - h
+19 - addauth ip rwcda
+20 - getAcl /node_04
+21 - history
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+16、执行历史命令
+语法：redo cmdno 
+cmdno：历史命令编号
+
+shell>redo 17
+'ip,'192.168.1.101
+: crwa
+1
+2
+3
+和linux中!命令编号命令的作用一样
+
+17、与leader同步数据
+语法：sync path 
+path：节点路径
+
+在对某个znode进行读操作时，应该先执行sync方法，使得读操作的连接所连的zk实例能与leader进行同步，从而保证能读到最新的数据。 
+注意：sync调用是异步的，无需等待调用的返回，zk服务器会保证所有后续的操作会在sync操作完成之后才执行，哪怕这些操作是在执行sync之前被提交的。
+
+shell> sync /node_01
+1
+18、打开或关闭监听日志
+在获取节点数据、子节点列表等操作时，都可以添加watch参数监听节点的变化，从而节点数据更改、子节点列表变更时收到通知，并输出到控制台。默认是打开，可以设置参数将其关闭。 
+语法：printwatches on|off 
+on：打开 
+off：关闭
+
+shell> printwatches off
+1
+19、关闭连接
+close命令会关闭当前客户端连接
+
+20、连接到zk服务器
+语法：connect host:port 
+host:port：IP和zk客户端端口
+
+shell>connect 192.168.1.102:2181
+1
+21、退出zkCli.sh终端
+quit

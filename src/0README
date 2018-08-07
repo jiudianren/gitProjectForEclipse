@@ -1,0 +1,39 @@
+Makefile 方式
+1. 先make clean 删除 上传的 *.o文件
+make clean
+
+2. 编译包括  gtest 部分
+linux:
+make   GLINUX=ON GTEST=ON/OFF
+
+3. 安装
+make  install  GLINUX=ON GTEST=ON/OFF
+
+
+CMAKE 方式
+
+
+ubuntu 
+Might be better to install gcc-multilib and g++-multilib.
+apt-get install gcc-multilib
+apt-get install g++-multilib
+
+#
+# Configure
+#
+[1] Debug mode
+cmake -DCMAKE_INSTALL_PREFIX=./ -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_COMPILER=`which gcc` -DCMAKE_CXX_COMPILER=`which c++` ..
+
+
+[2] Release with debuginfo mode [as default]
+cmake -DCMAKE_INSTALL_PREFIX=$HOME -DCMAKE_C_COMPILER=`which gcc` -DCMAKE_CXX_COMPILER=`which c++` ..
+
+#
+# make 
+#
+make 
+
+#
+# install
+#
+make install

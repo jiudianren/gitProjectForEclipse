@@ -1,0 +1,32 @@
+<nitf>
+
+
+<head>
+i am head 1
+</head>
+
+
+<head>
+<title>Colombia Earthquake</title>
+</head>
+
+<head>
+<title>head 2</title>
+</head>
+
+<body>
+
+<headline>
+  <hl1>143 Dead in Colombia Earthquake</hl1>
+</headline>
+<byline>
+  <bytag>By Jared Kotler, Associated Press Writer</bytag>
+</byline>
+<dateline>
+  <location>Bogota, Colombia</location>
+  <date>Monday January 25 1999 7:28 ET</date>
+</dateline>
+
+</body>
+
+</nitf>
