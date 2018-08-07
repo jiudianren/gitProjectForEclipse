@@ -4,9 +4,7 @@ FROM ubuntu:latest
 #no git 
 MAINTAINER  jiudiaren <lianpengfei12@foxmail.com>
  
-RUN apt-get update; \
-    apt-get -y upgrade
- 
+RUN apt-get update
 RUN apt-get -y install g++ cmake 
 RUN  mkdir -p  /home/git/gitProjectForEclipse/src
 COPY src  /home/git/gitProjectForEclipse/src/
