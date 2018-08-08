@@ -5,20 +5,23 @@ docker run -i -t ubuntu /bin/bash
  -i stdin 开启
  -t  打开一个伪终端
  exit
- 
+ -d 创建守护式容器
+ -p  端口映射
  --name xxxx 为容器命名
- 
+ --link  容器互联
+ --restart  
  启动已经停止的容器
  docker  start contain-id
  
  附着到容器
  docker attach cid
- 
- -d 创建守护式容器
+ docker exec 
  
  docker run -d ubuntu /bin/bash "while true ; do echo hello world ; sleep 1m ; done"
  
- docker run -p 
+ 对于 -d启动的容器 
+ 如果需要进入容器内部，可以使用docker exec 启动新的进程
+ 这个时候，可以执行docker exec -t it container-id 
  
  docker ps -a
  docker list
@@ -26,13 +29,12 @@ docker run -i -t ubuntu /bin/bash
  docker logs -f
  docker top xxx 
  docker exec xxx 容器内起额外的进程
- docker stop  停止某个docker
- docker kill 
+ docker stop  停止某个docker 向容器发送SIGTERM 
+ docker kill               向容器发送SIGKILL 
  
  docker run --restart=xxx  
  dokcer inspect xxx 查看容器信息
- docker rm 
- 
+ docker rm   
  docker image rm -f myhello:2.0
  
  构建环境 构建上下文
