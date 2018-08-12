@@ -48,8 +48,18 @@ docker run -t -i secess_imagsId /bin/bash
 Dockerfile语法
 
 
+# RUN命令有两种格式
 
-ENV REFRESH_AT XXXX_XX_XX
+1. RUN <command>
+2. RUN ["executable", "param1", "param2"]
+第一种后边直接跟shell命令
+在linux操作系统上默认 /bin/sh -c
+在windows操作系统上默认 cmd /S /C
+第二种是类似于函数调用。
+可将executable理解成为可执行文件，后面就是两个参数。
+
+
+#ENV REFRESH_AT XXXX_XX_XX
 
 WORKDIR
 
