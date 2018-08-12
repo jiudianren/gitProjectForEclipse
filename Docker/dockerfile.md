@@ -61,6 +61,8 @@ USER  root
 USER   xxx 
 VOLUE 卷
 
+ARGS
+
 
 ADD   目录或者文件  tar url 
 ADD  file  DestDir

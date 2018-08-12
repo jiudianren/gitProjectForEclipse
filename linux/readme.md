@@ -50,6 +50,8 @@ ping www.ahomepage.net
 ##ftp
 
 ## root e
+sudo passwd root
+
 
 
 ## docker °²×°
