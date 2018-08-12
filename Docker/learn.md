@@ -21,7 +21,7 @@ docker run -i -t ubuntu /bin/bash
  
  对于 -d启动的容器 
  如果需要进入容器内部，可以使用docker exec 启动新的进程
- 这个时候，可以执行docker exec -t it container-id 
+ 这个时候，可以执行docker exec -t -i container-id  /bin/bash
  
  docker ps -a
  docker list
