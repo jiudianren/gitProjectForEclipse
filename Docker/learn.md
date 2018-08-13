@@ -1,5 +1,8 @@
 《第一本docker入门书》
 
+docker 命令
+http://www.runoob.com/docker/docker-container-connection.html
+
 #docker run 
 docker run -i -t ubuntu /bin/bash
  -i stdin 开启
