@@ -1,9 +1,7 @@
 docker的实现机制 
 
-docker serach  xx
-docker pull xx 
 
-docker的命令
+
 
 dockerfile的语法
 
