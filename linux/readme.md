@@ -69,7 +69,9 @@ yum install cmake
 使用yum安装g++：yum install gcc-c++   
 方法一：使用yum安装：yum install gdb
 
-
+#SSH SERVER
+http://jingyan.baidu.com/article/00a07f38a5c05482d128dc5f.html
+http://www.linuxidc.com/Linux/2015-01/112033.htm
 
 #更改字体
 setterm -foreground green
