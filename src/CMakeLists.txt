@@ -13,6 +13,10 @@ set (Exercise_VERSION_MINOR 0)
 MESSAGE(STATUS "PROJECT_SOURCE_DIR" ${PROJECT_SOURCE_DIR})
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/CMakeModules)
 
+MESSAGE(STATUS "PROJECT_BINARY_DIR" ${PROJECT_BINARY_DIR})
+#在第一节我们提到了<projectname>_BINARY_DIR和PROJECT_BINARY_DIR变量，他们指的编译发生的当前目录，如果是内部编译，
+#就相当于PROJECT_SOURCE_DIR也就是工程代码所在目录，如果是外部编译，指的是外部编译所在目录，也就是本例中的build目录
+
 
 # 包含这个模块FindPackageHandleStandardArgs.cmake 
 INCLUDE(FindPackageHandleStandardArgs)
