@@ -48,39 +48,36 @@ void preOrder2( BinaryTreeNode<int> *root)     //非递归前序遍历
 #endif
 
 
-int PrintNodeAtLevel(BinaryTreeNode<int> root, int level)
-{
-    if(!root || level < 0)
-        return 0;
-    else if(level == 0)
-    {
-        cout << root->data << endl;
-        return 1;
-    }
-    else
-        return PrintNodeAtLevel(root->left, level - 1) + PrintNodeAtLevel(root->right, level - 1);
-}
+//int PrintNodeAtLevel(BinaryTreeNode<int>  * root, int level)
+//{
+//    if(!root || level < 0)
+//        return 0;
+//    else if(level == 0)
+//    {
+//        cout << root->data << endl;
+//        return 1;
+//    }
+//    else
+//        return PrintNodeAtLevel( root->leftChild, level - 1) + PrintNodeAtLevel( root->rightChild, level - 1);
+//}
 
 /*https://www.cnblogs.com/kaituorensheng/p/3558645.html
  * */
 // 二叉树 按照层遍历
-void ListNodeByLevel(BinaryTreeNode<int> root)
-{
-
-    for(int i = 0; i < Height(root); ++i)
-    {
-        PrintNodeAtLevel(root, i);
-        cout << "_____________________________" << endl;
-    }
-}
+//void ListNodeByLevel(BinaryTreeNode<int> *  root)
+//{
+//
+//    for(int i = 0; i < Height(root); ++i)
+//    {
+//        PrintNodeAtLevel(root, i);
+//        cout << "_____________________________" << endl;
+//    }
+//}
 
 
 void TestBinaryMain()
 {
 
     BinaryTreeNode<int> root();
-
-
-
 
 }

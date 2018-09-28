@@ -1,5 +1,3 @@
-#include "../os/impos/imptype.h"
-
 #ifndef __TABLE_LOC_H__
 #define __TABLE_LOC_H__
 
