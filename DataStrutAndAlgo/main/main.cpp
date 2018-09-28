@@ -9,6 +9,7 @@
 #include "../Skiplist/skiplist.h"
 
 #include "ListTest.h"
+#include "../List/ReversList.h"
 #include "MergerSort.h"
 #include "HeapSort.h"
 #include "QuickSort.h"
@@ -23,6 +24,7 @@ int main( int argc, char **argv)
 
 	cout<<"main"<<endl;
 
+	TestReverlist();
 	//ÅÅÐòËã·¨
 	mainMergSort();
 //	mainQuickSort();

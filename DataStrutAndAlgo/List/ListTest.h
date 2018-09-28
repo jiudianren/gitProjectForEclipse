@@ -1,23 +1,6 @@
-
-
 #ifndef  _LIST_TEST_H_
 #define  _LIST_TEST_H_
-class MList
-{
-public :
-	int iM;
-	MList * pNext;
-	~MList()
-	{
-		iM=0;
-		pNext=NULL;
-	};
-};
+#include "List.h"
 
-
-bool CheckCircleList();
-bool HasCircle();
-void mainListTEST();
-
-
+void TestList() ;
 #endif
