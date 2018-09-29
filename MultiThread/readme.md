@@ -1,22 +1,22 @@
 多线程相关 内容
 
 
-# 线程属性
-pthread_attr_init(&thread_attr);
-pthread_attr_setdetachstate(&thread_attr, PTHREAD_CREATE_DETACHED);
-pthread_attr_setdetachstate(&thread_attr, PTHREAD_CREATE_JOINABLE );
-pthread_attr_setscope(&thread_attr, PTHREAD_SCOPE_SYSTEM);
-pthread_attr_setstacksize(&thread_attr, stack * 1024 * 1024);
-pthread_attr_destroy(&thread_attr);
+# 线程属性  
+pthread_attr_init(&thread_attr);  
+pthread_attr_setdetachstate(&thread_attr, PTHREAD_CREATE_DETACHED);    
+pthread_attr_setdetachstate(&thread_attr, PTHREAD_CREATE_JOINABLE );  
+pthread_attr_setscope(&thread_attr, PTHREAD_SCOPE_SYSTEM);  
+pthread_attr_setstacksize(&thread_attr, stack * 1024 * 1024);  
+pthread_attr_destroy(&thread_attr);  
 
 
 #线程创建 以及运行方式
 pthread_create(&dwThreadId, &thread_attr, (void *(*)(void *))startaddr, (LPVOID)parg))
-pthread_self()
-pthread_cancel
+pthread_self()  
+pthread_cancel  
 pthread_join();//线程启动以后，必须明确线程的结束方式 是调用加入式 join 还是分离式 detach。
-pthread_detach();
-pthread_exit
+pthread_detach();  
+pthread_exit  
 
 
 #互斥锁
@@ -48,18 +48,18 @@ pthread_once()
 pthread_once_t 
 
 #读写锁
-pthread_rwlock_init
-int pthread_rwlock_rdlock(pthread_rwlock_t *rwlock);
-int pthread_rwlock_wrlock(pthread_rwlock_t *rwlock);
-int pthread_rwlock_unlock(pthread_rwlock_t *rwlock);
+pthread_rwlock_init  
+int pthread_rwlock_rdlock(pthread_rwlock_t *rwlock);  
+int pthread_rwlock_wrlock(pthread_rwlock_t *rwlock);  
+int pthread_rwlock_unlock(pthread_rwlock_t *rwlock);  
 
-int pthread_rwlock_tryrdlock(pthread_rwlock_t *rwlock);
-int pthread_rwlock_trywrlock(pthread_rwlock_t *rwlock);
+int pthread_rwlock_tryrdlock(pthread_rwlock_t *rwlock);  
+int pthread_rwlock_trywrlock(pthread_rwlock_t *rwlock);  
 
-int pthread_rwlock_timedrdlock(pthread_rwlock_t *restrict rwlock, const struct timespec *restrict abs_timeout);
-int pthread_rwlock_timedwrlock(pthread_rwlock_t *restrict rwlock, const struct timespec *restrict abs_timeout);
+int pthread_rwlock_timedrdlock(pthread_rwlock_t *restrict rwlock, const struct timespec *restrict abs_timeout);  
+int pthread_rwlock_timedwrlock(pthread_rwlock_t *restrict rwlock, const struct timespec *restrict abs_timeout);   
 
-int pthread_rwlock_destroy(pthread_rwlock_t *rwlock);
+int pthread_rwlock_destroy(pthread_rwlock_t *rwlock);  
 
 
 /*
