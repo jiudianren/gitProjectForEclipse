@@ -11,7 +11,7 @@ PDis消息分发进程，当有多个PDE的时候。
 
 #imp
 
-#平台层
+##平台层
 由操作系统相关的系统级功能构成，它屏蔽了不同操作系统的细节，为应用提供统一的调用系统API的接口，并提供部分通用的服务和管理程序：监控、启动、停止等。主要包括：
 1、	线程管理。OLC采用基于多线程协作处理的架构，负责线程的创建、销毁、健康监
 测等
@@ -26,7 +26,7 @@ PDis消息分发进程，当有多个PDE的时候。
 8、	系统内核资源管理。如线程锁、信号量等
 
 
-#imp的架构是这样的：
+##imp的架构是这样的：
 
 OLC采用多线程架构，其中比较重要的一点是，从socket收发数据的操作与具体的业务
 处理逻辑是分离的，因此系统中主要分两类线程：
@@ -62,6 +62,22 @@ typedef struct
 这个链接是一个长链接。Diamater有 DWR 和DWA消息维持心跳。解决黏包的时候，使用的 消息头包含长度信息的方式。
 
 
+OLC一共有3个消息队列：
+1、	消息队列0
+生产者：为socket接收线程，在收到对端（OCS或外部网元）的数据后，将数据放入到
+消息队列0
+消费者：为业务处理线程，如service380，从消息队列0取消息进行处理
+2、	消息队列1
+生产者：为业务处理线程，如service380，处理完消息后，将待转发到网元的消息放入
+到消息队列1
+消费者：为socket发送线程，从该队列取消息，通过socket发送到网元
+3、	消息队列2
+用于impmonitor进程对OLC的各线程进行健康检查，一般不需要关注
+
+发送到消息队列的消息，实际上为一个指针，该指针指向具体的数据，包括zxos消息
+头以及zxos数据体
+
+
 # 我的工作
 
 从参与这个项目以来，主要做的工作包括：
@@ -71,12 +87,53 @@ PDE进程的当前的一些统计信息，发送到报表统计进程后，落地成文件。
 ##bypass 部分解释
 ##5  云化管理 和dockerfile的编写
 zk的管理
+zk的链接管理类。
+zk的路径管理类
+zk的事件处理类
 
 
 ##6 单元测试
 
 gtest gmock的使用
 
+perl生成，按照现在的目录层级，生成所有类的mock类
+
+[TestCaseName，TestName]，而我对这两个参数的定义是：[TestSuiteName，TestCaseName]，在下一篇我们再来看为什么这样定义
+
+class为suit member为 case
+
+
+	class TEST_TCdrInDbStatInfo_Suit : public ::testing::Test  {
+	protected:
+	
+	    static void SetUpTestCase()
+	    {
+	    
+	
+	    }
+	
+	    static void TearDownTestCase()
+	    {
+	    }
+	
+	    static std::vector<TBalInfo> m_vecBalInfo;
+	
+	};
+	
+	TEST( CLASS , member) //suit 和case 
+	TEST(TEST_TCdrInDbStatInfo, SetCdrInDBStatMode_01)
+	{
+	    TCdrInDbStatInfo tObj;
+	
+	    bool bPara = true;
+	    tObj.SetStaticOrNot( bPara);
+	    EXPECT_EQ( bPara,  tObj.GetCdrInDBStatMode());
+	}
+	
+
+    1. EXPECT_*  失败时，案例继续往下执行。
+
+    2. ASSERT_* 失败时，直接在当前函数中返回，当前函数中ASSERT_*后面的语句将不会执行。
 
 
 7， 后期参与了一次代码重构，重构前的代码有一个历史遗留的全局变量的问题。
