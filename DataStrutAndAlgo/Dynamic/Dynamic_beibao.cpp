@@ -52,6 +52,7 @@ void init()
     inputFile>>peopleTotal>>n;
     for(int i=0; i<n; i++)
         inputFile>>peopleNeed[i]>>gold[i];
+
     inputFile.close();
 
     for(int i=0; i<=peopleTotal; i++)
