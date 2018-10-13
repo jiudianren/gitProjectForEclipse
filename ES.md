@@ -25,18 +25,23 @@ IPC部分创建几个io——service和线程，直接将线程和io_service进行绑定。
 一次http请求，就在相关的socket，所在的按个线程，进行处理，就可以了。
 一些公共资源，写成了thread_local .
 
-1 启动work_service_ptr，主要是为了绑定 wokr-service和io_service.并没有建立任何链接。work_service 
+1 启动work_service_ptr，主要是为了绑定 wokr-service和io_service.并没有建立任何链接。但work_service决定了其将会建立什么类型的网络连接，acceptor ， connect .
+
 2 通过work_service_name去启动 ，改work_service绑定 net_service的类型。tcp，udp。
      acceptor或者  connect.去启动net_service;  
      
 3 以acceptor为例， 这个时候启动net_service start 进入 acceptor 
-4 当接到一个连接，就会建立一个对应的，socket，并新建一个处理对象，持有该socket，这个时候，所有的业务业务逻辑就可以展开。 
+4 当接到一个连接，就会建立一个对应的，socket，并新建一个处理对象，持有该socket，这个时候，所有的业务业务逻辑就可以展开。
+
+为什么要这么做，这样可以动态的启动多个链接， 
  
 
 
-#业务部分全部由我负责
+#业务部分
 
-1数据和动作相分离.  
+了解协议文档， 
+
+1 数据和动作相分离.  
 2 动作注册.方便扩展动作。
 
 动作之前有setdata.

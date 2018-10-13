@@ -1,0 +1,51 @@
+
+/*
+ *
+ *
+ * [1,2,3]╣дееап
+ *
+ * 1 2 3
+ * 1 3 2
+ * 2 1 3
+ * 2 3 1
+ * 3 1 2
+ * 3 2 1
+ * */
+
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+	vector<vector<int> > permute(vector<int> &num) {
+		vector<vector<int>> permutations;
+		if(num.size() == 0) //invalid corner case check
+			return permutations;
+		vector<int> curr;
+		vector<bool> isVisited(num.size(), false);
+		//using this bool type array to check whether or not the elments has been visited
+		backTracking(permutations,curr,isVisited,num);
+		return permutations;
+	}
+
+
+	void backTracking(vector<vector<int>>& ret, vector<int> curr, vector<bool> isVisited, vector<int>num)
+	{
+		if(curr.size() == num.size())
+		{
+			ret.push_back(curr);
+			return;
+		}
+		for(int i = 0; i < num.size(); ++i)
+		{
+			if(isVisited[i] == false)
+			{
+				isVisited[i] = true;
+				curr.push_back(num[i]);
+				backTracking(ret,curr,isVisited,num);
+				isVisited[i] = false;
+				curr.pop_back();
+			}
+		}
+	}
+};
