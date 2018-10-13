@@ -104,7 +104,8 @@ T* singletonTwice<T>::GetInstance3()
 
 /*
  * 这也就是所谓的“双检锁”机制。但是有人质疑这种实现还是有问题，
- * 在执行 m_instance = new T()时，可能 类T还没有初始化完成，m_instance 就已经有值了。这样会导致另外一个调用GetInstance()方法的线程，
+ * 在执行 m_instance = new T()时，可能 类T还没有初始化完成，
+ * m_instance 就已经有值了。这样会导致另外一个调用GetInstance()方法的线程，
  * 获取到还未初始化完成的m_instance 指针，如果去使用它，
  * 会有意料不到的后果。其实，解决方法也很简单，用一个局部变量过渡下即可
  * */

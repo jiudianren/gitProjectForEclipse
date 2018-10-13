@@ -7,7 +7,9 @@ asio和多线程的关系。
 
 #异步和同步
 
-异步文件IO也就是重叠IO。在同步文件IO中，线程启动一个IO操作然后就立即进入等待状态，直到IO操作完成后才醒来继续执行。而异步文件IO方式中，线程发送一个IO请求到内核，然后继续处理其他的事情，内核完成IO请求后，将会通知线程IO操作完成了。如果IO请求需要大量时间执行的话，异步文件IO方式可以显著提高效率，因为在线程等待的这段时间内，CPU将会调度其他线程进行执行，如果没有其他线程需要执行的话，这段时间将会浪费掉（可能会调度操作系统的零页线程）。如果IO请求操作很快，用异步IO方式反而还低效，还不如用与方式。同步IO在同一时刻只允许一个IO操作，也就是说对于同一个文件句柄的IO操作是序列化的，即使使用两个线程也不能同时对同一个文件句柄同时发出读写操作。重叠IO允许一个或多个线程同时发出IO请求
+异步文件IO也就是重叠IO。
+在同步文件IO中，线程启动一个IO操作然后就立即进入等待状态，直到IO操作完成后才醒来继续执行。而异步文件IO方式中，线程发送一个IO请求到内核，然后继续处理其他的事情，内核完成IO请求后，将会通知线程IO操作完成了。如果IO请求需要大量时间执行的话，异步文件IO方式可以显著提高效率，因为在线程等待的这段时间内，CPU将会调度其他线程进行执行，如果没有其他线程需要执行的话，这段时间将会浪费掉（可能会调度操作系统的零页线程）。
+如果IO请求操作很快，用异步IO方式反而还低效，还不如用与方式。同步IO在同一时刻只允许一个IO操作，也就是说对于同一个文件句柄的IO操作是序列化的，即使使用两个线程也不能同时对同一个文件句柄同时发出读写操作。重叠IO允许一个或多个线程同时发出IO请求
 
 
 #异步工作
@@ -22,8 +24,107 @@ strand
 #
 IPC部分创建几个io——service和线程，直接将线程和io_service进行绑定。
 
-一次http请求，就在相关的socket，所在的按个线程，进行处理，就可以了。
+workserver，io_service 有自己的 io_context,
+启动的是有线程大小.
+
+	bool work_service_base::run(service_interface *ipc_service)
+	{
+	    std::lock_guard<std::mutex> guard(mtx_for_suspend_);
+	    if (initialize(ipc_service) == false)
+	    {
+	        return false;
+	    }
+	    // Create a pool of threads_ to run all of the io_contexts.
+	    for (std::size_t i = 0; i < thread_pool_size_; ++i)
+	    {
+	        threads_.push_back(std::make_shared<std::thread>([=]()
+	        {
+	            if (thread_local_initialize() == false)
+	            {
+	                return;
+	            }
+	            boost::system::error_code ec;
+	            io_context_.run(ec);
+	        }));
+	    }
+	
+	    return true;
+	}
+
+
+
+
+2 启动net——workservice
+
+  	
+	 1std::pair<bool, std::string> operator()(const NS_Net_Link_Configurator::net_service_cmd &cmd) const;
+	  
+	  2---->
+	               net_service_creator::make_net_service_handler_t<tcp_service_base> creator;
+	                auto http_work_service = std::dynamic_pointer_cast<http_work_service_base>(work_service);
+	                if (http_work_service)
+	                {
+	                    creator = http_work_service->http_service_creator();
+	                }
+	                else
+	                {
+	                    creator = net_service_creator::instance().tcp(work_service->net_service_name());
+	                }
+	
+	                if (creator)
+	                {
+	                    if (service_->add_tcp_acceptor(cmd.ip, std::to_string(cmd.port),
+	                            std::bind(creator, std::placeholders::_1, cmd.work_service_name, cmd_parameters),
+	                            get_ssl_context(cmd_parameters, true)) != 0)
+	                    {
+	                        ret = true;
+	                    }
+	                }
+                
+                
+                
+	 3   std::shared_ptr<tcp_acceptor_service> ipc_controller::add_tcp_acceptor(const std::string &ip, const std::string &port,
+	        add_net_service_handler_t<tcp_service_base> add_net_service_handle, tcp_service_base::ssl_context ctx)
+	{
+	    std::lock_guard<std::mutex> guard(mtx_for_ipc_controller_cmd_deal_);
+	
+	    boost::asio::io_context &io = io_context_pool_.get_io_context();
+	    auto sp = tcp_acceptor_service::creator(io, ip, port, [&io, add_net_service_handle]()
+	    {
+	        return add_net_service_handle(io);
+	    }, ctx);
+	    if (sp->start(network_service_base::en_net_state::server))
+	    {
+	        return sp;
+	    }
+	    else
+	    {
+	        return nullptr;
+	    }
+	}
+
+net——worksercie的io ——service 和 workservice的不一样
+
+
+workserver,会将这个io_service绑定到 net_service上。
+进而关联到监听套接字上，---》进而关联到 已经连接的套接字上。
+后续的Http请求，就将关联在这个线程上。
+             
+             auto new_connection(make_tcp_service_ptr_());
+                    new_connection->socket() = std::move(*socket_tmp);
+一次http请求，就在相关的socket，和持有该socket的对象。
+所在的按个线程，进行处理，就可以了。
 一些公共资源，写成了thread_local .
+
+能保证一个io_server的动作在同一个线程中被调用。
+
+
+    bool ret =  ns->cb_insert( sHopByHopId , [sp](shared_mutable_buffer_1& buffer , cb_additional_agrs *  pArg)  {
+
+        sp->io_context().post(  [sp , buffer]() mutable {
+            sp->DealAAAResp(buffer);
+        });
+    });
 
 1 启动work_service_ptr，主要是为了绑定 wokr-service和io_service.并没有建立任何链接。但work_service决定了其将会建立什么类型的网络连接，acceptor ， connect .
 
