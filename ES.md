@@ -15,10 +15,16 @@ Post
 strand
 
 
+这个部分岗接手了一个多月，asio和beast使用这一块，之前有个RSp，项目用过，我就参考了他的代码。
+由于他做的也是基于http的协议的，很多地方可以借鉴。也我做的这个，考虑了 一下我的做的这个业务流程，和他的那个比较接近。
 
-#框架部分是别人写的
 
-IPC部分创建一个io_service池，和线程
+#
+IPC部分创建几个io——service和线程，直接将线程和io_service进行绑定。
+
+一次http请求，就在相关的socket，所在的按个线程，进行处理，就可以了。
+一些公共资源，写成了thread_local .
+
 1 启动work_service_ptr，主要是为了绑定 wokr-service和io_service.并没有建立任何链接。work_service 
 2 通过work_service_name去启动 ，改work_service绑定 net_service的类型。tcp，udp。
      acceptor或者  connect.去启动net_service;  
@@ -30,11 +36,17 @@ IPC部分创建一个io_service池，和线程
 
 #业务部分全部由我负责
 
+1数据和动作相分离.  
+2 动作注册.方便扩展动作。
 
-数据和动作相分离
-动作注册
+动作之前有setdata.
+动作run之后，有getResponse.
 
-有diamater的交互。
+有diamater的交互。当发送完dimater，请求之后，需要等待其回复。并且与当前的http会话类，不能析构，
+这个时候，使用共享指针，dimater发送了之后，会绑定一个响应处理函数。 这个时候，将http的回话类的共享指针，作为
+lambda的捕获参数，传入 。保持http会话类不被析构。
+完成与AAA的交互。
+EAP_AKA请求。
 
 
 
