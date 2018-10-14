@@ -15,8 +15,6 @@ class为suit member为 case
 	
 	    static void SetUpTestCase()
 	    {
-	    
-	
 	    }
 	
 	    static void TearDownTestCase()
@@ -24,7 +22,6 @@ class为suit member为 case
 	    }
 	
 	    static std::vector<TBalInfo> m_vecBalInfo;
-	
 	};
 	
 	TEST( CLASS , member) //suit 和case 
@@ -53,7 +50,6 @@ gtest提供了多种事件机制，非常方便我们在案例之前或之后做一些操作。总结一下gtest的
 
 1. 全局的，所有案例执行前后。
 2. TestSuite级别的，在某一批案例中第一个案例前，最后一个案例执行后。
-
 3. TestCase级别的，每个TestCase前后。
 
 
@@ -82,11 +78,10 @@ gtest提供了多种事件机制，非常方便我们在案例之前或之后做一些操作。总结一下gtest的
 	}
 	
 	
-	三、TestSuite事件
+三、TestSuite事件
 我们需要写一个类，继承testing::Test，然后实现两个静态方法
 
 1. SetUpTestCase() 方法在第一个TestCase之前执行
-
 2. TearDownTestCase() 方法在最后一个TestCase之后执行
 
 
@@ -148,9 +143,7 @@ TestCase事件是挂在每个案例执行前后的，实现方式和上面的几乎一样，不过需要实现的是
 	}
 
 	
-	
-	
-	
+		
 	
 # 参数化
 

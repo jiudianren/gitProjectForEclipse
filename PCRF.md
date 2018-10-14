@@ -143,39 +143,6 @@ perl生成，按照现在的目录层级，生成所有类的mock类
 class为suit member为 case
 
 
-	class TEST_TCdrInDbStatInfo_Suit : public ::testing::Test  {
-	protected:
-	
-	    static void SetUpTestCase()
-	    {
-	    
-	
-	    }
-	
-	    static void TearDownTestCase()
-	    {
-	    }
-	
-	    static std::vector<TBalInfo> m_vecBalInfo;
-	
-	};
-	
-	TEST( CLASS , member) //suit 和case 
-	TEST(TEST_TCdrInDbStatInfo, SetCdrInDBStatMode_01)
-	{
-	    TCdrInDbStatInfo tObj;
-	
-	    bool bPara = true;
-	    tObj.SetStaticOrNot( bPara);
-	    EXPECT_EQ( bPara,  tObj.GetCdrInDBStatMode());
-	}
-	
-
-    1. EXPECT_*  失败时，案例继续往下执行。
-
-    2. ASSERT_* 失败时，直接在当前函数中返回，当前函数中ASSERT_*后面的语句将不会执行。
-
-
 7， 后期参与了一次代码重构，重构前的代码有一个历史遗留的全局变量的问题。
 RatableEvent的问题，有很多属性，用于保存，请求消息中的avp，和下发消息中的avp， 这个类太臃肿了，导致有问题的时候，定位的时候影响解决问题的速度。不符合设计原则。
 
