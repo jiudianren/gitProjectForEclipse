@@ -3,7 +3,10 @@ asio和多线程的关系。
 
 一个asio一个线程
 一个asio多个线程。
-多个asio多个线程； 每个线程有用自己的io_service;
+多个asio多个线程； 每个线程有用自己的io_service; 
+
+该线程的所有异步动作在本线程上异步处理
+
 
 #异步和同步
 
@@ -106,7 +109,6 @@ workserver，io_service 有自己的 io_context,
 net——worksercie的io ——service 和 workservice的不一样
 
 
-workserver,会将这个io_service绑定到 net_service上。
 进而关联到监听套接字上，---》进而关联到 已经连接的套接字上。
 后续的Http请求，就将关联在这个线程上。
              
@@ -153,6 +155,12 @@ workserver,会将这个io_service绑定到 net_service上。
 lambda的捕获参数，传入 。保持http会话类不被析构。
 完成与AAA的交互。
 EAP_AKA请求。
+
+
+
+
+
+1 异步网络的调试：
 
 
 
