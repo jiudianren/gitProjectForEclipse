@@ -110,10 +110,37 @@ net——worksercie的io ——service 和 workservice的不一样
 
 
 进而关联到监听套接字上，---》进而关联到 已经连接的套接字上。
+
+
+
+	std::shared_ptr<tcp_acceptor_service> ipc_controller::add_tcp_acceptor(const std::string &ip, const std::string &port,
+	        add_net_service_handler_t<tcp_service_base> add_net_service_handle, tcp_service_base::ssl_context ctx)
+	{
+	    std::lock_guard<std::mutex> guard(mtx_for_ipc_controller_cmd_deal_);
+	 
+	    auto sp = tcp_acceptor_service::creator(io_context_pool_.get_io_context()  , ip, port,   //lpf io_context_1
+	            [this, add_net_service_handle]()
+	            {
+	                return add_net_service_handle(io_context_pool_.get_io_context());    // lpf io_context_2
+	            }, ctx);
+	    if (sp->start(network_service_base::en_net_state::server))
+	    {
+	        return sp;
+	    }
+	    else
+	    {
+	        return nullptr;
+	    }
+	}
+
 后续的Http请求，就将关联在这个线程上。
              
              auto new_connection(make_tcp_service_ptr_());
-                    new_connection->socket() = std::move(*socket_tmp);
+             new_connection->socket() = std::move(*socket_tmp);
+             //new_connection->socket() 归属于  io_context_2 
+             //socket_tmp               归属于  io_context_1
+             // std::move 以后，所有有关socket_tmp 的异步动作，将会归属于  io_context_2 所关联的线程操作
+                    
 一次http请求，就在相关的socket，和持有该socket的对象。
 所在的按个线程，进行处理，就可以了。
 一些公共资源，写成了thread_local .
