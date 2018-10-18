@@ -11,7 +11,7 @@
 《跟我一起写 Makefile 陈浩》
 《CMake中文手册》 --http://www.cnblogs.com/coderfenghc/tag/cmake/
 《An_Introduction_to_GCC》
-
+《Debugging.with.gdb.中文版.pdf》
 
 ##STL BOOST
 《泛型编程与STL》
@@ -43,6 +43,8 @@
 
 #bash
 《linux shell 命令行及脚本编程案例详解》
+
+
 
 
 ## 在阅读

@@ -17,6 +17,8 @@
 #include "CircularQueue.h"
 #include "DynamicPlanning.h"
 #include "Dynamic_beibao.h"
+#include "MyStack.h"
+
 
 using namespace std;
 int main( int argc, char **argv)
