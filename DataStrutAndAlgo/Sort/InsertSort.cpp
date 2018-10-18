@@ -1,11 +1,3 @@
-/*
- * InsertSort.cpp
- *
- *  Created on: 2018Äê10ÔÂ11ÈÕ
- *      Author: Administrator
- */
-
-
 #include "InsertSort.h"
 
 void InsertSort(int arr[],int n){
@@ -21,7 +13,7 @@ void InsertSort(int arr[],int n){
 }
 
 
-void InsertSort2(vector<int> &num){
+void InsertSort2(std::vector<int> &num){
     for(int i = 1;i < num.size();++i){
         for(int j = i;j > 0;--j){
             if(num[j] < num[j - 1]){

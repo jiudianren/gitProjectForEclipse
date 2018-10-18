@@ -1,13 +1,8 @@
-/*
- * InsertSort.h
- *
- *  Created on: 2018Äê10ÔÂ11ÈÕ
- *      Author: Administrator
- */
-
+#ifndef INSERT_SORT_H_
+#define INSERT_SORT_H_
 #include <vector>
 
-
 void InsertSort(int arr[],int n);
+void InsertSort2(std::vector<int> &num);
 
-void InsertSort2(vector<int> &num);
+#endif

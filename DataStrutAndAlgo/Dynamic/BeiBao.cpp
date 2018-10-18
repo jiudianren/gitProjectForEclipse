@@ -31,7 +31,6 @@ void BeiBao()
     int n = 5;
     std::vector<int> w = { 0, 40, 50, 70, 40, 20 };
     std::vector<int> v = { 0, 10, 25, 40, 20, 10 };
-    int m, n;    //m重量，n数量
     vector< vector<int> > vec(n + 1, vector<int>(m + 1, 0));
     for (int i = 1; i <= n; i++)
     {
