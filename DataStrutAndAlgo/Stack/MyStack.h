@@ -1,17 +1,10 @@
-/*
- * Stack.h
- *
- *  Created on: 2018Äê10ÔÂ18ÈÕ
- *      Author: Administrator
- */
-
 #ifndef DATASTRUTANDALGO_STACK_MYSTACK_H_
 #define DATASTRUTANDALGO_STACK_MYSTACK_H_
 
 #include <vector>
 #define my_value_type int
-#define  my_reference int
-#define const_reference const int
+#define my_reference int
+//#define const_reference  (const int)
 
 
 class MyStack
@@ -33,7 +26,7 @@ public:
     void push (my_value_type&&  val);
     void pop ();
     my_reference & top();
-    const_reference& top() const;
+    const int & top() const;
 };
 
 void TestVoidVector();

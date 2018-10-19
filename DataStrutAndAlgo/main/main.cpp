@@ -27,6 +27,9 @@ int main( int argc, char **argv)
 	cout<<"main"<<endl;
 
 	TestReverlist();
+
+	TestMyStack();
+
 	//ÅÅÐòËã·¨
 	mainMergSort();
 //	mainQuickSort();
