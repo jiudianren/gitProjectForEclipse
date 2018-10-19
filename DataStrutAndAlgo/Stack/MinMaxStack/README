@@ -1,3 +1,17 @@
 #用数组实现push pop和 min max时间复杂度为1，的stack
 
 方法，使用三个 数组
+
+
+连续相同最值的处理方法：
+
+1 最值数组多次存储该值
+context      10 9 11 8 8 13 13 12
+min_context  10 9 8  8
+max_context  10 11 13 13
+
+
+2 删除值时，如果是最值，则判定，接下来的一个是否和当前删除值相同
+context      10 9 11 8 8 13 13 12
+min_context  10 9 8  8
+max_context  10 11 13 13

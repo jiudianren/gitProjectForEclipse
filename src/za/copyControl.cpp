@@ -82,6 +82,20 @@ void  mainInter()
     //    getchar();
 }
 
+
+
+
+void CopyAndOperater()
+{
+
+    innerclass  ma;
+    innerclass  mb;
+
+    mb=ma;  //调用赋值函数
+
+    innerclass  mc= ma; //调用 拷贝构造函数   会创建一个新的对象
+}
+
 void mainCpyCtrl() {
 
     mainInter();
