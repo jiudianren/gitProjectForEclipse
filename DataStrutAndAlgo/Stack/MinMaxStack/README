@@ -1,0 +1,3 @@
+#用数组实现push pop和 min max时间复杂度为1，的stack
+
+方法，使用三个 数组
