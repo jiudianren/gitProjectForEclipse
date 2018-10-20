@@ -6,12 +6,34 @@ https://www.cnblogs.com/haippy/archive/2013/02/21/2920241.html
 
 （发送至客户端）Sent to the client
 
+
+
+
 Zookeeper 客户端和服务端是通过 socket 进行通信的，由于网络存在故障，所以监视事件很有可能不会成功地到达客户端，监视事件是异步发送至监视者的，Zookeeper 本身提供了保序性(ordering guarantee)：即客户端只有首先看到了监视事件后，才会感知到它所设置监视的 znode 发生了变化(a client will never see a change for which it has set a watch until it first sees the watch event). 网络延迟或者其他因素可能导致不同的客户端在不同的时刻感知某一监视事件，但是不同的客户端所看到的一切具有一致的顺序。
 
 （被设置 watch 的数据）The data for which the watch was set
 
 这意味着 znode 节点本身具有不同的改变方式。你也可以想象 Zookeeper 维护了两条监视链表：数据监视和子节点监视(data watches and child watches) getData() and exists() 设置数据监视，getChildren() 设置子节点监视。 或者，你也可以想象 Zookeeper 设置的不同监视返回不同的数据，getData() 和 exists() 返回 znode 节点的相关信息，而 getChildren() 返回子节点列表。因此， setData() 会触发设置在某一节点上所设置的数据监视(假定数据设置成功)，而一次成功的 create() 操作则会出发当前节点上所设置的数据监视以及父节点的子节点监视。一次成功的 delete() 操作将会触发当前节点的数据监视和子节点监视事件，同时也会触发该节点父节点的child watch。
 
+
+
+
+
+节点有两个维度，一个是永久的还是临时的，另一个是否有序。组合成的四种类型如下：
+
+1：PERSISTENT? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? //? 持久化节点
+
+2：PERSISTENT_SEQUENTIAL? ? ? ?//? 持久化排序节点
+
+3：EPHEMERAL? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?//? 临时节点
+
+4：EPHEMERAL_SEQUENTIAL? ? ? ? //? 临时排序节点
+
+永久节点：节点创建后会被持久化，只有主动调用delete方法的时候才可以删除节点。
+
+临时节点：节点创建后在创建者超时连接或失去连接的时候，节点会被删除。临时节点下不能存在字节点。
+
+排序节点：创建的节点名称后自动添加序号，如节点名称为"node-"，自动添加为"node-1"，顺序添加为"node-2"...
 
 
 zk的永久节点 临时节点
@@ -109,7 +131,6 @@ ZOOAPI int zoo_acreate(zhandle_t * zh, const char *path,
 
 ## 回调函数  获得句柄后，就随便用了，并把回调函数在  zookeeper_init的时候，设置进去
 
-
     m_pZHandle = zookeeper_init(m_sConnectString.c_str(),
                                 TZNodeEventMgr::fun_watch,
                                 m_iConnectTimeout, 0, (void *)NULL, 0);
@@ -118,3 +139,59 @@ ZOOAPI int zoo_acreate(zhandle_t * zh, const char *path,
 
 TZNodeEventMgr::fun_watch(
 
+
+
+
+永久节点 ： 容器类型，等等 pde spr imp等
+
+临时 tps   cpu_usage 和容器运行状态相关的指标，， 临时节点
+
+namespace ZPermanentNode
+{
+enum class E_StatusPath : int32_t
+{
+    start  = (int32_t)E_Switcher::end + 1,
+
+    type = start,
+    status,
+    tps,
+    log,
+    rtt,
+    olp,
+    cloud_app_id,
+    testing,
+    linker_num,
+    cpu_usage,
+    module,
+    abn,
+    rulecache,
+    phubmodule,
+    shubmodule,
+
+    end
+};
+}
+
+namespace ZEphemeralNode
+{
+
+
+enum class E_StatusPath : int32_t
+{
+    E_PartII = 20,
+    E_Type,        //容器的业务类型，比如HUB、PDE、CDR等;ZKClient进程在启动时，将自身的容器类型写入该处
+    E_Status,      //如RUNNING、NOT RUNNING、TESTING（灰度发布）、UNKNOWN
+    E_Tps,         //ZK客户端定时上报
+    //E_Log,         //日志跟踪
+    E_Rtt,         //ZK客户端定时上报
+    E_Olp,
+    E_CloudAppId,
+    //E_Test,
+    E_LinkNum,
+    E_CpuUsage,
+    E_RuleCacheVersion,
+    //E_Module,    //zxos module info
+    E_PhubModule,
+    E_ShubModule
+};
+}
