@@ -21,6 +21,12 @@ using namespace std;
 
 （十）Master-Worker模式
 
+
+master-worker模式是一种并行计算模式，
+分为master进程和worker进程两个部分，
+master是担任总管角色，worker才是执行具体任务的地方。
+
+
     Master 掌控有 多个worker 线程 ，
  *  https://www.cnblogs.com/code-java/p/6901439.html
  * */
