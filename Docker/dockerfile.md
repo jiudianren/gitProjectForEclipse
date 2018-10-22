@@ -83,6 +83,24 @@ ONBULID 当该镜像被用作其他的镜像的基础镜像时，被执行
 
 
 
+# CMD 和 ENTERPOINT的区别
+cmd 可以有多条，最后一条有作用，cmd可以被容器启动时的启动命令所代替
+
+ENTERPINT指令不会被覆盖，docker run的指定的参数，会被附加到 enterpoint之后  
+
+
+从上面的说明，我们可以看到有两个共同点：
+
+都可以指定shell或exec函数调用的方式执行命令；
+当存在多个CMD指令或ENTRYPOINT指令时，只有最后一个生效；
+而它们有如下差异：
+
+       差异1：CMD指令指定的容器启动时命令可以被docker run指定的命令覆盖，而ENTRYPOINT指令指定的命令不能被覆盖，而是将docker run指定的参数当做ENTRYPOINT指定命令的参数。
+
+       差异2：CMD指令可以为ENTRYPOINT指令设置默认参数，而且可以被docker run指定的参数覆盖；
+
+下面分别对上面两个差异点进行详细说明，
+
 
 
     
