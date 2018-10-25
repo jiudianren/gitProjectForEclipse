@@ -18,7 +18,7 @@
 #include "DynamicPlanning.h"
 #include "Dynamic_beibao.h"
 #include "MyStack.h"
-
+#include "../Tree/MostFar.h"
 
 using namespace std;
 int main( int argc, char **argv)
@@ -32,6 +32,9 @@ int main( int argc, char **argv)
 
 	//≈≈–ÚÀ„∑®
 	mainMergSort();
+
+
+	TestMax();
 //	mainQuickSort();
 //	mainHeapSort();
 //

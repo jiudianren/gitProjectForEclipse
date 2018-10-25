@@ -8,14 +8,11 @@
 
 #include <vector>
 
+#include "SimpleTreeNode.h"
+
+
 using namespace std;
-struct TreeNode
-{
-	int value;
-	TreeNode * left;
-	TreeNode * right;
-	TreeNode(int x) : value(x), left(NULL), right(NULL){}
-};
+
 
 
 /* µü´ú*/
@@ -24,7 +21,7 @@ vector<int >  inorderTraversal( TreeNode * root){
 
 	vector<int> val;
 
-	if( root = NULL)
+	if( root == NULL)
 	{
 		return val;
 	}
