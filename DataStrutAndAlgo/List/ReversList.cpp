@@ -28,8 +28,7 @@ MList * ReversList( MList * head)
         curNode = pNext;
     }
 
-    MList * newHead = preNode;
-    return newHead;
+    return preNode;
 }
 
 

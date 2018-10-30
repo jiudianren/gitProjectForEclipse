@@ -14,6 +14,8 @@
 typedef void (*SUM)(int a,int b);
 void sum1(int a ,int b);
 void sum2(int a ,int b);
+
+int MMax(int, int);  //º¯ÊıÉùÃ÷
 void mainFP();
 class FunctionPointer
 {

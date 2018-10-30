@@ -20,6 +20,14 @@ public:
         m_head = NULL;
     }
 
+    ~MyStack()
+    {
+        if( m_head != NULL)
+        {
+            delete [] m_head;
+        }
+    }
+
     //注意 参数类型 和返回类型
     //如果随手写成    void push ( value_type& val); 就会有问题 会被鄙视的
     void push (const my_value_type& val);

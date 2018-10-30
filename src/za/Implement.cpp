@@ -54,7 +54,7 @@ char * strA=strcpy(new char[10],strB);
  * */
 
 
-char *my_memcpy(char *dst, const char* src, int cnt)
+char *my_memcpy(void  *dst, const void * src, int cnt)
 {
     assert(dst != NULL && src != NULL);
     char *ret = dst;
@@ -141,6 +141,8 @@ atoi()函数实现的代码：strToInt()
 
 
 int strToInt(const char* str){
+
+
     long long result=0; //8个字节长度
     int flag=1;//默认正数
     //判断指针是否为空

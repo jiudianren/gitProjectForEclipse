@@ -24,7 +24,7 @@ using namespace std;
 class Solution {
 public:
 	vector<vector<int> > res;
-	vector<vector<int> > subsets(vector<int> &S) {
+	vector<vector<int> > subsets( const vector<int> &S) {
 		if(S.empty()) {
 			return res;
 		}
