@@ -17,6 +17,7 @@
  * */
 
 #include <vector>
+#include <algorithm>
 using namespace std;
 
 
@@ -24,20 +25,21 @@ using namespace std;
 class Solution {
 public:
 	vector<vector<int> > res;
-	vector<vector<int> > subsets( const vector<int> &S) {
+	vector<vector<int> > subsets( const vector<int> & S) {
 		if(S.empty()) {
 			return res;
 		}
 
-		sort(S.begin(), S.end());
+		std::sort(S.begin(), S.end());
 		//别忘了空集合
 		res.push_back(vector<int>());
 		vector<int> v;
 		generate(0, v, S);
 		return res;
 	}
-	void generate(int start, vector<int>& v, vector<int>&S) {
-		if(start == S.size()) {
+	void generate(int start, vector<int>& v,  const vector<int>&S) {
+
+		if( start == S.size()) {
 			return;
 		}
 		for(int i = start; i < S.size(); i++) {

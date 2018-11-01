@@ -17,32 +17,34 @@ using namespace std;
 
 class Solution {
 public:
-	vector<vector<int> > permute(vector<int> &num) {
+	vector<vector<int> > permute( const vector<int> & In) {
 		vector<vector<int>> permutations;
-		if(num.size() == 0) //invalid corner case check
+		if(In.size() == 0) //invalid corner case check
 			return permutations;
 		vector<int> curr;
-		vector<bool> isVisited(num.size(), false);
+		vector<bool> isVisited(In.size(), false);
 		//using this bool type array to check whether or not the elments has been visited
-		backTracking(permutations,curr,isVisited,num);
+		backTracking(permutations,curr,isVisited,In);
 		return permutations;
 	}
 
 
-	void backTracking(vector<vector<int>>& ret, vector<int> curr, vector<bool> isVisited, vector<int>num)
+	void backTracking( vector<vector<int>>& ret, vector<int>  & curr, vector<bool> &  isVisited, const vector<int> & In  )
 	{
-		if(curr.size() == num.size())
+		if(curr.size() == In.size())
 		{
 			ret.push_back(curr);
 			return;
 		}
-		for(int i = 0; i < num.size(); ++i)
+		for(int i = 0; i < In.size(); ++i)
 		{
 			if(isVisited[i] == false)
 			{
 				isVisited[i] = true;
-				curr.push_back(num[i]);
-				backTracking(ret,curr,isVisited,num);
+				curr.push_back(In[i]);
+
+				backTracking(ret,curr,isVisited,In);
+
 				isVisited[i] = false;
 				curr.pop_back();
 			}
