@@ -30,33 +30,26 @@ int main(void)
 
     Client client;
 
-    Data * data=  client.request( "request1");
+    auto data=  client.request( "request1");
     //do something other thing or sleep to wait the result;
     int second = 10;
-    sleep(second);
-    printf("sleep %d  in main() \n",second);
-
-    sleep(second);
-    printf("sleep %d  in main() \n",second);
-
-    sleep(second);
-    printf("sleep %d  in main() \n",second);
+    int times = 3;
+    while(times > 0)
+    {
+        sleep(second);
+        printf("sleep %d  in main() \n",second);
+        times--;
+    }
 
     string ret = data->getResult();
     printf("Real date return :[%s].\n", ret.c_str());
-    delete(data);
 
-
-
-
-    Data * data2=  client.request( "request1");
-     second = 5;
+    auto data2=  client.request( "request2");
+    second = 5;
     sleep(second);
     printf("sleep %d  in main() \n",second);
-     ret = data2->getResult();
+    ret = data2->getResult();
     printf("Real date return :[%s].\n", ret.c_str());
-    delete(data2);
-
 
     printf("Futural Model end ==========.\n");
     return 0;

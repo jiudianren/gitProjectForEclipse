@@ -1,11 +1,3 @@
-/*
- * ProducerConsumer.cpp
- *
- *  Created on: 2017Äê12ÔÂ19ÈÕ
- *      Author: Administrator
- */
-
-
 
 #include <stdio.h>
 

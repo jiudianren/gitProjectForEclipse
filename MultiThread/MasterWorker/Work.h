@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include "Task.h"
 
-
+#include <memory>
 
 typedef struct
 {
@@ -22,7 +22,7 @@ bool bDone;
 int iResult;
 }  TResult;
 
-#define RESULTMAP    std::list<TResult *>
+#define RESULTMAP std::list<std::shared_ptr<TResult>>
 
 
 class Work
@@ -56,12 +56,12 @@ public:
        return  this->sWorkName;
     }
     static void * ThreadFnc(void * args);
-    virtual void  Handle( Task & task, TResult & result);
+    virtual void  Handle( Task & task, std::shared_ptr<TResult > & result);
 
 
 private:
     std::list<Task> * listTask;
-    RESULTMAP   * mapResult;
+    RESULTMAP  * mapResult;
 
 
     pthread_t  pThread ;

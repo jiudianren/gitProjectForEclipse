@@ -43,9 +43,9 @@ i++;
 5)有的地方,assert不能代替条件过滤。
  * */
 
-#include < stdio.h>
-#include < assert.h>
-#include < stdlib.h>
+#include <stdio.h>
+#include <assert.h>
+#include <stdlib.h>
 #include "LearnAssert.h"
 
 int mainAssert( void )

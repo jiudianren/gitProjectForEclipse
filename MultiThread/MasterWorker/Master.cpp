@@ -25,9 +25,7 @@ Master:: Master( int WorkType, int iWorkNumber)
         work.SetTaskList( & this->listTask);
         work.SetMutex( &MUTEX);
 
-        string workName="Work_";
-        workName += i;
-
+        string workName= "Work_" + std::to_string(i);
         work.SetWorkName( workName);
 
         //cout<< taskName<<std::endl;
@@ -55,9 +53,9 @@ void Master::getResult()
 
 void Master::releaseResult()
 {
-    for (auto ref : mapResult)
+    if(mapResult.size() >0 )
     {
-        delete ( ref);
+        mapResult.pop_back();
     }
 }
 bool Master::isComplete()
@@ -83,8 +81,7 @@ bool Master::isComplete()
 
 void Master::execute()
 {
-    std::map<string, Work>::iterator iter;
-    for(iter=mapWork.begin(); iter!=mapWork.end(); iter++)
+    for(auto iter=mapWork.begin(); iter!=mapWork.end(); iter++)
     {
         cout<<"Master::execute: "<< iter->first<<" going to start"<<std::endl;
         Work * work = &(iter->second);

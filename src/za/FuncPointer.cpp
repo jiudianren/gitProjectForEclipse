@@ -1,11 +1,3 @@
-/*
- * FuncPointer.cpp
- *
- *  Created on: 2017年3月31日
- *      Author: Administrator
- */
-
-
 
 
 #include "FuncPointer.h"
@@ -51,11 +43,11 @@ int MMax(int x, int y)  //定义Max函数
 int mainTestPoint(void)
 {
     int(*p)(int, int);  //定义一个函数指针
-    int a, b, c;
     p = MMax;  //把函数Max赋给指针变量p, 使p指向Max函数
     printf("please enter a and b:");
 
     int a=10, b=12;
+    int c;
 
     c = (*p)(a, b);  //通过函数指针调用Max函数
     printf("a = %d\nb = %d\nmax = %d\n", a, b, c);

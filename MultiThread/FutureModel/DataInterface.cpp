@@ -25,7 +25,7 @@ std::string  RealData:: getResult() {
     //实际获取比较慢 sleep代替
     int second = 15;
     sleep(second);
-    printf("sleep %d  in RealData:: getResult. \n",second);
+    printf("sleep %d  in RealData::getResult. \n",second);
     std:: string sRet="Real Answer to request: ";
     sRet += this->request;
 
@@ -62,6 +62,13 @@ std::string  FutureData::getResult()
     }
     return result;
 };
+
+void FutureData::setResult(string  result)
+{
+    printf("SetResult For FutureData Now .\n");
+    this->result =result;
+    bReady = true;
+}
 
 bool FutureData:: IsReady(){
     return bReady;

@@ -54,21 +54,25 @@ char * strA=strcpy(new char[10],strB);
  * */
 
 
-char *my_memcpy(void  *dst, const void * src, int cnt)
+void * my_memcpy(void  *dstt, const void * srcc, int cnt)
 {
-    assert(dst != NULL && src != NULL);
-    char *ret = dst;
+    assert(dstt != NULL && srcc != NULL);
+
+
+    void  * ret = dstt;
+    char * dst = (char *) dstt;
+    char * src = (char *) srcc;
     if (dst >= src && dst <= src+cnt-1) //内存重叠，从高地址开始复制
     {
         dst = dst+cnt-1;
         src = src+cnt-1;
         while (cnt--)
-            *dst-- = *src--;
+           *dst-- = *src--;
     }
     else    //正常情况，从低地址开始复制
     {
         while (cnt--)
-            *dst++ = *src++;
+             *dst++ = *src++;
     }
     return ret;
 }

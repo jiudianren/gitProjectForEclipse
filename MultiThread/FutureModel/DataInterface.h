@@ -46,11 +46,8 @@ public :
     FutureData(string request);
 
     bool IsReady();
-    void setResult(string  result)
-    {
-        this->result =result;
-        bReady = true;
-    }
+    void setResult(string  result);
+
     string getResult();
     string getRequest(){
         return request;

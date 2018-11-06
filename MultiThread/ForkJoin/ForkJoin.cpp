@@ -1,14 +1,4 @@
-/*
- * ProducerConsumer.cpp
- *
- *  Created on: 2017年12月19日
- *      Author: Administrator
- */
-
-
-
 #include <stdio.h>
-
 #include <pthread.h>
 #include <unistd.h>
 #include <errno.h>
@@ -18,7 +8,6 @@
  *  可以用来处理一些可以进行拆分的大任务。
  *  其主要是把一个大任务逐级拆分为多个子任务，然后分别在子线程中执行，
  *  当每个子线程执行结束之后逐级回溯，返回结果进行汇总合并，最终得出想要的结果。
-
  * */
 
 /*
@@ -31,7 +20,9 @@ pthread_cond_t CON_NOT_FULL  = PTHREAD_COND_INITIALIZER;
 pthread_cond_t CON_NOT_EMPTY = PTHREAD_COND_INITIALIZER;
 
 
-
+#define  UNIT_LONG 20
+#define  START_NUM  0
+#define  END_NUM 300
 typedef struct
 {
     long start;
@@ -47,7 +38,7 @@ void * MultiThreadSub( void * args)
 
     long lRet =0;
     long lDiff=  tInput.end - tInput.start;
-    if(  lDiff >100 )
+    if(  lDiff > UNIT_LONG )
     {
         TSubArray tFront;
         TSubArray tBehind;
@@ -56,8 +47,7 @@ void * MultiThreadSub( void * args)
         tFront.start = tInput.start;
         tFront.end = lMid;
 
-
-        tBehind.start = lMid;
+        tBehind.start = lMid + 1;
         tBehind.end = tInput.end;
 
         pthread_t pFrnt ;
@@ -102,7 +92,7 @@ void * MultiThreadSub( void * args)
     }
     else
     {
-        for( long  i = tInput.start; i<tInput.end ; i++)
+        for( long i= tInput.start; i<=tInput.end ; i++)
         {
             lRet+=i;
         }
@@ -118,14 +108,14 @@ int main(void)
 
 
     TSubArray tSubArray;
-    tSubArray.start = 0;
-    tSubArray.end   = 300000;
+    tSubArray.start = START_NUM;
+    tSubArray.end   = END_NUM;
 
-/*
+    /*
     (void *) iRet = NULL;
     iRet =  MultiThreadSub( &tSubArray );
    printf("Sub result:%d. \n", &iRet );
-*/
+     */
 
     pthread_t pMultiSub ;
 
