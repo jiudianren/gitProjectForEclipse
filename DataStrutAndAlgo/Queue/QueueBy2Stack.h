@@ -12,6 +12,11 @@
 #include  <assert.h>
 #include  <iostream>
 
+
+
+/*
+两个栈 实现一个队列
+https://www.cnblogs.com/MrListening/p/5697459.html*/
 using namespace std;
 
 template<typename T>  class QueueBy2Stack
