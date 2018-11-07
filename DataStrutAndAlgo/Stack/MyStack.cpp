@@ -14,6 +14,7 @@ void MyStack::push (const my_value_type & val)
     }
 
     m_local++;
+
     if( m_local == m_curSize )
     {
         m_curSize =  m_curSize * 2;

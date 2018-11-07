@@ -1,57 +1,43 @@
 /*
  * BinaryTree.h
  *
- *  Created on: 2017年7月30日
- *      Author: Lian
+ *  Created on: 2018年11月7日
+ *      Author: lian.pengfei
  */
 
+#ifndef DATASTRUTANDALGO_TREE_BINARYTREE_H_
+#define DATASTRUTANDALGO_TREE_BINARYTREE_H_
 
-#include <stddef.h>
+#include "SimpleTreeNode.h"
+#include <vector>
 
-template <class T>
-class BinaryTreeNode
-{
-
-public:
-
-    BinaryTreeNode(){
-        leftChild= rightChild= NULL;
-        height =0;
-    };
-
-    BinaryTreeNode(const T & a)
-    {
-        data = a;
-        leftChild= rightChild= NULL;
-        height =0;
-    };
-    BinaryTreeNode(const T & a, BinaryTreeNode * r, BinaryTreeNode l)
-    {
-        data = a;
-        leftChild=l;
-        rightChild= r;
-        height =0;
-    };
+//递归版本
+void proOrder( TreeNode *root) ;
+void inOrder( TreeNode *root)  ;
+void postOrder( TreeNode *root);
 
 
-    T  GetData()
-    {
-        return data;
-    };
+//非递归
+void PreOrder_Nor(TreeNode * root);
+void InOrder_Nor(TreeNode *root) ;
+void postOrder_Nor(TreeNode *root) ;
 
-    BinaryTreeNode<T> * GetLeftChild()
-    {
-        return leftChild;
-    };
+//深度
+int Depth(TreeNode *root);
 
-    BinaryTreeNode<T> * GetRightChild()
-    {
-        return rightChild;
-    };
+//按层次遍历
+void ListNodeByLevel(TreeNode*  root);
+int PrintNodeAtLevel(TreeNode*  root, int level);
 
-private:
-    int height; //for AVL
-    T data;
-    BinaryTreeNode<T> * leftChild;
-    BinaryTreeNode<T> * rightChild;
-};
+//按层次遍历，容器法
+void getSolution(std::vector<std::vector<int>> & ret, TreeNode*  root, int level);
+std::vector<std::vector<int>> levelOrder(TreeNode *root) ;
+
+
+/*相距离最远的两个节点的距离*/
+int MostFar(TreeNode*pNode, int&nMaxDistance);
+void TestMax();
+
+/*二叉树的宽度 */
+int WidthOfBinaryTree(TreeNode * pNode);
+#endif /* DATASTRUTANDALGO_TREE_BINARYTREE_H_ */

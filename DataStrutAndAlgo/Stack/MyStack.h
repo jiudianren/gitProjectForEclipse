@@ -17,12 +17,12 @@ public:
     {
         m_curSize = 0;
         m_local =-1;
-        m_head = NULL;
+        m_head = nullptr;
     }
 
     ~MyStack()
     {
-        if( m_head != NULL)
+        if( m_head != nullptr)
         {
             delete [] m_head;
         }
