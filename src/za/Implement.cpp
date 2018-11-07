@@ -10,10 +10,10 @@
 
 char * strcpy1(char *dst, const char *src) //[1]
 {
-    assert(dst != NULL && src != NULL);  //[2]
-    char *ret = dst;                     //[3]
-    while ((*dst++ = *src++) != '\0');   //[4]
-    return ret;
+	assert(dst != NULL && src != NULL);  //[2]
+	char *ret = dst;                     //[3]
+	while ((*dst++ = *src++) != '\0');   //[4]
+	return ret;
 }
 
 
@@ -56,34 +56,34 @@ char * strA=strcpy(new char[10],strB);
 
 void * my_memcpy(void  *dstt, const void * srcc, int cnt)
 {
-    assert(dstt != NULL && srcc != NULL);
+	assert(dstt != NULL && srcc != NULL);
 
 
-    void  * ret = dstt;
-    char * dst = (char *) dstt;
-    char * src = (char *) srcc;
-    if (dst >= src && dst <= src+cnt-1) //内存重叠，从高地址开始复制
-    {
-        dst = dst+cnt-1;
-        src = src+cnt-1;
-        while (cnt--)
-           *dst-- = *src--;
-    }
-    else    //正常情况，从低地址开始复制
-    {
-        while (cnt--)
-             *dst++ = *src++;
-    }
-    return ret;
+	void  * ret = dstt;
+	char * dst = (char *) dstt;
+	char * src = (char *) srcc;
+	if (dst >= src && dst <= src+cnt-1) //内存重叠，从高地址开始复制
+	{
+		dst = dst+cnt-1;
+		src = src+cnt-1;
+		while (cnt--)
+			*dst-- = *src--;
+	}
+	else    //正常情况，从低地址开始复制
+	{
+		while (cnt--)
+			*dst++ = *src++;
+	}
+	return ret;
 }
 
 
 char * strcpy2(char *dst,const char *src)
 {
-    assert(dst != NULL && src != NULL);
-    char *ret = dst;
-    my_memcpy(dst, src, strlen(src)+1);
-    return ret;
+	assert(dst != NULL && src != NULL);
+	char *ret = dst;
+	my_memcpy(dst, src, strlen(src)+1);
+	return ret;
 }
 
 /*
@@ -101,28 +101,28 @@ char * strcpy2(char *dst,const char *src)
 
 void* my_memmove(void* dst,const void* src,size_t count)
 {
-    assert(NULL !=src && NULL !=dst);
-    char* tmpdst = (char*)dst;
-    char* tmpsrc = (char*)src;
+	assert(NULL !=src && NULL !=dst);
+	char* tmpdst = (char*)dst;
+	char* tmpsrc = (char*)src;
 
-    if (tmpdst <= tmpsrc || tmpdst >= tmpsrc + count)
-    {
-        while(count--)
-        {
-            *tmpdst++ = *tmpsrc++;
-        }
-    }
-    else
-    {
-        tmpdst = tmpdst + count - 1;
-        tmpsrc = tmpsrc + count - 1;
-        while(count--)
-        {
-            *tmpdst-- = *tmpsrc--;
-        }
-    }
+	if (tmpdst <= tmpsrc || tmpdst >= tmpsrc + count)
+	{
+		while(count--)
+		{
+			*tmpdst++ = *tmpsrc++;
+		}
+	}
+	else
+	{
+		tmpdst = tmpdst + count - 1;
+		tmpsrc = tmpsrc + count - 1;
+		while(count--)
+		{
+			*tmpdst-- = *tmpsrc--;
+		}
+	}
 
-    return dst;
+	return dst;
 }
 
 
@@ -134,8 +134,18 @@ void* my_memmove(void* dst,const void* src,size_t count)
 3. 结束条件，遇到非数字或者字符'\0'结束
 4. 考虑溢出，分别与int值所能表示的最大(0x7fffffff)和最小值(0x8000000)进行比较
 5. 考虑异常输入情况下
+
+由于可能出现的负面输入以及溢出情况，我们需要对结果进行判断，这里介绍一下三种错误处理方式：返回值、全局变量、异常。
+
+返回值：和系统API一致； 但是不能方便的使用返回结果，并且会有二义性。
+
+全局变量：用全局变量表示错误状态，能方便使用结果； 但是程序员可能会忘记检查全局变量。
+
+异常：可以为不同的出错原因定义不同该异常类型，逻辑清晰明了； 有些语言不支持，同时对性能有一定程度上的负面影响。
+
 atoi()函数实现的代码：strToInt()
  * */
+
 
 
 
@@ -143,52 +153,67 @@ atoi()函数实现的代码：strToInt()
 #define INT_MAX ((int)0x7fffffff)
 #define INT_MIN ((int)0x80000000)
 
+enum Status{Valid = 0, Invalid, OutOfRange};
+int g_status = Invalid;
 
 int strToInt(const char* str){
 
 
-    long long result=0; //8个字节长度
-    int flag=1;//默认正数
-    //判断指针是否为空
-    if (str==NULL)
-        return 0;
-    //跳过前面的空白字符
-    while(isspace(*str)){
-        ++str;
-    }
-    /*
-    *判断正负号
-    */
-    if(*str=='-'){
-        flag=-1;
-        str++;
-    }else if(*str=='+')
-        str++;
-    //把数字字符逐个转换成整数，并校验溢出,溢出返回0
-    while(*str<='9' && *str>='0'){
+	long long result=0; //8个字节长度
+	int flag=1;//默认正数
+	//判断指针是否为空
+	if (str==NULL || *str=='\0')
+		return 0;
 
-        result=result*10+*str-'0';
-        if(flag==1){ //校验是否正溢出
-            if(result>INT_MAX)
-                return 0;
-        }else{ //校验负溢出
-            if(-result<INT_MIN)
-                return 0;
-        }
-        str++;
-    }
-    return (int)flag*result;
+	g_status = Invalid;
+	//跳过前面的空白字符
+	while(isspace(*str)){
+		++str;
+	}
+	/*
+	 *判断正负号
+	 */
+	if(*str=='-'){
+		flag=-1;
+		str++;
+	}else if(*str=='+')
+		str++;
+
+
+	//把数字字符逐个转换成整数，并校验溢出,溢出返回0
+	while(*str<='9' && *str>='0'){
+
+		result=result*10+*str-'0';
+		if(flag==1){
+			//校验是否正溢出
+			if(result>INT_MAX)
+			{
+				g_status = OutOfRange;
+				return 0;
+			}
+		}else{ //校验负溢出
+			if(-result<INT_MIN)
+			{
+				g_status = OutOfRange;
+				return 0;
+			}
+		}
+		str++;
+	}
+
+
+	return (int)flag*result;
 }
 
 
 int main()
 {
 
-    /*
-     *
-     * memcpy只是简单的将两块内存区域当作没有关系的相互独立内存区域进行内存的拷贝，
-     * 而memmove则考虑了当两块内存区域有重叠时所采用不同方向的拷贝模式进行处理。
-     * */
+	/*
+	 *
+	 * memcpy只是简单的将两块内存区域当作没有关系的相互独立内存区域进行内存的拷贝，
+	 * 而memmove则考虑了当两块内存区域有重叠时所采用不同方向的拷贝模式进行处理。
+	 * */
 
 
 
