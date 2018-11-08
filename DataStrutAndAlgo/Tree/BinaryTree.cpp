@@ -359,3 +359,50 @@ int WidthOfBinaryTree(TreeNode * pNode){
     return maxWidth;
 }
 
+
+
+void  FindPath(TreeNode * root , std::vector<int>  path , int curSum, int sum )
+{
+
+    curSum += root->value;
+    path.push_back(root->value);
+
+    bool isLeaf =( (root->left== nullptr) && ( root->right == nullptr) );
+    if(isLeaf && curSum == sum )
+    {
+
+        for( auto it :path)
+        {
+            cout<< *it;
+        }
+    }
+
+    if( root->left != nullptr)
+    {
+        FindPath(  root->left  , path ,curSum , sum );
+    }
+    if(root->right != nullptr)
+    {
+        FindPath( root->right , path ,curSum , sum );
+    }
+
+    curSum -= root->value;
+    path.pop_back();
+}
+
+
+/* 遍历 ，所有路径和为 sum的二叉树的路径*/
+void  FindPath(TreeNode * root , int sum)
+{
+
+    if( root == nullptr )
+    {
+           return ;
+    }
+
+     vector<int> path;
+     int curSum =0 ;
+     FindPath( root , path ,curSum , sum );
+
+}
+

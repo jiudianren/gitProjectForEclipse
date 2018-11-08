@@ -40,4 +40,13 @@ void TestMax();
 
 /*二叉树的宽度 */
 int WidthOfBinaryTree(TreeNode * pNode);
+
+
+/*路径 和为 某个值*/
+
+void  FindPath(TreeNode * root , std::vector<int>  path , int curSum, int sum );
+void  FindPath(TreeNode * root , int Sum);
+
+
+
 #endif /* DATASTRUTANDALGO_TREE_BINARYTREE_H_ */
