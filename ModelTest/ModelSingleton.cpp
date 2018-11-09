@@ -22,8 +22,8 @@ class singletonOne
 protected:
     singletonOne(){};
 private:
-    singletonOne(const singletonOne &){};//½ûÖ¹¿½±´
-    singletonOne & operator=(const singletonOne &){};//½ûÖ¹¸³Öµ
+    singletonOne(const singletonOne &)              = delete;//½ûÖ¹¿½±´
+    singletonOne & operator=(const singletonOne &)  = delete;//½ûÖ¹¸³Öµ
     static T* m_instance;
 public:
     static T* GetInstance();
