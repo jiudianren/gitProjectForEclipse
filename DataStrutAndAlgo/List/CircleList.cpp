@@ -43,6 +43,11 @@ bool CheckCircleList(MList * pFirst)
 
 bool HasCircle(MList * pHead)
 {
+	if( pHead == nullptr || pHead->pNext != nullptr)
+	{
+		return false;
+	}
+
     MList * pFast = pHead; // 快指针每次前进两步
     MList * pSlow = pHead; // 慢指针每次前进一步
     while(pFast != NULL && pFast->pNext != NULL)

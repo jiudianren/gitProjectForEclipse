@@ -32,6 +32,7 @@ int PrintNodeAtLevel(TreeNode*  root, int level);
 //按层次遍历，容器法
 void getSolution(std::vector<std::vector<int>> & ret, TreeNode*  root, int level);
 std::vector<std::vector<int>> levelOrder(TreeNode *root) ;
+//用队列 实现 按成遍历
 
 
 /*相距离最远的两个节点的距离*/

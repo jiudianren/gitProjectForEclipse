@@ -18,4 +18,9 @@ MList *  InsertList( MList * head, int value);
 void DestoryList( MList * head);
 
 
+/*·´×ªÁ´±í*/
+MList * ReversList( MList * head);
+void TestReverlist();
+
+
 #endif /* DATASTRUTANDALGO_LIST_LIST_H_ */
