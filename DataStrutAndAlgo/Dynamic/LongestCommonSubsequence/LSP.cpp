@@ -1,3 +1,5 @@
+#include "LSP.h"
+
 
 /*
  *
@@ -15,24 +17,27 @@ c[i][j] =  2 , c[i-1][j-1] +1              i,j >0 and Xi=Yj
            3 , max { c[i,j-1] c[i-1,j]}    i,j >0 and Xi != Yj
  *
  * */
-#include <string.h>
+
 
 /*
  * 最长公共子序列
  */
-int lcs(std::string  str1, std::string str2) {
-    int len1 = str1.size();
+int lcs( const std::string   & str1,  const std::string & str2)
+{
+    int len1 =str1.length();
     int len2 = str2.size();
-    int c[][] = new int[len1+1][len2+1];
+    int c  [len1+1][len2+1] ={0};
+
     for (int i = 0; i <= len1; i++) {
+
         for( int j = 0; j <= len2; j++) {
             if(i == 0 || j == 0) {
                 c[i][j] = 0;
 
-            } else if (str1.charAt(i-1) == str2.charAt(j-1)) {
+            } else if (str1[i-1] == str2[j-1]) {
                 c[i][j] = c[i-1][j-1] + 1;
             } else {
-                c[i][j] = max(c[i - 1][j], c[i][j - 1]);
+                c[i][j] = std::max(c[i - 1][j], c[i][j - 1]);
             }
         }
     }
@@ -56,19 +61,18 @@ c[i][j] =  2 , c[i-1][j-1] +1              i,j >0 and Xi=Yj
            3 , 0                           i,j >0 and Xi != Yj
  *
  * */
- */
- int lcs2(String str1, String str2) {
+ int lcs2(const std::string &  str1,const std::string &  str2) {
     int len1 = str1.length();
     int len2 = str2.length();
     int result = 0;     //记录最长公共子串长度
-    int c[][] = new int[len1+1][len2+1];
+    int c[len1+1][len2+1] ={0};
     for (int i = 0; i <= len1; i++) {
         for( int j = 0; j <= len2; j++) {
             if(i == 0 || j == 0) {
                 c[i][j] = 0;
-            } else if (str1.charAt(i-1) == str2.charAt(j-1)) {
+            } else if (str1[(i-1)] == str2[j-1]) {
                 c[i][j] = c[i-1][j-1] + 1;
-                result = max(c[i][j], result);
+                result = std::max(c[i][j], result);
             } else {
                 c[i][j] = 0;
             }

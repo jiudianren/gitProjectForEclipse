@@ -6,8 +6,6 @@
  */
 
 
-
-
 /*
  * n个 骰子 ，随机投掷，求所有数字之和的概率。
  * */
@@ -47,24 +45,27 @@ void Probalbility(int orignal, int *  probability)
 
 void PrintProbability(int number)
 {
-
     assert( number>0);
 
     int maxSum = number * g_MaxValue;
     int * probability = new int[ maxSum - number +1];
-    for(int i = number; i< maxSum ; i++)
+
+
+    for(int i = number; i< maxSum; i++)
     {
-        probability[ i - number ] =0;
+        probability[ i-number] =0;
     }
 
     Probalbility( number , probability);
 
-   double total = pow( (double )number, g_MaxValue );
+    double total = pow( (double )number, g_MaxValue );
 
     for(int i = number; i< maxSum ; i++)
     {
         std::cout<< " Value: " << i << ", probalbity : " <<  probability[ i - number ]/total;
     }
+
+    delete [] probability;
 }
 
 

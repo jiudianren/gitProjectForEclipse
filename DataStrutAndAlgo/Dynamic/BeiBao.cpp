@@ -1,7 +1,7 @@
 /*
  * BeiBao.cpp
  *
- *  Created on: 2018年10月12日
+ *  Created on: 2017年10月12日
  *      Author: Administrator
  */
 
@@ -24,6 +24,8 @@ f[i][v]表示前i件物品恰放入一个容量为v的背包可以获得的最大价值。
 
 
 */
+
+
 void BeiBao()
 {
 
