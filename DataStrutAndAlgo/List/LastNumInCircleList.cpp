@@ -19,6 +19,7 @@
 
 #include <assert.h>
 #include <vector>
+#include <list>
 
 int GetLast(const int n , const int m)
 {
@@ -26,7 +27,7 @@ int GetLast(const int n , const int m)
     assert( n>=1);
     assert( m>=1);
 
-    std::vector<int> context;
+    std::list<int> context;
     for(int i =0 ; i < n ;i++)
     {
         context.push_back(i);
@@ -52,8 +53,7 @@ int GetLast(const int n , const int m)
         }
 
         itbegin--;
-
-        context.erase(itbegin);
+        context.erase(itbegin); //如果是vector的话，下一步中的next的it可能已经失效
         itbegin= next;
     }
 

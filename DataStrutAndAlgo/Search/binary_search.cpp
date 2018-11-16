@@ -2,7 +2,7 @@
 #include <string.h>
 #include <assert.h>
 
-int binary_search(int arr[],int n,int key)
+int binary_search( const int arr[],int n,int key)
 {
     assert(arr!=NULL && n>0);//注意断言的作用
 
