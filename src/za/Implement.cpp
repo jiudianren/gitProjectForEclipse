@@ -10,10 +10,10 @@
 
 char * strcpy1(char *dst, const char *src) //[1]
 {
-	assert(dst != NULL && src != NULL);  //[2]
-	char *ret = dst;                     //[3]
-	while ((*dst++ = *src++) != '\0');   //[4]
-	return ret;
+    assert(dst != NULL && src != NULL);  //[2]
+    char *ret = dst;                     //[3]
+    while ((*dst++ = *src++) != '\0');   //[4]
+    return ret;
 }
 
 
@@ -56,34 +56,34 @@ char * strA=strcpy(new char[10],strB);
 
 void * my_memcpy(void  *dstt, const void * srcc, int cnt)
 {
-	assert(dstt != NULL && srcc != NULL);
+    assert(dstt != NULL && srcc != NULL);
 
 
-	void  * ret = dstt;
-	char * dst = (char *) dstt;
-	char * src = (char *) srcc;
-	if (dst >= src && dst <= src+cnt-1) //内存重叠，从高地址开始复制
-	{
-		dst = dst+cnt-1;
-		src = src+cnt-1;
-		while (cnt--)
-			*dst-- = *src--;
-	}
-	else    //正常情况，从低地址开始复制
-	{
-		while (cnt--)
-			*dst++ = *src++;
-	}
-	return ret;
+    void  * ret = dstt;
+    char * dst = (char *) dstt;
+    char * src = (char *) srcc;
+    if (dst >= src && dst <= src+cnt-1) //内存重叠，从高地址开始复制
+    {
+        dst = dst+cnt-1;
+        src = src+cnt-1;
+        while (cnt--)
+            *dst-- = *src--;
+    }
+    else    //正常情况，从低地址开始复制
+    {
+        while (cnt--)
+            *dst++ = *src++;
+    }
+    return ret;
 }
 
 
 char * strcpy2(char *dst,const char *src)
 {
-	assert(dst != NULL && src != NULL);
-	char *ret = dst;
-	my_memcpy(dst, src, strlen(src)+1);
-	return ret;
+    assert(dst != NULL && src != NULL);
+    char *ret = dst;
+    my_memcpy(dst, src, strlen(src)+1);
+    return ret;
 }
 
 /*
@@ -101,28 +101,28 @@ char * strcpy2(char *dst,const char *src)
 
 void* my_memmove(void* dst,const void* src,size_t count)
 {
-	assert(NULL !=src && NULL !=dst);
-	char* tmpdst = (char*)dst;
-	char* tmpsrc = (char*)src;
+    assert(NULL !=src && NULL !=dst);
+    char* tmpdst = (char*)dst;
+    char* tmpsrc = (char*)src;
 
-	if (tmpdst <= tmpsrc || tmpdst >= tmpsrc + count)
-	{
-		while(count--)
-		{
-			*tmpdst++ = *tmpsrc++;
-		}
-	}
-	else
-	{
-		tmpdst = tmpdst + count - 1;
-		tmpsrc = tmpsrc + count - 1;
-		while(count--)
-		{
-			*tmpdst-- = *tmpsrc--;
-		}
-	}
+    if (tmpdst <= tmpsrc || tmpdst >= tmpsrc + count)
+    {
+        while(count--)
+        {
+            *tmpdst++ = *tmpsrc++;
+        }
+    }
+    else
+    {
+        tmpdst = tmpdst + count - 1;
+        tmpsrc = tmpsrc + count - 1;
+        while(count--)
+        {
+            *tmpdst-- = *tmpsrc--;
+        }
+    }
 
-	return dst;
+    return dst;
 }
 
 
@@ -157,63 +157,213 @@ enum Status{Valid = 0, Invalid, OutOfRange};
 int g_status = Invalid;
 
 int strToInt(const char* str){
+    long long result=0; //8个字节长度
+    int flag=1;//默认正数
+
+    //判断指针是否为空
+    if (str==NULL || *str=='\0')
+        return 0;
+
+    g_status = Invalid;
+    //跳过前面的空白字符
+    while(isspace(*str)){
+        ++str;
+    }
+    /*
+     *判断正负号
+     */
+    if(*str=='-'){
+        flag=-1;
+        str++;
+    }else if(*str=='+')
+        str++;
 
 
-	long long result=0; //8个字节长度
-	int flag=1;//默认正数
-	//判断指针是否为空
-	if (str==NULL || *str=='\0')
-		return 0;
+    //把数字字符逐个转换成整数，并校验溢出,溢出返回0
+    while(*str<='9' && *str>='0'){
 
-	g_status = Invalid;
-	//跳过前面的空白字符
-	while(isspace(*str)){
-		++str;
-	}
-	/*
-	 *判断正负号
-	 */
-	if(*str=='-'){
-		flag=-1;
-		str++;
-	}else if(*str=='+')
-		str++;
-
-
-	//把数字字符逐个转换成整数，并校验溢出,溢出返回0
-	while(*str<='9' && *str>='0'){
-
-		result=result*10+*str-'0';
-		if(flag==1){
-			//校验是否正溢出
-			if(result>INT_MAX)
-			{
-				g_status = OutOfRange;
-				return 0;
-			}
-		}else{ //校验负溢出
-			if(-result<INT_MIN)
-			{
-				g_status = OutOfRange;
-				return 0;
-			}
-		}
-		str++;
-	}
+        result=result*10+*str-'0';
+        if(flag==1){
+            //校验是否正溢出
+            if(result>INT_MAX)
+            {
+                g_status = OutOfRange;
+                return 0;
+            }
+        }else{ //校验负溢出
+            if(-result<INT_MIN)
+            {
+                g_status = OutOfRange;
+                return 0;
+            }
+        }
+        str++;
+    }
 
 
-	return (int)flag*result;
+    return (int)flag*result;
 }
 
 
-int main()
+
+
+
+//18. strcat函数的实现
+
+char *strcat(char *strDes, const char *strSrc){
+
+    assert((strDes != NULL) && (strSrc != NULL));
+
+    char *address = strDes;
+
+    while (*strDes != ‘\0′)
+
+        ++ strDes;
+
+    while ((*strDes ++ = *strSrc ++) != ‘\0′)
+
+        return address;
+
+}
+
+//19．strncat实现
+
+char *strncat(char *strDes, const char *strSrc, int count){
+
+    assert((strDes != NULL) && (strSrc != NULL));
+
+    char *address = strDes;
+
+    while (*strDes != ‘\0′)
+
+        ++ strDes;
+
+    while (count — && *strSrc != ‘\0′ )
+
+        *strDes ++ = *strSrc ++;
+
+    *strDes = ‘\0′;
+
+    return address;
+
+}
+
+//20. strcmp函数实现
+
+int strcmp(const char *str1,const char *str2){
+
+    /*不可用while(*str1++==*str2++)来比较，当不相等时仍会执行一次++，
+
+    return返回的比较值实际上是下一个字符。应将++放到循环体中进行。*/
+
+    while(*str1 == *str2){
+
+        if(*str1 == '\0')
+
+            return0;
+
+
+
+        ++str1;
+
+        ++str2;
+
+    }
+
+    return *str1 - *str2;
+
+}
+
+21. strncmp实现
+
+int strncmp(const char *s, const char *t, int count){
+
+    assert((s != NULL) && (t != NULL));
+
+    while (*s && *t && *s == *t && count –) {
+
+        ++ s;
+
+        ++ t;
+
+    }
+
+    return (*s – *t);
+
+}
+
+//22.strlen函数实现
+
+int strlen(const char *str){
+
+    assert(str != NULL);
+    int len = 0;
+
+    while (*str ++ != '\0')
+        ++ len;
+
+    return len;
+
+}
+
+//23. strpbrk函数实现
+
+char * strpbrk(const char * cs,const char * ct){
+
+    const char *sc1,*sc2;
+
+    for( sc1 = cs; *sc1 != '\0'; ++sc1){
+
+        for( sc2 = ct; *sc2 != '\0'; ++sc2){
+
+            if (*sc1 == *sc2){
+
+                return (char *) sc1;
+
+            }
+
+        }
+
+    }
+
+    return NULL;
+
+}
+
+//24. strstr函数实现 strstr(str1,str2) 函数用于判断字符串str2是否是str1的子串
+//如果是，则该函数返回str2在str1中首次出现的地址；否则，返回NULL。
+
+char *strstr(const char * in1,const char *s2){
+
+    char * s1= in1; //一定要定义这个，不然可能会改变指针位置
+    int len2=0 ;
+    //我在程序中多处会用到strlen,可是strlen在参数为NULL情况下会出错
+    if( s2 == nullptr)
+    {
+        return nullptr;
+    }
+
+    if(!(len2=strlen(s2)))//此种情况下s2不能指向空，否则strlen无法测出长度，这条语句错误
+        return(char*)s1;
+
+    for( ; *s1 ;++s1)
+    {
+
+        if(*s1==*s2 && strncmp(s1,s2,len2)==0)
+            return(char*)s1;
+    }
+
+    return NULL;
+}
+
+int mainImplement()
 {
 
-	/*
-	 *
-	 * memcpy只是简单的将两块内存区域当作没有关系的相互独立内存区域进行内存的拷贝，
-	 * 而memmove则考虑了当两块内存区域有重叠时所采用不同方向的拷贝模式进行处理。
-	 * */
+    /*
+     *
+     * memcpy只是简单的将两块内存区域当作没有关系的相互独立内存区域进行内存的拷贝，
+     * 而memmove则考虑了当两块内存区域有重叠时所采用不同方向的拷贝模式进行处理。
+     * */
 
 
 
