@@ -59,3 +59,6 @@ bool HasCircle(MList * pHead)
     }
     return false;
 }
+
+
+/* 求 circleList的相交点  ，环的长度 和 前面直线的长度  */
