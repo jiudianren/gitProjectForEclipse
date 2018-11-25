@@ -2,24 +2,29 @@
 #define DATASTRUTANDALGO_LIST_LIST_H_
 #include <stdio.h>
 
-class MList
+class MListNode
 {
 public :
     int iM;
-    MList * pNext;
-    ~MList()
+    MListNode * pNext;
+
+    MListNode(){
+        iM=0;
+        pNext= nullptr;
+    }
+    ~MListNode()
     {
         iM=0;
-        pNext=NULL;
+        pNext= nullptr;
     };
 };
 
-MList *  InsertList( MList * head, int value);
-void DestoryList( MList * head);
+MListNode *  InsertList( MListNode * head, int value);
+void DestoryList( MListNode * head);
 
 
 /*·´×ªÁ´±í*/
-MList * ReversList( MList * head);
+MListNode * ReversList( MListNode * head);
 void TestReverlist();
 
 

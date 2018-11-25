@@ -1,15 +1,15 @@
 #include "List.h"
 
 
-MList *  InsertList( MList * head, int value)
+MListNode *  InsertList( MListNode * head, int value)
 {
-    MList *  node  = new MList;
+    MListNode *  node  = new MListNode;
     node->iM = value;
     node->pNext = head->pNext;
     head->pNext = node;
     return head;
 }
-void DestoryList( MList * head)
+void DestoryList( MListNode * head)
 {
     if( head == NULL)
     {
@@ -18,7 +18,7 @@ void DestoryList( MList * head)
 
     while( head->pNext != NULL)
     {
-        MList * deleteNode = head->pNext;
+        MListNode * deleteNode = head->pNext;
         head->pNext = deleteNode->pNext;
         delete deleteNode;
     }

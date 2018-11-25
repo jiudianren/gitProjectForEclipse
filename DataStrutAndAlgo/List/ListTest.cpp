@@ -6,14 +6,14 @@ using namespace std;
 void TestList() {
 
 	cout<<"InsertTest===============start"<<endl;
-	MList  * frist =  new MList ;
+	MListNode  * frist =  new MListNode ;
 	frist->pNext= NULL;
 	int iA[5]={4,5,2,6,8};
 	for(int i=0;i<5;i++ )
 	{
 	    InsertList( frist ,iA[i]);
 	}
-	MList  * temp = frist;
+	MListNode  * temp = frist;
 	while(temp->pNext != NULL)
 	{
 		cout<<temp->pNext->iM<<endl;
@@ -26,19 +26,19 @@ void TestList() {
 
 
 
-MList * ReversList( MList * head)
+MListNode * ReversList( MListNode * head)
 {
     if(head == NULL)
     {
         return head;
     }
 
-    MList * curNode = head;
-    MList  * preNode = NULL;
+    MListNode * curNode = head;
+    MListNode  * preNode = NULL;
 
     while( curNode != NULL)
     {
-        MList * pNext  = curNode->pNext;
+        MListNode * pNext  = curNode->pNext;
         curNode->pNext = preNode;
         preNode = curNode;
         curNode = pNext;
@@ -52,7 +52,7 @@ MList * ReversList( MList * head)
 void TestReverlist() {
 
     cout<<"TestReverlist===============start"<<endl;
-    MList  * frist =  new MList ;
+    MListNode  * frist =  new MListNode ;
     frist->pNext= NULL;
     frist->iM = 100;
 
@@ -60,7 +60,7 @@ void TestReverlist() {
     {
         InsertList( frist ,i);
     }
-    MList  * temp = frist;
+    MListNode  * temp = frist;
     while( temp != NULL)
     {
         cout<< temp->iM <<endl;
@@ -69,7 +69,7 @@ void TestReverlist() {
 
     cout<<" ===============1"<<endl;
 
-    MList * reversHead = ReversList( frist);
+    MListNode * reversHead = ReversList( frist);
     while(reversHead != NULL)
     {
         cout<< reversHead->iM<<endl;
