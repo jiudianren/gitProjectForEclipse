@@ -32,7 +32,7 @@ int mainQuickSort()
     return 0;
 }
 
-void quickSort(int s[], int l, int r)
+void quickSort( int s[], int l, int r)
 {
     if (l < r)
     {
