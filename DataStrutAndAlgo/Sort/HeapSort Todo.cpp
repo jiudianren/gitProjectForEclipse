@@ -11,8 +11,13 @@
 /**
  * 堆排序：C++
  *
- * @author skywang
- * @date 2014/03/11
+ * 算法之堆排序（最大堆c++实现）
+ *
+ *
+ * https://blog.csdn.net/lyl771857509/article/details/78853448
+ *
+ * 算法之堆排序（最大堆c++实现）
+ *
  */
 
 #include <iostream>
