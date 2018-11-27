@@ -1,17 +1,14 @@
-
-
-/*
- * https://blog.csdn.net/callinglove/article/details/8597189
- *
- * */
-
 #include  <string.h>
 #include <assert.h>
+#include <iostream>
+
 
 char * strcpy1(char *dst, const char *src) //[1]
 {
     assert(dst != NULL && src != NULL);  //[2]
     char *ret = dst;                     //[3]
+    //先复制 后判断，会把最后一个 \0复制了，然后再判断
+
     while ((*dst++ = *src++) != '\0');   //[4]
     return ret;
 }
@@ -61,7 +58,7 @@ void * my_memcpy(void  *dstt, const void * srcc, int cnt)
 
     void  * ret = dstt;
     char * dst = (char *) dstt;
-    char * src = (char *) srcc;
+    char * src = (const char *) srcc;
     if (dst >= src && dst <= src+cnt-1) //内存重叠，从高地址开始复制
     {
         dst = dst+cnt-1;
@@ -149,7 +146,7 @@ atoi()函数实现的代码：strToInt()
 
 
 
-#include <iostream>
+
 #define INT_MAX ((int)0x7fffffff)
 #define INT_MIN ((int)0x80000000)
 
@@ -161,7 +158,7 @@ int strToInt(const char* str){
     int flag=1;//默认正数
 
     //判断指针是否为空
-    if (str==NULL || *str=='\0')
+    if (str== nullptr || *str=='\0')
         return 0;
 
     g_status = Invalid;
@@ -199,9 +196,7 @@ int strToInt(const char* str){
         }
         str++;
     }
-
-
-    return (int)flag*result;
+    return static_cast<int>(flag*result);
 }
 
 
@@ -216,14 +211,13 @@ char *strcat(char *strDes, const char *strSrc){
 
     char *address = strDes;
 
-    while (*strDes != ‘\0′)
-
+    while (*strDes != '\0')
         ++ strDes;
 
-    while ((*strDes ++ = *strSrc ++) != ‘\0′)
+    while ((*strDes ++ = *strSrc ++) != '\0')
+    {}
 
-        return address;
-
+    return address;
 }
 
 //19．strncat实现
@@ -234,18 +228,14 @@ char *strncat(char *strDes, const char *strSrc, int count){
 
     char *address = strDes;
 
-    while (*strDes != ‘\0′)
-
+    while (*strDes != '\0')
         ++ strDes;
 
-    while (count — && *strSrc != ‘\0′ )
-
+    while (count - && *strSrc != '\0' )
         *strDes ++ = *strSrc ++;
 
-    *strDes = ‘\0′;
-
+    *strDes = '\0';
     return address;
-
 }
 
 //20. strcmp函数实现
