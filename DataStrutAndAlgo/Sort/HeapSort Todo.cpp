@@ -160,27 +160,25 @@ void mainHeapSort()
     for (i=0; i<ilen; i++)
         cout << a[i] << " ";
     cout << endl;
-
 }
 
 
 
 
-/*https://jingyan.baidu.com/article/5225f26b057d5de6fa0908f3.html*/
+
+//
 
 
 #include <iostream>
-
-#include<algorithm>
+#include <algorithm>
 
 using namespace std;
 
 void HeapAdjust(int *a,int i,int size)  //调整堆
 {
-    int lchild=2*i;       //i的左孩子节点序号
-    int rchild=2*i+1;     //i的右孩子节点序号
+    int lchild= 2*i +1;       //i的左孩子节点序号
+    int rchild= lchild+1;     //i的右孩子节点序号
     int max=i;            //临时变量
-
     if(i<=size/2)          //如果i是叶节点就不用进行调整
     {
         if(lchild<=size&&a[lchild]>a[max])
@@ -202,9 +200,7 @@ void HeapAdjust(int *a,int i,int size)  //调整堆
 
 void BuildHeap(int *a,int size)    //建立堆
 {
-    int i;
-
-    for(i=size/2;i>=1;i--)    //非叶节点最大序号值为size/2
+    for(int i=size/2 -1; i>=0 ; i--)    //非叶节点最大序号值为size/2
     {
         HeapAdjust(a,i,size);
     }
@@ -212,49 +208,27 @@ void BuildHeap(int *a,int size)    //建立堆
 
 void HeapSort(int *a,int size)    //堆排序
 {
-    int i;
     BuildHeap(a,size);
-
-    for(i=size;i>=1;i--)
+    for(int i=size-1; i>=0; i--)
     {
-        //cout<<a[1]<<" ";
-        swap(a[1],a[i]);           //交换堆顶和最后一个元素，即每次将剩余元素中的最大者放到最后面
-          //BuildHeap(a,i-1);        //将余下元素重新建立为大顶堆
-          HeapAdjust(a,1,i-1);      //重新调整堆顶节点成为大顶堆
+        swap(a[0],a[i]);           //交换堆顶和最后一个元素，即每次将剩余元素中的最大者放到最后面
+        HeapAdjust(a,0,i-1);      //重新调整堆顶节点成为大顶堆
     }
 }
 
 int main(int argc, char *argv[])
-
 {
-
-     //int a[]={0,16,20,3,11,17,8};
-
     int a[100];
-
     int size;
-
     while(scanf("%d",&size)==1&&size>0)
-
     {
-
         int i;
-
         for(i=1;i<=size;i++)
-
             cin>>a[i];
 
         HeapSort(a,size);
-
         for(i=1;i<=size;i++)
-
             cout<<a[i]<<"";
 
-        cout<<endl;
 
-    }
-
-    return 0;
-
-}
 
