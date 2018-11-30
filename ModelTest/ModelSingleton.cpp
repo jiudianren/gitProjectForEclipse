@@ -15,18 +15,31 @@
 
 
 /* 饿汉模式
+ *
+ * /*
+ * （1）饿汉
+
+
+需要动手写一下
+
+
+饿汉单例，即在最开始的时候，静态对象就已经创建完成；
+设计方法是类中包含一个静态成员指针，该指针指向该类的一个对象，提供一个公有的静态成员方法，返回该对象指针；
+为了使得对象唯一，还需要将构造函数设为私有，
  * */
-template <class T>
-class singletonOne
+
+
+
+template <class T>  class singletonOne
 {
 protected:
-    singletonOne(){};
+    singletonOne(){}; 	// 注意点 1  将默认构造函数设置为 protected
 private:
-    singletonOne(const singletonOne &)              = delete;//禁止拷贝
-    singletonOne & operator=(const singletonOne &)  = delete;//禁止赋值
-    static T* m_instance;
+    singletonOne(const singletonOne &)              = delete;//禁止拷贝  注意点3
+    singletonOne & operator=(const singletonOne &)  = delete;//禁止赋值  注意点4
+    static T* m_instance;      // 注意点2  静态成员变量  指针
 public:
-    static T* GetInstance();
+    static T* GetInstance();  //注意点4   getInstance的成员函数也要是 static函数，并且是public
 };
 
 
@@ -35,6 +48,7 @@ T* singletonOne<T>::GetInstance()
 {
     return m_instance;
 }
+
 
 template <class T>
 T* singletonOne<T>::m_instance = new T();
