@@ -48,6 +48,14 @@ MListNode * ReversList( MListNode * head)
 }
 
 
+/*todo
+ *
+ * 一个链表中的倒数第k个节点
+ * */
+MListNode * LastKNode(const  MListNode * head)
+{
+
+}
 
 void TestReverlist() {
 

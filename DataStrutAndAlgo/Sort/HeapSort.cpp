@@ -164,16 +164,9 @@ void mainHeapSort()
 
 
 
-
-
-//
-
-
 #include <iostream>
 #include <algorithm>
-
 using namespace std;
-
 void HeapAdjust(int *a,int i,int size)  //调整堆
 {
 	int lchild= 2*i +1;       //i的左孩子节点序号

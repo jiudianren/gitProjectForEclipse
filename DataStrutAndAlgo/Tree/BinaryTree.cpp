@@ -3,6 +3,7 @@
 #include "BinaryTree.h"
 #include <stack>
 #include <deque>
+#include <queue>
 
 using namespace std;
 
@@ -185,8 +186,7 @@ void postOrder_Nor(TreeNode *root)     //非递归后序遍历
 
 
 /*递归法 按层 遍历*/
-
-int Depth(TreeNode *root)
+int Depth(const TreeNode *root)
 {
     if (!root) return 0;
     int left =  Depth(root->left);
@@ -224,8 +224,7 @@ void ListNodeByLevel(TreeNode*  root)
 
 
 /* 将每层的数据 组织到容器中 */
-
-void getSolution(vector<vector<int>>& ret, TreeNode*  root, int level)
+void getSolution(vector<vector<int>>& ret, const TreeNode*  root, int level)
 {
     if(root == NULL)
         return;
@@ -236,7 +235,7 @@ void getSolution(vector<vector<int>>& ret, TreeNode*  root, int level)
 }
 
 
-vector<vector<int>> levelOrder(TreeNode *root) {
+vector<vector<int>> levelOrder(const TreeNode *root) {
 
     int depth = Depth(root);
 
@@ -249,11 +248,37 @@ vector<vector<int>> levelOrder(TreeNode *root) {
     return ret;
 }
 
+void levels_showBT(const TreeNode * root){//层次遍历,利用队列实现
+
+
+    if(root == nullptr )
+        return;
+
+    std::queue<TreeNode *> que;//构造一个树结点指针的队列
+    que.push(root);
+
+    while(!que.empty()){
+        TreeNode *q = que.front();
+        cout<<q->value<<" ";
+        que.pop();
+
+        if( q->left != nullptr)//que.front()拿到最前结点
+        {
+            que.push( q->left );
+        }
+
+
+        if( q->right != nullptr){
+            que.push( q->right );
+        }
+    }
+    cout<<endl;
+}
 
 
 
 //https://blog.csdn.net/liuyi1207164339/article/details/50898902
-int MostFar(TreeNode*pNode, int&nMaxDistance){
+int MostFar(const TreeNode*pNode, int&nMaxDistance){
 
     if (pNode == NULL)
         return -1;   //空节点的高度为-1
@@ -318,20 +343,20 @@ void  TestMax()
 /*按层遍历的时候，获取其宽度也可以 */
 /* 二叉树的宽度      在上一层遍历完成后，下一层的所有节点已经放到队列中，此时队列中的元素个数就是下一层的宽度*/
 /************************************************************************/
-int WidthOfBinaryTree(TreeNode * pNode){
+int WidthOfBinaryTree(const TreeNode * pNode){
+
     if (pNode == NULL)
     {
         return 0;
     }
-    std::deque<TreeNode*> dequeTreeNode;//双端队列
 
+    std::deque<TreeNode*> dequeTreeNode;//双端队列
 
     int maxWidth = 1;//最大的宽度,用于当只有一个节点时候返回1
     dequeTreeNode.push_back(pNode);//头结点入队
 
     while (true)
     {
-
         int length = dequeTreeNode.size();//当前层节点的个数
         if ( length == 0)//当前层没有节点，跳出循环
         {
@@ -394,15 +419,12 @@ void  FindPath(TreeNode * root , std::vector<int>  path , int curSum, int sum )
 /* 遍历 ，所有路径和为 sum的二叉树的路径*/
 void  FindPath(TreeNode * root , int sum)
 {
-
     if( root == nullptr )
     {
-           return ;
+        return ;
     }
-
-     vector<int> path;
-     int curSum =0 ;
-     FindPath( root , path ,curSum , sum );
-
+    vector<int> path;
+    int curSum =0 ;
+    FindPath( root , path ,curSum , sum );
 }
 
