@@ -24,7 +24,7 @@ int mainBB()
     act.sa_flags = SA_RESTART;
 
 
-        act.sa_handler = SIG_DFL;
+    act.sa_handler = SIG_DFL;
 
 
     sigaction(SIGHUP, &act, NULL);
@@ -42,18 +42,18 @@ int mainBB()
 
         std::string strEnd(iLength, '=');
         std::cout << "\n" << os.str()
-                           << "\n" << strEnd
-                           << "\nSelect column name(0:Quit, 1:Show all data):";
+                                   << "\n" << strEnd
+                                   << "\nSelect column name(0:Quit, 1:Show all data):";
         std::cin.clear();
         std::string strColumnName;
 
 
-         std::getline(std::cin, strColumnName);
-         if( cin.bad())
-         {
-             std::cout << "sssss" << std::endl;
-             exit(1);
-         }
+        std::getline(std::cin, strColumnName);
+        if( cin.bad())
+        {
+            std::cout << "sssss" << std::endl;
+            exit(1);
+        }
 
 
 
