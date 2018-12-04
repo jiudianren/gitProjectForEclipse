@@ -119,6 +119,153 @@ zk的链接管理类。  ---- 》管理和获取zk的连接的句柄
 zk的路径管理类   ---》初始化路径
 zk的事件处理类    ---》 对zk节点变化的时间进行处理 ，在zk——init的时候，注入
 
+
+##这一块要看清楚 todo
+
+
+###处理的 事件有：
+	void TZNodeEventMgr::fun_watch(zhandle_t *zhandle, 
+								const int iEvent, 
+									int iState, 
+									const char* sPath, 
+									void* context)
+	{
+	
+		    // 使用者只关注部分事件
+	    const std::set<int> &refEventCare = GetSelf()->GetEventCare();
+	    if(!refEventCare.empty())
+	    {
+	        bProcEvent = refEventCare.find(iEvent) != refEventCare.end();
+	        VLOG_INFO("TZNodeEventMgr::fun_watch In Event Only Care,  Event is {}", iEvent);
+	    }
+	    if (iEvent == ZOO_SESSION_EVENT) 
+	    //会话失效事件，客户端与服务端断开或重连时触发
+	    {
+	    }
+	    else if (iEvent == ZOO_CHANGED_EVENT) 
+	    //节点数据改变事件，此watch通过zoo_exists()或zoo_get()设置
+	    {
+	            if(bProcEvent)
+		        {
+		            ProZooChangedEvent(zhandle, sPath);
+		        }
+	    }
+	    else if (iEvent == ZOO_CREATED_EVENT) 
+	    //节点创建事件，需要watch一个不存在的节点，当节点被创建时触发，此watch通过zoo_exists()设置
+	    {
+	    }
+	    else if (iEvent == ZOO_DELETED_EVENT) 
+	    //节点删除事件，此watch通过zoo_exists()或zoo_get()设置
+	    {
+	    }
+	    else if (iEvent == ZOO_CHILD_EVENT) 
+	    //子节点列表改变事件，此watch通过zoo_get_children()或zoo_get_children2()设置
+	    {
+	    }
+	}
+	
+	
+
+####	ProZooChangedEvent 示例
+
+	void TZNodeEventMgr::ProZooChangedEvent(zhandle_t *zhandle, const char* sPath)
+	{
+	    VLOG_INFO("Info, Pro ZOO_CHANGED_EVENT Begin, path:{}.", sPath);
+	    TEventKeyEle tEventKey;
+	    //regist a watcher again to make watch persistence
+	    struct Stat stat;
+	    zoo_exists(zhandle, sPath, 1, &stat);
+	    
+	    tEventKey.Set(sPath, E_EventType::CHANGE_VALUE);
+	    
+	    GetSelf()->ExecCallbackImp(sPath, tEventKey);
+	}
+	
+	
+	
+###
+	bool TZKStatusAgent::Initialize(const std::string &val)
+	{
+	    if(m_bInitialized)
+	    {
+	        return m_bInitialized;
+	    }
+	
+	    m_bInitialized = true;
+	
+	    gpvLogger->Init(val);
+	
+	    bool bRetFlag = false;
+	
+	    //1.初始化基础变量
+	    bRetFlag = m_pHostStatusMgr->Initialize(E_SvsType::PCRF);
+	    //2.初始化本地路径
+	    bRetFlag = bRetFlag && m_pZNodePathMgr->Initialize();
+	    //3.清除非本次会话临时节点（由于网络延迟等造成的非本次会话临时节点未及时释放掉情况）
+	    bRetFlag = bRetFlag && m_pZNodePathMgr->DeleteEphemeralNode();
+	    //4.同步路径节点到ZK服务器
+	    bRetFlag = bRetFlag && m_pZNodePathMgr->SyncPathToZooKeeper();
+	    //5.设置watcher和回调信息，如日志跟踪
+	    bRetFlag = bRetFlag && m_pZNodeEventMgr->AddMonitoredEntity();
+	
+	    m_pZNodePathMgr->SetRequestModuleFunc([this]() { return this->RequestZKModuleInfo();});
+	
+	    return bRetFlag;
+	}
+
+
+
+###
+
+	bool TZNodeEventMgr::AddMonitoredEntity()
+	{
+	    bool bRetFlag = true;
+	    for (auto node : m_mapStatusEvent)
+	    {
+	        auto path = m_pZNodePathMgr->GetNodePath((int32_t) node.first);
+	
+	        //一个路径对应一个特性功能
+	        m_mapEntityObj[path] = node.second;
+	        SetNotifyCallBack(path, EventCallbackFunc, node.second->CareChildren());
+	    }
+	
+	    return bRetFlag;
+	}
+
+	bool TZNodeEventMgr::AddMonitoredEntity()
+	{
+	    bool bRetFlag = true;
+	    for (auto node : m_mapStatusEvent)
+	    {
+	        auto path = m_pZNodePathMgr->GetNodePath((int32_t) node.first);
+	
+	        //一个路径对应一个特性功能
+	        m_mapEntityObj[path] = node.second;
+	        SetNotifyCallBack(path, EventCallbackFunc, node.second->CareChildren());
+	    }
+	
+	    return bRetFlag;
+	}
+
+
+
+	void TZNodeEventMgr::SetNotifyCallBack(const std::string& sPath, callback func, bool bCareChildren)
+	{
+	    VLOG_INFO("SetNotifyCallBack begin.path:[{}], bCareChildren is:[{}]", sPath.c_str(), bCareChildren);
+	    m_mapCallbackFunc[sPath] = func;
+	    if (bCareChildren)
+	    {
+	        std::set<std::string> setZNodeChildren;
+	        m_pZNodePathMgr->GetChildren(sPath, false, setZNodeChildren);
+	        m_pZNodePathMgr->SetChildrenLocal(sPath, setZNodeChildren, E_LocalChild::All);
+	        m_pZNodePathMgr->SetChildrenLocal(sPath, setZNodeChildren, E_LocalChild::Add);
+	    }
+	    m_pZNodePathMgr->SetWatcher(sPath, bCareChildren);
+	    VLOG_INFO("SetNotifyCallBack End.");
+	}
+	
+	
+	
 主要是把zk作为 数据发布和订阅 ，提供给管理平台当前容器内的业务进程的一些信息。
 第二是分布式协调通知，比如 号码跟踪功能，
 之前单机的情况的下，通过管理进程发一条消息就可了，云化以后，各个容器都需要知道信息，
