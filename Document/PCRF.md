@@ -181,6 +181,21 @@ zk的事件处理类    ---》 对zk节点变化的时间进行处理 ，在zk——init的时候，注入
 	    GetSelf()->ExecCallbackImp(sPath, tEventKey);
 	}
 	
+	void TZNodeEventMgr::ExecCallbackImp(const std::string sPath,
+		 const TEventKeyEle tEvent)
+	{
+	    auto it = m_mapCallbackFunc.find(sPath);
+	    if (it != m_mapCallbackFunc.end())
+	    {
+	        //call event processor
+	        it->second(tEvent);
+	    }
+	    else
+	    {
+	        VLOG_INFO("module,path:{},id:{},does not found event processor.", tEvent.sZNodePath, tEvent.Action());
+	    }
+	}
+	
 	
 	
 ###
@@ -217,20 +232,57 @@ zk的事件处理类    ---》 对zk节点变化的时间进行处理 ，在zk——init的时候，注入
 
 ###
 
-	bool TZNodeEventMgr::AddMonitoredEntity()
+
+	class TStatusEventBase
 	{
-	    bool bRetFlag = true;
-	    for (auto node : m_mapStatusEvent)
+	public:
+	    TStatusEventBase(bool bCareChildren) :
+	            m_bCareChildren(bCareChildren)
 	    {
-	        auto path = m_pZNodePathMgr->GetNodePath((int32_t) node.first);
-	
-	        //一个路径对应一个特性功能
-	        m_mapEntityObj[path] = node.second;
-	        SetNotifyCallBack(path, EventCallbackFunc, node.second->CareChildren());
 	    }
+	    virtual ~TStatusEventBase()
+	    {
+	    }
+	    bool CareChildren()
+	    {
+	        return m_bCareChildren;
+	    }
+	    virtual bool Execute(const TEventKeyEle event) = 0;
 	
-	    return bRetFlag;
+	private:
+	    bool m_bCareChildren;
+	};
+
+
+	class TTraceLogEvent : public TTraceLogEventBase
+	{
+	public:
+	    TTraceLogEvent(std::shared_ptr<THostStatusMgr> arg1, std::shared_ptr<TZNodePathMgr> arg2);
+	    virtual ~TTraceLogEvent();
+	
+	public:
+	    void CloseTraceLog() override;
+	    void OpenTraceLog(const int32_t iLogLvl, const std::string &sNumber) override;
+	};
+
+
+	TZKStatusAgent::TZKStatusAgent()
+	{
+	    m_bInitialized = false;
+	    mapStatusEventtype mapStatEvt;
+	    m_pPcrfModuleAssign = std::make_shared<TPcrfModuleAssignMgr>(m_pZNodePathMgr);
+	    
+	    mapStatEvt[(int32_t) StatusPer::log] = std::make_shared<TTraceLogEvent>(m_pHostStatusMgr, m_pZNodePathMgr);
+	
+	    m_pZNodeEventMgr->SetStatusEvent(mapStatEvt);
 	}
+
+
+	void TZNodeEventMgr::SetStatusEvent(const mapStatusEventtype mapStatusEvent)
+	{
+	    m_mapStatusEvent = mapStatusEvent;
+	}
+
 
 	bool TZNodeEventMgr::AddMonitoredEntity()
 	{
@@ -264,6 +316,20 @@ zk的事件处理类    ---》 对zk节点变化的时间进行处理 ，在zk——init的时候，注入
 	    VLOG_INFO("SetNotifyCallBack End.");
 	}
 	
+	
+	void TZNodeEventMgr::EventCallbackFunc(const TEventKeyEle event)
+	{
+	    //VLOG_INFO("status event, znode path is:\"{}\", event id:{}", event.sZNodePath.c_str(), (int32_t)event.eEventId);
+	    auto obj = GetSelf()->m_mapEntityObj.find(event.sZNodePath);
+	    if (obj != GetSelf()->m_mapEntityObj.end())
+	    {
+	        obj->second->Execute(event);
+	    }
+	    else
+	    {
+	        VLOG_INFO("ExecutCallbackFunc failded , znode path is:\"{}\", event id:{}", event.sZNodePath.c_str(), (int32_t)event.eEventId);
+	    }
+	}
 	
 	
 主要是把zk作为 数据发布和订阅 ，提供给管理平台当前容器内的业务进程的一些信息。

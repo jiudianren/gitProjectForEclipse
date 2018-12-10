@@ -11,6 +11,7 @@ SQL VS NoSQL 如何选择数据库 https://www.cnblogs.com/beilin/p/6007080.html
 
 SQL与NoSQL关系和区别  https://blog.csdn.net/han_cui/article/details/60765969
 
+NoSQL类型介绍及适用场景  https://blog.csdn.net/andybbc/article/details/50725194
 
 #一、概念
 	SQL (Structured Query Language) 数据库，指关系型数据库。主要代表：SQL Server，Oracle，MySQL(开源)，PostgreSQL(开源)。
