@@ -23,6 +23,13 @@ http://note.youdao.com/noteshare?id=accc28c56b127c1c28efa6655b145fe4&sub=8E22308
 #内存碎片的解决方法
 
 
+#生产者，消费者的线程模式的处理方法
+todo
+# 已连接socker和线程池的使用的结合
+
+todo 
+
+
  c++
 虚继继承
 模板特化
