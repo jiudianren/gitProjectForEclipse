@@ -9,6 +9,9 @@
 #define SRC_MODESTATE_H_
 
 /*
+ * 状态模式
+ *
+ *
  * http://www.cnblogs.com/wanggary/archive/2011/04/21/2024117.html
  *
  *CLiftState，电梯状态抽象类

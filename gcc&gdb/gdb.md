@@ -4,3 +4,6 @@ gdb ГьБо
 
 p  m_value
 p/x m_value
+
+
+#x

@@ -11,12 +11,6 @@ using namespace std;
  *      2，
  *      3，
  *
- *
- *
- *
- *
- *
- *
  * */
 //对外接口   实现组件和叶子节点的所有功能
 class Component
