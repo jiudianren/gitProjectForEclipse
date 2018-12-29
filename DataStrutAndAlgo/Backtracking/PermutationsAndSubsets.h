@@ -41,7 +41,8 @@ public:
     }
 
 
-    void backTracking( vector<vector<int>>& ret, vector<int>  & curr, vector<bool> &  isVisited, const vector<int> & In  )
+    void backTracking( vector<vector<int>>& ret, vector<int>  & curr,
+                       vector<bool> &  isVisited, const vector<int> & In  )
     {
         if(curr.size() == In.size())
         {
