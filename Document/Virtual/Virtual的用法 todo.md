@@ -8,3 +8,5 @@
 
 #todo
 为什么构造函数不能为虚函数？？？
+
+[http://blog.sina.com.cn/s/blog_620882f401016ri2.html]
