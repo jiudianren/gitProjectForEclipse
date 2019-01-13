@@ -339,11 +339,11 @@ zk的事件处理类    ---》 对zk节点变化的时间进行处理 ，在zk——init的时候，注入
 
 
 zookeeper应用的典型场景 
-　　　　3.1　数据发布与订阅（配置中心） 
-　　　　3.2　命名服务 
-　　　　3.3　分布式协调服务/通知 
-　　　　3.4　Master选举 
-　　　　3.5　分布式锁 
+	3.1　数据发布与订阅（配置中心） 
+	3.2　命名服务 
+	3.3　分布式协调服务/通知 
+	3.4　Master选举 
+	3.5　分布式锁 
 
 
 这里主要用到了 
@@ -356,7 +356,9 @@ gtest gmock的使用
 
 perl生成，按照现在的目录层级，生成所有类的mock类
 
-[TestCaseName，TestName]，而我对这两个参数的定义是：[TestSuiteName，TestCaseName]，在下一篇我们再来看为什么这样定义
+[TestCaseName，TestName]，而我对这两个参数的定义是：
+[TestSuiteName，TestCaseName]，在下一篇我们再来看为什么这样定义
+
 
 class为suit member为 case
 
