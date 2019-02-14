@@ -1,3 +1,4 @@
+
 #reinterpret_cast, static_cast, dynamic_cast和const_cast，目的在于控制类(class)之间的类型转换
 
 
