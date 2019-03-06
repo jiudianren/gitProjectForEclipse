@@ -52,9 +52,26 @@ MListNode * ReversList( MListNode * head)
  *
  * 一个链表中的倒数第k个节点
  * */
-MListNode * LastKNode(const  MListNode * head)
+MListNode * LastKNode(const  MListNode * head, int n )
 {
+	MListNode * before = head;
+	MListNode * ret = head;
+	while( n >0 && before != nullptr)
+	{
+		before = before->pNext;
+		n--;
+	}
+	if(before ==nullptr)
+	{
+		return nullptr;
+	}
 
+	while(before != nullptr)
+	{
+		before= before->pNext;
+		ret= ret->pNext;
+	}
+	return ret;
 }
 
 void TestReverlist() {

@@ -6,16 +6,13 @@
  */
 
 
-找出字符串中第一个只出现一次的字符
+//找出字符串中第一个只出现一次的字符
+//https://blog.csdn.net/ego_bai/article/details/80461304
 
-
-
-https://blog.csdn.net/ego_bai/article/details/80461304
-
-void findSingle(char *arr){
+void findSingle( const char *arr){
     int hashtable[26] = {0};
     int i;
-    int len = strlen(str);
+    int len = strlen(arr);
     for(i=0;i<len;i++)
         hashtable[arr[i]-'a']++;
 
@@ -31,7 +28,7 @@ void findSingle(char *arr){
 }
 
 
-同样如果不仅线制对小写字母，各类字符都有的情况直接采用int hashtable[256] = {0};更通用
+//同样如果不仅线制对小写字母，各类字符都有的情况直接采用int hashtable[256] = {0};更通用
 
 
 
