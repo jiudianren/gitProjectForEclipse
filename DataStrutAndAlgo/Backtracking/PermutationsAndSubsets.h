@@ -89,6 +89,10 @@ public:
         //别忘了空集合
         res.push_back(vector<int>());
         vector<int> v;
+       auto input=   [S](vector<int> in)
+        		{
+        			S.push_back(in);
+        		};
         generate(0, v, S);
         return res;
     }
@@ -100,6 +104,19 @@ public:
         for(int i = start; i < S.size(); i++) {
             v.push_back(S[i]);
             res.push_back(v);
+            generate(i + 1, v, S);
+            v.pop_back();
+        }
+    }
+
+    void generate(int start, vector<int>& v,  std::function<void(vector<int>) func>) {
+
+        if( start == S.size()) {
+            return;
+        }
+        for(int i = start; i < S.size(); i++) {
+            v.push_back(S[i]);
+            func(v);
             generate(i + 1, v, S);
             v.pop_back();
         }
