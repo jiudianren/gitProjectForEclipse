@@ -7,88 +7,112 @@
 
 #include "RCString.h"
 
+
+
+template<class T>
+void RCPtr<T>::init()
+{
+    if (pointee == 0) return;
+    if (pointee->isShareable() == false) {
+        pointee = new T(*pointee);
+    }
+    pointee->addReference();
+}
+
+
+template<class T> RCPtr<T>::RCPtr(T* realPtr)
+                : pointee(realPtr)
+                  { init(); }
+
+
+template<class T>RCPtr<T>::RCPtr(const RCPtr& rhs)
+                : pointee(rhs.pointee)
+                  { init(); }
+
+template<class T>RCPtr<T>::~RCPtr()
+{ if (pointee)pointee->removeReference(); }
+
+
+template<class T>
+RCPtr<T>& RCPtr<T>::operator=(const RCPtr& rhs)
+{
+    if (pointee != rhs.pointee) {
+        if (pointee) pointee->removeReference();
+        pointee = rhs.pointee;
+        init();
+    }
+    return *this;
+}
+template<class T>T* RCPtr<T>::operator->() const
+{
+    return pointee;
+}
+
+template<class T> T& RCPtr<T>::operator*() const
+{
+    return *pointee;
+}
+
+void String::StringValue::init(const char *initValue)
+{
+    data = new char[strlen(initValue) + 1];
+    strcpy(data, initValue);
+}
 String::StringValue::StringValue(const char *initValue)
-: refCount(1),shareable(true)
-{
-	data = new char[strlen(initValue) + 1];
-	strcpy(data, initValue);
-}
+
+
+{ init(initValue); }
+String::StringValue::StringValue(const StringValue& rhs)
+{ init(rhs.data); }
 String::StringValue::~StringValue()
-{
-	delete [] data;
-}
-
-
+{ delete [] data; }
 String::String(const char *initValue)
-: value(new StringValue(initValue))
-{}
-
-String::String(const String& rhs)
-{
-	if (rhs.value->shareable) {
-		value = rhs.value;
-		++value->refCount;
-	}
-	else {
-		value = new StringValue(rhs.value->data);
-	}
-}
-
-String& String::operator=(const String& rhs)
-{
-	if (value == rhs.value) { // do nothing if the values
-		return *this; // are already the same; this
-	} // subsumes the usual test of
-	// this against &rhs (see Item E17)
-	if (--value->refCount == 0) { // destroy *this's value if
-		delete value; // no one else is using it
-	}
-	value = rhs.value; // have *this share rhs's
-	++value->refCount; // value
-	return *this;
-}
-
+: value(new StringValue(initValue)) {}
 const char& String::operator[](int index) const
-{
-	return value->data[index];
-}
-
-
-/*写时拷贝 下面这种实现是有问题的
- *
- * String s1 = "Hello";
-char *p = &s1[1];
-String s2=s1;
-*p='x;
-'*/
+{ return value->data[index]; }
 char& String::operator[](int index)
 {
-	// if we're sharing a value with other String objects,
-	// break off a separate copy of the value for ourselves
-	if (value->refCount > 1) {
-		--value->refCount; // decrement current value's
-		// refCount, because we won't
-		// be using that value any more
-		value = // make a copy of the
-				new StringValue(value->data); // value for ourselves
-	}
-	// return a reference to a character inside our
-	// unshared StringValue object
-	return value->data[index];
+    if (value->isShared()) {
+        value = new StringValue(value->data);
+    }
+    value->markUnshareable();
+    return value->data[index];
 }
 
-char& String::operator[](int index)
+RCObject::RCObject(): refCount(0), shareable(true)
 {
-	if (value->refCount > 1) {
-		--value->refCount;
-		value = new StringValue(value->data);
-	}
-	value->shareable = false; // add this
-	return value->data[index];
 }
 
 
-String::~String()
+RCObject::RCObject(const RCObject&): refCount(0), shareable(true)
 {
-	if (--value->refCount == 0) delete value;
 }
+
+
+RCObject& RCObject::operator=(const RCObject&)
+{
+    return *this;
+}
+
+RCObject::~RCObject()
+{
+}
+
+
+void RCObject::addReference()
+{
+    ++refCount;
+}
+
+
+void RCObject::removeReference()
+{ if (--refCount == 0) delete this; }
+
+void RCObject::markUnshareable()
+{ shareable = false; }
+
+bool RCObject::isShareable() const
+{ return shareable; }
+
+bool RCObject::isShared() const
+{ return refCount > 1; }
