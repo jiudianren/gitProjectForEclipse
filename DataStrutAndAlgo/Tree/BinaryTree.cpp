@@ -42,8 +42,6 @@ void postOrder( TreeNode *root)
 
 
 /*非递归版本*/
-
-
 void PreOrder_Nor(TreeNode * root)
 {
     if(NULL == root)
@@ -64,7 +62,6 @@ void PreOrder_Nor(TreeNode * root)
 
         if( nullptr  != pTemp->left)
             s.push(pTemp->left);
-
     }
     cout<<endl;
 }
@@ -193,7 +190,7 @@ int Depth(const TreeNode *root)
 {
     if (!root) return 0;
     int left =  Depth(root->left);
-    int right =Depth(root->right);
+    int right = Depth(root->right);
     return 1 + ( left >right ? left: right);
 }
 
@@ -216,7 +213,6 @@ int PrintNodeAtLevel(TreeNode*  root, int level)
 // 二叉树 按照层遍历
 void ListNodeByLevel(TreeNode*  root)
 {
-
     for(int i = 0; i < Depth(root); ++i)
     {
         PrintNodeAtLevel(root, i);

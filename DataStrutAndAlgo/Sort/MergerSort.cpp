@@ -43,7 +43,7 @@ void Merge(int r[],int r1[],int s,int m,int t){
 void MergeSort(int r[],int r1[],int s,int t){
 
     if(s<t){
-        int m=(s+t)/2;
+        int m=s+(t-s)>>1;
         MergeSort(r,r1,s,m);
         MergeSort(r,r1,m+1,t);
         Merge(r,r1,s,m,t);

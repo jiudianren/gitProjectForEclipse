@@ -20,13 +20,13 @@ https://blog.csdn.net/liuyi1207164339/article/details/50916687
 
 //寻找某一个特定的子节点
 bool bLeafIsFound = false;//全局变量
-void findPath(BinaryTreeNode*pRoot, vector<int>&path, int nToFind){
+void findPath(BinaryTreeNode* pRoot, vector<int> & path, int iToFind){
     if (pRoot == NULL)
     {
         return;
     }
     path.push_back(pRoot->m_nValue);
-    if (!bLeafIsFound&&pRoot->m_nValue == nToFind) //达到了子节点
+    if (!bLeafIsFound&&pRoot->m_nValue == iToFind) //达到了子节点
     {
         printPath(path);//打印路径
         bLeafIsFound = true;
@@ -34,11 +34,11 @@ void findPath(BinaryTreeNode*pRoot, vector<int>&path, int nToFind){
     }
     if (!bLeafIsFound&&pRoot->m_pLeft != NULL)//左子树
     {
-        findPath(pRoot->m_pLeft, path, nToFind);
+        findPath(pRoot->m_pLeft, path, iToFind);
     }
     if (!bLeafIsFound&&pRoot->m_pRight != NULL)//右子树
     {
-        findPath(pRoot->m_pRight, path, nToFind);
+        findPath(pRoot->m_pRight, path, iToFind);
     }
     if (!bLeafIsFound)//找到后就不弹出了
     {

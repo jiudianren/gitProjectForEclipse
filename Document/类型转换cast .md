@@ -20,9 +20,11 @@ reinpreter_castÊÇÌØÒâÓÃÓÚµ×²ãµÄÇ¿ÖÆ×ªÐÍ£¬µ¼ÖÂÊµÏÖÒÀÀµ£¨¾ÍÊÇËµ£¬²»¿ÉÒÆÖ²£©µÄ½á¹û¡
 ###2 const_cast
 ÓÃ·¨£ºconst_cast<type_id> (expression)
 
-ÓÃÓÚÐÞ¸ÄÀàÐÍµÄconst»òvolatileÊôÐÔ¡£³ýÁËconst »òvolatileÐÞÊÎÖ®Íâ£¬type_idºÍexpressionµÄÀàÐÍÊÇÒ»ÑùµÄ£¬Ò»°ãÓÃÓÚÇ¿ÖÆÏû³ý¶ÔÏóµÄ³£Á¿ÐÔ¡£ËüÊÇÎ¨Ò»ÄÜ×öµ½ÕâÒ»µãµÄ C++ ·ç¸ñµÄÇ¿ÖÆ×ªÐÍ£¬¶øC²»Ìá¹©Ïû³ýconstµÄ»úÖÆ£¨ÒÑÑéÖ¤£©¡£
+ÓÃÓÚÐÞ¸ÄÀàÐÍµÄconst»òvolatileÊôÐÔ¡£³ýÁËconst »òvolatileÐÞÊÎÖ®Íâ£¬type_idºÍexpressionµÄÀàÐÍÊÇÒ»ÑùµÄ£¬Ò»°ãÓÃÓÚÇ¿ÖÆÏû³ý¶ÔÏóµÄ³£Á¿ÐÔ¡£
+ËüÊÇÎ¨Ò»ÄÜ×öµ½ÕâÒ»µãµÄ C++ ·ç¸ñµÄÇ¿ÖÆ×ªÐÍ£¬¶øC²»Ìá¹©Ïû³ýconstµÄ»úÖÆ£¨ÒÑÑéÖ¤£©¡£
 
-	³£Á¿Ö¸Õë±»×ª»¯³É·Ç³£Á¿Ö¸Õë£¬²¢ÇÒÈÔÈ»Ö¸ÏòÔ­À´µÄ¶ÔÏó£»³£Á¿ÒýÓÃ±»×ª»»³É·Ç³£Á¿ÒýÓÃ£¬²¢ÇÒÈÔÈ»Ö¸ÏòÔ­À´µÄ¶ÔÏó£»³£Á¿¶ÔÏó±»×ª»»³É·Ç³£Á¿¶ÔÏó¡£
+	³£Á¿Ö¸Õë±»×ª»¯³É·Ç³£Á¿Ö¸Õë£¬²¢ÇÒÈÔÈ»Ö¸ÏòÔ­À´µÄ¶ÔÏó£»
+	³£Á¿ÒýÓÃ±»×ª»»³É·Ç³£Á¿ÒýÓÃ£¬²¢ÇÒÈÔÈ»Ö¸ÏòÔ­À´µÄ¶ÔÏó£»³£Á¿¶ÔÏó±»×ª»»³É·Ç³£Á¿¶ÔÏó¡£
 
 ###3 static_cast
 ÓÃ·¨£ºstatic_cast < type-id > ( expression )

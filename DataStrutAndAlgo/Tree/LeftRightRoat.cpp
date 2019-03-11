@@ -12,7 +12,7 @@
 #include <stack>
 #include <queue>
 
-void Exchange(TreeNode *root)
+void Exchange(TreeNode * root)
 {
 
 	if( root == nullptr)
