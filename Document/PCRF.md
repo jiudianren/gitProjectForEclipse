@@ -7,7 +7,7 @@ OLC³äµ±OCSÓë¸÷Íâ²¿ÔÚÏß¼Æ·ÑÉÏ±¨ÍøÔªµÄ½Ó¿Ú£¬´¦ÀíÍøÔª·¢ËÍµÄÔÚÏß¼Æ·ÑÏà¹ØµÄÇëÇó£¬×ª»»
 
 
 PCRFÊÇÒ»¸ö¶à½ø³ÌµÄ³ÌÐò¡£
-°üÀ¨½ø³Ì¹ÜÀí½ø³ÌºÍÒµÎñ½ø³Ì ¡£ zxinit ºÍzxmonitor µÈ¸ºÔð¹ÜÀí½ø³ÌµÄÆô¶¯ºÍ¼à¿Ø£¬½ø³ÌµÄÀ­Æð¡£
+°üÀ¨½ø³Ì¹ÜÀí½ø³ÌºÍÒµÎñ½ø³Ì¡£ zxinit ºÍzxmonitor µÈ¸ºÔð¹ÜÀí½ø³ÌµÄÆô¶¯ºÍ¼à¿Ø£¬½ø³ÌµÄÀ­Æð¡£
 
 Í¨¹ýÐÄÌøÊµÏÖ
 
@@ -23,8 +23,7 @@ PDisÏûÏ¢·Ö·¢½ø³Ì£¬£¨±ÈÈç°´ºÅÂë·Ö·¢µÈ£©
 
 ##Æ½Ì¨²ã
 ÓÉ²Ù×÷ÏµÍ³Ïà¹ØµÄÏµÍ³¼¶¹¦ÄÜ¹¹³É£¬ËüÆÁ±ÎÁË²»Í¬²Ù×÷ÏµÍ³µÄÏ¸½Ú£¬ÎªÓ¦ÓÃÌá¹©Í³Ò»µÄµ÷ÓÃÏµÍ³APIµÄ½Ó¿Ú£¬²¢Ìá¹©²¿·ÖÍ¨ÓÃµÄ·þÎñºÍ¹ÜÀí³ÌÐò£º¼à¿Ø¡¢Æô¶¯¡¢Í£Ö¹µÈ¡£Ö÷Òª°üÀ¨£º
-1¡¢	Ïß³Ì¹ÜÀí¡£OLC²ÉÓÃ»ùÓÚ¶àÏß³ÌÐ­×÷´¦ÀíµÄ¼Ü¹¹£¬¸ºÔðÏß³ÌµÄ´´½¨¡¢Ïú»Ù¡¢½¡¿µ¼à
-²âµÈ
+1¡¢	Ïß³Ì¹ÜÀí¡£OLC²ÉÓÃ»ùÓÚ¶àÏß³ÌÐ­×÷´¦ÀíµÄ¼Ü¹¹£¬¸ºÔðÏß³ÌµÄ´´½¨¡¢Ïú»Ù¡¢½¡¿µ¼à²âµÈ
 2¡¢	Á´Â·¹ÜÀí¡£¶ÔOLCÓëÍâ²¿ÍøÔª¡¢OLCÓëOCSµÄÁ´Â·½øÐÐ¹ÜÀí£¬Èç¶¨Ê±¼ì²âÁ´Â·ÊÇ·ñ
 Õý³£¡¢Á´Â·ÊÇ·ñ»ýÑ¹¡¢¶ÏÁ´ÖØÁ¬µÈ¡£Ö§³ÖTCP¡¢UDP¡¢SSL¡£
 3¡¢	ÏûÏ¢¶ÓÁÐ¹ÜÀí¡£Ïß³ÌÖ®¼äÊ¹ÓÃÏûÏ¢¶ÓÁÐ½øÐÐÍ¨ÐÅ
@@ -166,7 +165,7 @@ zkµÄÊÂ¼þ´¦ÀíÀà    ---¡· ¶Ôzk½Úµã±ä»¯µÄÊ±¼ä½øÐÐ´¦Àí £¬ÔÚzk¡ª¡ªinitµÄÊ±ºò£¬×¢Èë
 	
 	
 
-####	ProZooChangedEvent Ê¾Àý
+### ProZooChangedEvent Ê¾Àý
 
 	void TZNodeEventMgr::ProZooChangedEvent(zhandle_t *zhandle, const char* sPath)
 	{
@@ -369,25 +368,18 @@ RatableEventµÄÎÊÌâ£¬ÓÐºÜ¶àÊôÐÔ£¬ÓÃÓÚ±£´æ£¬ÇëÇóÏûÏ¢ÖÐµÄavp£¬ºÍÏÂ·¢ÏûÏ¢ÖÐµÄavp£¬ Õ
  ÖØ¹¹Ö®ºó£¬½Ó¿Ú¸ü¼ÓÇåÎú¡£
  ±ÈÈçGx£¬Sysp,Rx½Ó¿Ú£¬ºÍ²ßÂÔÅÐ¶¨½Ó¿Ú£¬
  
- gx,sysp,rxµÈ½Ó¿Ú½«±ØÒªµÄÐÅÏ¢£¬ÉèÖÃ¸ø²ßÂÔÅÐ¶¨½Ó¿Ú£¬²ßÂÔÅÐ¶¨ºó£¬¸÷¸ö½Ó¿ÚÔÙÈ¡µÄ±ØÒªµÄÊý¾Ý¡£
+gx,sysp,rxµÈ½Ó¿Ú½«±ØÒªµÄÐÅÏ¢£¬ÉèÖÃ¸ø²ßÂÔÅÐ¶¨½Ó¿Ú£¬²ßÂÔÅÐ¶¨ºó£¬¸÷¸ö½Ó¿ÚÔÙÈ¡µÄ±ØÒªµÄÊý¾Ý¡£
  
  ÕâÑù½Ó¿Ú¸ü¼ÓÇåÎú£¬ 
  ¶øÇÒÊý¾ÝºÍÐÐÎª·ÖÀë¡£
  Êý¾ÝºÍÐÐÎª·ÖÀëµÄ¡£
     
-8 ÏÖ³¡ÎÊÌâ¶¨Î»ºÍ
-RTÊ±¼ä×ÜÊÇ´í£¬rt²Î¿¼µÄÄÚÈÝÌ«¶à£¬²ßÂÔ¼Æ»®µÄÊ§Ð§Ê±¼ä£¬Ê±¶Î²ßÂÔµÄÉúÐ§Ê±¼ä£¬»Ø»°Ê§Ð§Ê±¼ä£¬ÕË±¾Ê§Ð§Ê±¼äµÈµÈ£¬
+8 ÏÖ³¡ÎÊÌâ¶¨Î»ºÍRTÊ±¼ä×ÜÊÇ´í£¬
+rt²Î¿¼µÄÄÚÈÝÌ«¶à£¬²ßÂÔ¼Æ»®µÄÊ§Ð§Ê±¼ä£¬Ê±¶Î²ßÂÔµÄÉúÐ§Ê±¼ä£¬»Ø»°Ê§Ð§Ê±¼ä£¬ÕË±¾Ê§Ð§Ê±¼äµÈµÈ£¬
 Õâ¸öÎÊÌâ£¬×ÜÊÇ³öÏÖ£¬¶øÇÒ£¬Õâ¸öÊ±¼äµÄÉè¶¨£¬·Ö²¼ÓÚ³ÌÐòµÄ¸÷¸öµØ·½£¬µ±RTÊ±¼ä£¬´íÎóµÄÊ±ºò£¬¾ÍÐèÒª²»Í£µÄ×·×ÙRT²Î¿¼ÁËÄÄÐ©Öµ£¬ÕâÑùºÜÀË·ÑÊ±¼ä¡£
 ºóÀ´ÎÒ¾ÍÌáÒé£¬ÐÂÔöÒ»¸öRTÀà£¬ºÍ²Î¿¼Ê±¼äµÄÀàÐÍµÄÃ¶¾ÙÖµ£¬ÕâÑù£¬Ã¿µ±ÓÐrtµÄ²Î¿¼Ê±¼äµÄÊ±ºò£¬¾Í½«Æä±£´æµ½¸ÃÀàÖÐ¡£
 µÈµ½×îºó£¬ÏÂ·¢ÏìÓ¦ÏûÏ¢µÄÊ±ºò£¬ÔÚ½«¸ÃÖµ£¬×öÔËËã¡£ÏÂ·¢¡£
 
-
-#VTune
-
-ÐÔÄÜ²âÊÔ¹¤¾ß £º
-¿ÉÒÔ¿´µ½Ã¿¸öº¯ÊýµÄÓÃÊ±£¬
-
-#ValGrind
 
 
 

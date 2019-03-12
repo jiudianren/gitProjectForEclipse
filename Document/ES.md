@@ -32,6 +32,22 @@ dispatch
 由于他做的也是基于http的协议的，很多地方可以借鉴。也我做的这个，考虑了 一下我的做的这个业务流程，和他的那个比较接近。
 
 
+#IPC的大体结构
+wk和networkservice  wk持有相应的networkservice 
+networkservie完成短连接的工作，
+wk负责管理这些networkservice
+
+如果是长链接，则networkserive负责，网络收发，并将收发的内容转给wk进程处理
+
+
+##走读代码发现问题
+的时候发现过一个性能问题，一个线程一个io——service，
+在监听socket收到一个连接后，获得收发socker以后需要给其绑定一个io_servie，
+应该从io_servie池（轮流）中不断的获取下一个，而其代码是一直取同一，这样多线程的性能就有问题
+
+
+
+
 #IPC部分创建几个io——service和线程，直接将线程和io_service进行绑定。
 
 workserver，io_service 有自己的 io_context,
