@@ -22,15 +22,15 @@ int g_MaxValue=6;
 void ProbalbilityInner(int orignal, int curNumber, int sum , int * probability )
 {
 
-    if( curNumber ==1)
+    if( curNumber == 1)
     {
-        probability[ sum - orignal] ++;
+        probability[sum - orignal] ++;
     }
     else
     {
-        for(int i = 1  ; i <= g_MaxValue; i++)
+        for(int i = 1; i <= g_MaxValue; i++)
         {
-            ProbalbilityInner( orignal, curNumber -1  , sum+i ,probability) ;
+            ProbalbilityInner( orignal, curNumber -1  , sum+i ,probability);
         }
     }
 }
@@ -39,9 +39,9 @@ void ProbalbilityInner(int orignal, int curNumber, int sum , int * probability )
 
 void Probalbility(int orignal, int *  probability)
 {
-    for(int i = 1  ; i <= g_MaxValue; i++)
+    for(int i = 1; i <= g_MaxValue; i++)
     {
-        ProbalbilityInner( orignal, orignal ,i ,probability) ;
+        ProbalbilityInner(orignal, orignal, i, probability) ;
     }
 }
 
