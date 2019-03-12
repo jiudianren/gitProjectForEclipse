@@ -12,9 +12,9 @@ cnblogs与belong，最长公共子序列为blog（cnblogs, belong），最长公共子串为lo（cnbl
  *
  *用i，j遍历两个子串x,y，如果两个元素相等就+1 ，不等就用上一个状态最大的元素
 
-           1 , 0                           i=0,j=1
-c[i][j] =  2 , c[i-1][j-1] +1              i,j >0 and Xi=Yj
-           3 , max { c[i,j-1] c[i-1,j]}    i,j >0 and Xi != Yj
+           1 , 0                           i=0或者j=0
+c[i][j] =  2 , c[i-1][j-1] +1              i >0 && j>0 && Xi==Yj
+           3 , max { c[i,j-1] c[i-1,j]}    i>0 && j>0 &&  Xi != Yj
  *
  * */
 

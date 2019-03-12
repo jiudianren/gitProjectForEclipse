@@ -12,8 +12,6 @@
  * todo:
  *
  * 圆圈中最后一个数字
- *
- *
  *n 个数组 组成一个圈 ， 每次删除 第m个， 求最后一个被删除的数字
  * */
 
@@ -28,16 +26,15 @@ int GetLast(const int n , const int m)
     assert( m>=1);
 
     std::list<int> context;
-    for(int i =0 ; i < n ;i++)
+    for(int i = 0; i < n; i++)
     {
         context.push_back(i);
     }
 
     auto itbegin = context.begin();
-    while( context.size() >1)
+    while( context.size() > 1)
     {
-
-        for(int j = 0 ; j< m ;j ++)
+        for(int j = 0; j < m; j++)
         {
             itbegin++;
             if( itbegin == context.end())

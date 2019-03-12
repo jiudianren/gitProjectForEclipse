@@ -29,7 +29,30 @@ int GetClimbWays(int n)
 
 }
 
+int GetClimbWays3(int n)
+{
+	static std::map<int ,int >  & alreadMap  ;
+	if( n ==1)
+	{
+		return 1;
+	}
 
+	if(n==2)
+	{
+		return 2;
+	}
+	std::map<int,int>::iterator  it= alreadMap.find( n);
+	if( it!= alreadMap.end())
+	{
+		return it->second;
+	}
+	else
+	{
+		int ret = GetClimbWays2(n-1, alreadMap) +GetClimbWays2(n-1, alreadMap);
+		alreadMap.insert(std::pair<int ,int> (n,ret));
+		return ret;
+	}
+}
 int GetClimbWays2(int n, std::map<int ,int >  & alreadMap  )
 {
 

@@ -28,28 +28,47 @@ f[i][v]表示前i件物品恰放入一个容量为v的背包可以获得的最大价值。
 */
 
 
+#include<iostream>
+using namespace std;
+
+#define N 5 // N件宝贝
+#define V 10 // C是背包的总capacity
+
 void BeiBao()
 {
+	int value[N + 1]  = {0, 6, 3, 5, 4, 6}; // 钱啊
+	int weight[N + 1] = {0, 2, 2, 6, 5, 4}; // 重量
+	int f[N + 1][V + 1] = {0}; // f[i][j]表示在背包容量为j的情况下， 前i件宝贝的最大价值
 
-    int m = 120;
-    int n = 5;
-    std::vector<int> w = {  40, 50, 70, 40, 20 };
-    std::vector<int> v = { 10, 25, 40, 20, 10 };
-    vector< vector<int> > vec(n , vector<int>(m , 0));
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j <m; j++)
-        {
-            if ( w[i] > j)
-                vec[i][j] = vec[i - 1][j];
-            else
-            {
-                int tmp1 = v[i] + vec[i - 1][j - w[i]];
-                int tmp2 = vec[i - 1][j];
-                vec[i][j] = tmp1 > tmp2 ? tmp1 : tmp2;
-            }
-        }
-    }
+	int i = 1;
+	int j = 1;
+	for(i = 1; i <= N; i++)
+	{
+		for(j = 1; j <= V; j++)
+		{
+			// 递推关系式出炉
+			if(j < weight[i])
+			{
+				f[i][j] = f[i - 1][j];
+			}
+			else
+			{
+				f[i][j] = std::max(f[i - 1][j] /*不放*/, f[i - 1][j - weight[i]] + value[i] /*放*/);
+			}
+		}
+	}
+
+	for(i = N; i >= 1; i--)
+	{
+		for(j = 1; j <= V; j++)
+		{
+			printf("%4d ", f[i][j]);
+		}
+
+		cout << endl;
+	}
+
+	return 0;
 }
 
 
