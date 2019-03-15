@@ -1,24 +1,12 @@
-/*
- * ModelSingleton.cpp
- *
- *  Created on: 2018年3月15日
- *      Author: Administrator
- */
-
-
 
 /*
  * 线程安全的 单例模式
- *
  * https://www.cnblogs.com/myd620/p/6133420.html
  * */
 
 
 /* 饿汉模式
- *
- * /*
  * （1）饿汉
-
 
 需要动手写一下
 
