@@ -45,6 +45,14 @@
 《linux shell 命令行及脚本编程案例详解》
 
 
+#并发
+《cpp concurrency in action》
+
+#性能
+
+
+#网络
+Boost.Asio C++ Network Programming.pdf
 
 
 ## 在阅读
@@ -55,4 +63,11 @@
 ## 待阅读
 《超越c++标准库——boost程序库导论》
 《Boost程序库完全开发指南深入C++准标准库.pdf》
+
+##工具类
+《代码大全》
+
+
+
+
 

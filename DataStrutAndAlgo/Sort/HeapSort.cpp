@@ -175,7 +175,7 @@ void HeapAdjust(int *a,int i,int size)  //调整堆
 	int max=i;            //临时变量
 	if(i<=size/2)          //如果i是叶节点就不用进行调整
 	{
-		if(lchild<=size&&a[lchild]>a[max])
+		if( lchild<=size&&a[lchild]>a[max])
 		{
 			max=lchild;
 		}
