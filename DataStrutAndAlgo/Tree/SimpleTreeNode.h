@@ -1,7 +1,7 @@
 /*
  * SimpleTreeNode.cpp
  *
- *  Created on: 2018Äê10ÔÂ25ÈÕ
+ *  Created on: 2018Ã„Ãª10Ã”Ã‚25ÃˆÃ•
  *      Author: Administrator
  */
 
@@ -17,6 +17,28 @@ struct TreeNode
     TreeNode * right;
     TreeNode() : value(0), left(NULL), right(NULL){}
     TreeNode(int x) : value(x), left(NULL), right(NULL){}
+
+
+
+void  free() {
+	freeSubNode();
+	delete this;
+}
+void freeSubNode()
+{
+
+	if(this->left != nullptr)
+	{
+		this->left->freeSubNode();
+		delete this->left;
+	}
+	if(this->right != nullptr)
+	{
+		this->right->freeSubNode();
+		delete this->right;
+	}
+}
+
 };
 
 
