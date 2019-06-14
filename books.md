@@ -25,7 +25,8 @@
 《MySQL数据库应用从入门到精通 第2版》
 
 
-##算法
+## 算法 
+
 《编程之美》
 《数据结构与算法》
 
@@ -60,7 +61,10 @@ Boost.Asio C++ Network Programming.pdf
 《七周七并发模型》
 《STL源码剖析》
 《深入浅出DPDK》
-《图解Ht》
+《图解Http》
+《深入理解Linux内核(第三版)中文版》
+[C和指针].(美)Kenneth.A.Reek(ED2000.COM)
+
 
 ## 待阅读
 《超越c++标准库——boost程序库导论》
