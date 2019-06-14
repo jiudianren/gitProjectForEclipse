@@ -1,71 +1,73 @@
 
 ## c++/c 
- ¡¶c++ primer¡·    
-¡¶effctive c++¡·   
-¡¶More effctive c++¡·  
-¡¶ÉîÈëÀí½âc++11¡·
-¡¶³¹µ×¸ã¶¨CÖ¸Õë¡·
+ ã€Šc++ primerã€‹    
+ã€Šeffctive c++ã€‹   
+ã€ŠMore effctive c++ã€‹  
+ã€Šæ·±å…¥ç†è§£c++11ã€‹
+ã€Šå½»åº•æžå®šCæŒ‡é’ˆã€‹
 
-##±àÒë
-¡¶±àÒëÏµÍ³Í¸ÊÓ:Í¼½â±àÒëÔ­Àí¡·
-¡¶¸úÎÒÒ»ÆðÐ´ Makefile ³ÂºÆ¡·
-¡¶CMakeÖÐÎÄÊÖ²á¡· --http://www.cnblogs.com/coderfenghc/tag/cmake/
-¡¶An_Introduction_to_GCC¡·
-¡¶Debugging.with.gdb.ÖÐÎÄ°æ.pdf¡·
+##ç¼–è¯‘
+ã€Šç¼–è¯‘ç³»ç»Ÿé€è§†:å›¾è§£ç¼–è¯‘åŽŸç†ã€‹
+ã€Šè·Ÿæˆ‘ä¸€èµ·å†™ Makefile é™ˆæµ©ã€‹
+ã€ŠCMakeä¸­æ–‡æ‰‹å†Œã€‹ --http://www.cnblogs.com/coderfenghc/tag/cmake/
+ã€ŠAn_Introduction_to_GCCã€‹
+ã€ŠDebugging.with.gdb.ä¸­æ–‡ç‰ˆ.pdfã€‹
 
 ##STL BOOST
-¡¶·ºÐÍ±à³ÌÓëSTL¡·
+ã€Šæ³›åž‹ç¼–ç¨‹ä¸ŽSTLã€‹
  
 
-## Éè¼ÆÄ£Ê½  
-¡¶head first Éè¼ÆÄ£Ê½¡·
+## è®¾è®¡æ¨¡å¼  
+ã€Šhead first è®¾è®¡æ¨¡å¼ã€‹
 
 
-## Êý¾Ý¿â
-¡¶MySQLÊý¾Ý¿âÓ¦ÓÃ´ÓÈëÃÅµ½¾«Í¨ µÚ2°æ¡·
+## æ•°æ®åº“
+ã€ŠMySQLæ•°æ®åº“åº”ç”¨ä»Žå…¥é—¨åˆ°ç²¾é€š ç¬¬2ç‰ˆã€‹
 
 
-##Ëã·¨
-¡¶±à³ÌÖ®ÃÀ¡·
-¡¶Êý¾Ý½á¹¹ÓëËã·¨¡·
+##ç®—æ³•
+ã€Šç¼–ç¨‹ä¹‹ç¾Žã€‹
+ã€Šæ•°æ®ç»“æž„ä¸Žç®—æ³•ã€‹
 
 
-## unix »·¾³
-¡¶unix»·¾³¸ß¼¶±à³Ì¡·  
-¡¶unix ÍøÂç±à³Ì ¾íÒ»¡·  
-¡¶unix ÍøÂç±à³Ì ¾í¶þ¡·  
+## unix çŽ¯å¢ƒ
+ã€ŠunixçŽ¯å¢ƒé«˜çº§ç¼–ç¨‹ã€‹  
+ã€Šunix ç½‘ç»œç¼–ç¨‹ å·ä¸€ã€‹  
+ã€Šunix ç½‘ç»œç¼–ç¨‹ å·äºŒã€‹  
 
 
-## ÔÆ»¯
-¡¶µÚÒ»±¾docker¡·
+## äº‘åŒ–
+ã€Šç¬¬ä¸€æœ¬dockerã€‹
 
 
 
 #bash
-¡¶linux shell ÃüÁîÐÐ¼°½Å±¾±à³Ì°¸ÀýÏê½â¡·
+ã€Šlinux shell å‘½ä»¤è¡ŒåŠè„šæœ¬ç¼–ç¨‹æ¡ˆä¾‹è¯¦è§£ã€‹
 
 
-#²¢·¢
-¡¶cpp concurrency in action¡·
+#å¹¶å‘
+ã€Šcpp concurrency in actionã€‹
 
-#ÐÔÄÜ
+#æ€§èƒ½
 
 
-#ÍøÂç
+#ç½‘ç»œ
 Boost.Asio C++ Network Programming.pdf
 
 
-## ÔÚÔÄ¶Á
-¡¶º¯ÊýÊ½±à³ÌË¼Î¬¡·
-¡¶ÆßÖÜÆß²¢·¢Ä£ÐÍ¡·
-¡¶STLÔ´ÂëÆÊÎö¡·
+## åœ¨é˜…è¯»
+ã€Šå‡½æ•°å¼ç¼–ç¨‹æ€ç»´ã€‹
+ã€Šä¸ƒå‘¨ä¸ƒå¹¶å‘æ¨¡åž‹ã€‹
+ã€ŠSTLæºç å‰–æžã€‹
+ã€Šæ·±å…¥æµ…å‡ºDPDKã€‹
+ã€Šå›¾è§£Htã€‹
 
-## ´ýÔÄ¶Á
-¡¶³¬Ô½c++±ê×¼¿â¡ª¡ªboost³ÌÐò¿âµ¼ÂÛ¡·
-¡¶Boost³ÌÐò¿âÍêÈ«¿ª·¢Ö¸ÄÏÉîÈëC++×¼±ê×¼¿â.pdf¡·
+## å¾…é˜…è¯»
+ã€Šè¶…è¶Šc++æ ‡å‡†åº“â€”â€”boostç¨‹åºåº“å¯¼è®ºã€‹
+ã€ŠBoostç¨‹åºåº“å®Œå…¨å¼€å‘æŒ‡å—æ·±å…¥C++å‡†æ ‡å‡†åº“.pdfã€‹
 
-##¹¤¾ßÀà
-¡¶´úÂë´óÈ«¡·
+##å·¥å…·ç±»
+ã€Šä»£ç å¤§å…¨ã€‹
 
 
 
