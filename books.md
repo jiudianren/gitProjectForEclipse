@@ -65,6 +65,9 @@ Boost.Asio C++ Network Programming.pdf
 《深入理解Linux内核(第三版)中文版》
 [C和指针].(美)Kenneth.A.Reek(ED2000.COM)
 
+深入浅出dpdk
+《Redis设计与实现》.(黄健宏).[PDF]
+[30天自制操作系统].(川合秀实).周自恒等.扫描版
 
 ## 待阅读
 《超越c++标准库——boost程序库导论》
