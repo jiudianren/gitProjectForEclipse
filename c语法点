@@ -8,6 +8,12 @@ inline
 likely()与unlikely()函数的意义
 https://www.cnblogs.com/xudong-bupt/p/7337240.html
 
+https://www.cnblogs.com/embedded-linux/p/5943652.html
+
+和普通的是一样的，只不过是提高了cache的命中率
+问题如果没有cache呢 ？如何确定计算机有没有cache？？
+
+
 
 C语言中的volatile——让我保持原样
 https://www.cnblogs.com/yangguang-it/p/6719261.html?utm_source=itdadao&utm_medium=referral
