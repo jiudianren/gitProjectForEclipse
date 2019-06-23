@@ -7,13 +7,34 @@ https://www.jianshu.com/p/22d6b8aecd7e
 https://www.cnblogs.com/wi100sh/p/5701525.html
 
 
-dark reader
-vimium
-tampermokey
-adblock
-momentum
-the great suspender
-githuber
-octotree
-sourcegraph
-githubmate
+# dark reader
+暗黑 浏览器模式
+# vimium
+用vim 方式 浏览网页
+
+
+# tampermokey
+自定义js脚本，作用于网页
+
+#adblock
+屏蔽广告 插件
+#momentum
+风光摄影 主题插件
+
+# the great suspender
+
+
+# sslspeedy2
+# 谷歌翻译
+# readlater 2
+# onetab
+# postman 
+# last pass
+# chrome下载管理器
+
+
+# github 相关
+## githuber
+## octotree
+## sourcegraph
+## githubmate
