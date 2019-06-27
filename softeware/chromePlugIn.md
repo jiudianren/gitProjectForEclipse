@@ -22,13 +22,26 @@ https://www.cnblogs.com/wi100sh/p/5701525.html
 风光摄影 主题插件
 
 # the great suspender
-
+悬挂 网页 减少 内存使用
 
 # sslspeedy2
+付费翻墙
+
+
 # 谷歌翻译
 # readlater 2
+将 链接保存，稍后阅读
+
+
 # onetab
+所有标签 瞬间 回收成一个
+
+
+
 # postman 
+测试接口
+
+
 # last pass
 # chrome下载管理器
 
