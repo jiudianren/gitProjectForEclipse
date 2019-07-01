@@ -1,3 +1,6 @@
+# 国内下载插件的地方
+https://cloud.tencent.com/developer/news/200147
+
 #  dark reader
 https://www.jianshu.com/p/22d6b8aecd7e
 
