@@ -111,8 +111,6 @@ public:
 		}
 	}
 
-
-
 	void generate(int start, vector<int>& v,  std::function<void(vector<int>) func>) {
 
 		if( start == S.size()) {

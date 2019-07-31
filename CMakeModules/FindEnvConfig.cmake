@@ -8,8 +8,6 @@
 OPTION(MT "program run in multi-threads mode" ON)
 OPTION(BUILD_SHARED_LIBS "libraries build static or shared" ON)
 
-
-
 set(CMAKE_SKIP_RPATH TRUE)
 
 #############################################
@@ -82,8 +80,6 @@ SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -D_DEBUG")
 IF(MT)
     ADD_DEFINITIONS(-D_REENTRANT)
 ENDIF()
-
-
 
 #############################################
 #Choose the type of build

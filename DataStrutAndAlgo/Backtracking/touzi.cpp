@@ -8,8 +8,7 @@
 
 /*
  * n个 骰子 ，随机投掷，求所有数字之和的概率。
- *
- * 思路就是求排列
+ * * 思路就是求排列
  * */
 
 
@@ -19,18 +18,18 @@
 
 int g_MaxValue=6;
 
-void ProbalbilityInner(int orignal, int curNumber, int sum , int * probability )
+void ProbalbilityInner( int curNumber, int sum , int * temprobility )
 {
 
     if( curNumber == 1)
     {
-        probability[sum - orignal] ++;
+    	temprobility[sum] ++;
     }
     else
     {
         for(int i = 1; i <= g_MaxValue; i++)
         {
-            ProbalbilityInner( orignal, curNumber -1  , sum+i ,probability);
+            ProbalbilityInner( curNumber -1  , sum+i ,temprobility);
         }
     }
 }
@@ -39,19 +38,18 @@ void ProbalbilityInner(int orignal, int curNumber, int sum , int * probability )
 
 void Probalbility(int orignal, int *  probability)
 {
+	int * temprobility = probability+6;
     for(int i = 1; i <= g_MaxValue; i++)
     {
-        ProbalbilityInner(orignal, orignal, i, probability) ;
+        ProbalbilityInner( orignal, i, temprobility) ;
     }
 }
 
 void PrintProbability(int number)
 {
     assert( number>0);
-
     int maxSum = number * g_MaxValue;
     int * probability = new int[ maxSum - number +1];
-
 
     for(int i = number; i< maxSum; i++)
     {
@@ -59,15 +57,11 @@ void PrintProbability(int number)
     }
 
     Probalbility( number , probability);
-
     double total = pow( (double )number, g_MaxValue );
 
     for(int i = number; i< maxSum ; i++)
     {
         std::cout<< " Value: " << i << ", probalbity : " <<  probability[ i - number ]/total;
     }
-
     delete [] probability;
 }
-
-
