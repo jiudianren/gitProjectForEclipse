@@ -1,0 +1,9 @@
+
+ " 设置swp undo backup 目录
+set dir=f:\vimtmp\swp
+set dir=f:\vimtmp\undo
+set dir=f:\vimtmp\backup
+" 设置配色方案
+colorscheme  darkblue
+"显示行号
+set number
