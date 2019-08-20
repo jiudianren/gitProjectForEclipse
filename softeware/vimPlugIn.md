@@ -29,5 +29,14 @@ CtrIP
 ctrlp和ctrlp的插件ctrlp-funky是一套强大的文本搜索系统。
 它可以提供文件、buffer和内容中查找的功能
 
- taglist  ctags
+ taglist  
 https://www.cnblogs.com/loveyakamoz/p/3472205.html
+
+ctags
+https://www.vim.org/scripts/script.php?script_id=2288
+下载附件中的文件ctags.ex ，
+并将其 解压到目录中取。
+解压之后的目录是CTAGS_PATH（例如D:\Program Files\ctags58）。
+并把%CTAGS_PATH%加到环境变量PATH的后面。
+
+
