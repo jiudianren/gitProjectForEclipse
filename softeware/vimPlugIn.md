@@ -60,6 +60,50 @@ https://www.cnblogs.com/loveyakamoz/p/3472205.html
 
 　　set autochdir表示自动切换目录的意思, set tags=tags;表示自动查找, 这两句同时设置vim即可实现递归的tags查找, 注意: set tags=tags;这一句的最后有一个分号, 这个分号是不能省略的. vim的配置文件使用的是vim自己的脚步语言. 这里是少数几个在行尾需要使用分号的地方之一.
   
+  2、ctags能定位什么内容
+1) 用#define定义的宏
+2) 枚举类型变量的值
+3) 函数的定义、原型和声明
+4) 名字空间(namespace)
+5) 类型定义(typedef)
+6) 变量(包括定义和声明)
+7) 类、结构体、枚举类型、联合
+8) 类、结构体和联合中成员变量或函数
+
+3、安装ctags
+如果是redhat或centos系统可以直接使用yum在线安装
+
+[root@localhost ~]# yum install ctags
+源码位置生成tags文件
+
+[root@localhost ~]# ctags -R *
+4、查找操作(3种使用方式)
+1)直接在命令行上操作
+
+[root@localhost ~]# vim -t main
+[root@localhost ~]# vim -t pos_create_task
+结果：直接打开对应符号对应文件，并定位到该符号的定义位置。常用在知道符号，但不知道在哪个文件模块中的位置。
+
+2)在vim的模式下使用": ta"命令
+
+:ta main
+:ta pos_create_task
+3)在光标指定位置下直接使用"ctrl + ]"
+在光标指定的位置下直接使用 "crtl + ]" 就可以定位到函数的定义位置；使用 "ctrl + t" 快捷键返回到上次跳转之前的位置。
+
+关于ctags的用法很多，以下是我们列举的部分：
+-->"ctrl + t"退回到原来的地方
+-->"[{"转到上一个位于第一列的"{"
+-->"}]"转到下一个位于第一列的"{" /* 似乎不管用 */
+-->"{"转到上一个空行
+-->"}"转到下一个空行
+-->"gd"转到当前光标所指的局部变量的定义
+-->"*"转到当前光标所指的单词一次出现的地方
+-->"#"转到当前光标所指的单词上一次出现的地方
+
+
+https://www.cnblogs.com/chenliyang/p/6634679.html
+  
 https://www.vim.org/scripts/script.php?script_id=2288  
 
 
