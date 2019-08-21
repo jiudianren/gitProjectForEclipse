@@ -1,0 +1,15 @@
+
+"  很好很强大的vimrc（带注释版） https://blog.csdn.net/fryingpan/article/details/40183197
+" 设置swp undo backup 目录
+
+set dir=f:\vimtmp\swp
+set udir=f:\vimtmp\undo
+set bdir=f:\vimtmp\backup
+" 设置配色方案
+colorscheme  darkblue
+"显示行号
+set number
+
+
+set fileencoding=utf-8
+set fileencodings=ucs-bom,utf-8,gbk,cp936,gb2312,big5,euc-jp,euc-kr,latin
