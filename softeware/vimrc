@@ -3,9 +3,16 @@
 " 设置swp undo backup 目录
 
 set dir=f:\vimtmp\swp
-set dir=f:\vimtmp\undo
-set dir=f:\vimtmp\backup
+set udir=f:\vimtmp\undo
+set bdir=f:\vimtmp\backup
 " 设置配色方案
 colorscheme  darkblue
 "显示行号
 set number
+
+
+set encoding=utf-8
+set fileencoding=utf-8
+set fileencodings=ucs-bom,utf-8,gbk,cp936,gb2312,big5,euc-jp,euc-kr,latin1
+let &termencoding=&encoding
+language messages zh_CN.utf-8
