@@ -20,3 +20,18 @@ Corvusoft's Restbed framework brings asynchronous RESTful functionality to C++11
 # nlohmann/json 
 
 JSON for Modern C++
+# devharsh/Technical-eBooks
+PDFs for programming tutorials.
+
+# Tessil/ordered-map
+
+C++ hash map and hash set which preserve the order of insertion
+
+# nghttp2
+ nghttp2/nghttp2
+nghttp2 - HTTP/2 C Library and tools
+#  arvidn/libtorrent
+an efficient feature complete C++ bittorrent implementation
+
+# spdlog
+spdlog
