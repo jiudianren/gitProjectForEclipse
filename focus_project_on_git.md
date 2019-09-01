@@ -9,3 +9,14 @@
 
 #netmindms/urlparser
 Simple URL Parser for C++
+
+# BitShares (BTS) 中文技术文档
+abitmore/bts-cn-docs
+
+#  leethomason/tinyxml2
+TinyXML2 is a simple, small, efficient, C++ XML parser that can be easily integrated into other programs.
+# Corvusoft/restbed
+Corvusoft's Restbed framework brings asynchronous RESTful functionality to C++11 applications.
+# nlohmann/json 
+
+JSON for Modern C++
