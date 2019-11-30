@@ -4,5 +4,7 @@ Docker Remote API
 
 
 
-API 风格
-Docker Remote API 能够管理远程主机上的docker集群信息
+
+
+API 椋庢牸
+Docker Remote API 鑳藉绠＄悊杩滅▼涓绘満涓婄殑docker闆嗙兢淇℃伅
