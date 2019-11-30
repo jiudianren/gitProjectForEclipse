@@ -1,15 +1,19 @@
-docker��ʵ�ֻ��� 
+docker的实现机制 
 
 
 
 
-dockerfile���﷨
+dockerfile的语法
 
 k8s
 
 
 devops
 
-�ƻ���ֲ�ʽ֮��Ĺ�ϵ
+云化与分布式之间的关系
 
 
+  
+  
+  
+  
