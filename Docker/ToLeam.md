@@ -1,15 +1,16 @@
-DOCKER»ù´¡¼¼Êõ£ºLINUX NAMESPACE£¨ÉÏ£©
+DOCKERåŸºç¡€æŠ€æœ¯ï¼šLINUX NAMESPACEï¼ˆä¸Šï¼‰
 
 https://coolshell.cn/articles/17010.html
 
-Docker ºËĞÄ¼¼ÊõÓëÊµÏÖÔ­Àí https://draveness.me/docker
+Docker æ ¸å¿ƒæŠ€æœ¯ä¸å®ç°åŸç† https://draveness.me/docker
 
-DOCKER»ù´¡¼¼Êõ£ºLINUX CGROUP https://coolshell.cn/articles/17049.html
+DOCKERåŸºç¡€æŠ€æœ¯ï¼šLINUX CGROUP https://coolshell.cn/articles/17049.html
 
-¡¶×Ô¼º¶¯ÊÖĞ´Docker¡·ÊéÕªÖ®Èı£º Linux UnionFShttps://yq.aliyun.com/articles/65034
+ã€Šè‡ªå·±åŠ¨æ‰‹å†™Dockerã€‹ä¹¦æ‘˜ä¹‹ä¸‰ï¼š Linux UnionFShttps://yq.aliyun.com/articles/65034
 
-¶Ë¿ÚÓ³ÉäÓëÈİÆ÷»¥Áª https://www.cnblogs.com/wade-luffy/p/6542653.html
+ç«¯å£æ˜ å°„ä¸å®¹å™¨äº’è” https://www.cnblogs.com/wade-luffy/p/6542653.html
 
-Àí½âDocker£¨8£©£ºDocker ´æ´¢Ö®¾í£¨Volume£©
+ç†è§£Dockerï¼ˆ8ï¼‰ï¼šDocker å­˜å‚¨ä¹‹å·ï¼ˆVolumeï¼‰
 https://www.cnblogs.com/sammyliu/p/5932996.html
 https://blog.csdn.net/l19901215/article/details/56295716
+
