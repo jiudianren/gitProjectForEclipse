@@ -1,31 +1,33 @@
-¡¶µÚÒ»±¾dockerÈëÃÅÊé¡·
+ã€Šç¬¬ä¸€æœ¬dockerå…¥é—¨ä¹¦ã€‹
 
-docker ÃüÁî
+docker å‘½ä»¤
 http://www.runoob.com/docker/docker-container-connection.html
 
 #docker run 
 docker run -i -t ubuntu /bin/bash
- -i stdin ¿ªÆô
- -t  ´ò¿ªÒ»¸öÎ±ÖÕ¶Ë
+ -i stdin å¼€å¯
+ -t  æ‰“å¼€ä¸€ä¸ªä¼ªç»ˆç«¯
 
- -d ´´½¨ÊØ»¤Ê½ÈİÆ÷
- -p  ¶Ë¿ÚÓ³Éä
- --name xxxx ÎªÈİÆ÷ÃüÃû
- --link  ÈİÆ÷»¥Áª
+ -d åˆ›å»ºå®ˆæŠ¤å¼å®¹å™¨
+ -p  ç«¯å£æ˜ å°„
+ --name xxxx ä¸ºå®¹å™¨å‘½å
+ --link  å®¹å™¨äº’è”
  --restart  
  
-# Æô¶¯ÒÑ¾­Í£Ö¹µÄÈİÆ÷
+ 
+ 
+# å¯åŠ¨å·²ç»åœæ­¢çš„å®¹å™¨
  docker  start contain-id
  
-# ¸½×Åµ½ÈİÆ÷
+# é™„ç€åˆ°å®¹å™¨
  docker attach cid
  docker exec 
  
  docker run -d ubuntu /bin/bash "while true ; do echo hello world ; sleep 1m ; done"
 
 #docker exec 
- ¶ÔÓÚ -dÆô¶¯µÄÈİÆ÷  Èç¹ûĞèÒª½øÈëÈİÆ÷ÄÚ²¿£¬¿ÉÒÔÊ¹ÓÃdocker exec Æô¶¯ĞÂµÄ½ø³Ì
- Õâ¸öÊ±ºò£¬¿ÉÒÔÖ´ĞĞdocker exec -t -i container-id  /bin/bash
+ å¯¹äº -då¯åŠ¨çš„å®¹å™¨  å¦‚æœéœ€è¦è¿›å…¥å®¹å™¨å†…éƒ¨ï¼Œå¯ä»¥ä½¿ç”¨docker exec å¯åŠ¨æ–°çš„è¿›ç¨‹
+ è¿™ä¸ªæ—¶å€™ï¼Œå¯ä»¥æ‰§è¡Œdocker exec -t -i container-id  /bin/bash
 
 
  docker ps -a
@@ -33,16 +35,16 @@ docker run -i -t ubuntu /bin/bash
  docker logs xxxx
  docker logs -f
  docker top xxx 
- docker exec xxx ÈİÆ÷ÄÚÆğ¶îÍâµÄ½ø³Ì
- docker stop  Í£Ö¹Ä³¸ödocker ÏòÈİÆ÷·¢ËÍSIGTERM 
- docker kill               ÏòÈİÆ÷·¢ËÍSIGKILL 
+ docker exec xxx å®¹å™¨å†…èµ·é¢å¤–çš„è¿›ç¨‹
+ docker stop  åœæ­¢æŸä¸ªdocker å‘å®¹å™¨å‘é€SIGTERM 
+ docker kill               å‘å®¹å™¨å‘é€SIGKILL 
  
  docker run --restart=xxx  
- dokcer inspect xxx ²é¿´ÈİÆ÷ĞÅÏ¢
+ dokcer inspect xxx æŸ¥çœ‹å®¹å™¨ä¿¡æ¯
  docker rm   
  docker image rm -f myhello:2.0
 
-#dockerÖĞÊ¹ÓÃgdb£¬ĞèÒªÔÚdocker run ¼ÓÈëÈçÏÂÑ¡Ïî
+#dockerä¸­ä½¿ç”¨gdbï¼Œéœ€è¦åœ¨docker run åŠ å…¥å¦‚ä¸‹é€‰é¡¹
 --security-opt seccomp=unconfined
 
 
@@ -55,9 +57,9 @@ docker run -i -t ubuntu /bin/bash
 #docker inpect 
  
 
- *ÎÄÕÂ*  
+ *æ–‡ç« *  
  
- ÔÚUbuntuÉÏ°²×°Docker
+ åœ¨Ubuntuä¸Šå®‰è£…Docker
  https://www.cnblogs.com/ksir16/p/6530433.html
- docker½¨Á¢×î¼òµ¥×îĞ¡µÄhelloworld¾µÏñ:
+ dockerå»ºç«‹æœ€ç®€å•æœ€å°çš„helloworldé•œåƒ:
  https://blog.csdn.net/u012819339/article/details/80007919
