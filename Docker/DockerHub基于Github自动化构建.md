@@ -1,11 +1,13 @@
 https://blog.csdn.net/cszhouwei/article/details/41312671
 
-1 µÇÂ¼docker hub 
+1 ç™»å½•docker hub 
 
 2 setting ---> Linked Accounts & Services
 
 3 creat ---> automated build
 
- ¿ªÊ¼¹¹½¨£¡µÇÂ¼µ½ÄãµÄ Docker Hub ÕË»§£¬µã»÷ÆÁÄ»ÓÒÉÏ·½µÄ "+ Add Repository" °´Å¥£¬Ñ¡Ôñ×Ô¶¯»¯¹¹½¨¡£
-Ñ¡ÔñGitHub·þÎñ
-È»ºó°´ÕÕËµÃ÷ÊÚÈ¨ºÍÁ¬½ÓÄãµÄ GitHub ÕË»§µ½ Docker Hub¡£Á¬½Ó³É¹¦ºó£¬Äã¾Í¿ÉÒÔÑ¡ÔñÓÃÀ´×Ô¶¯»¯¹¹½¨µÄ²Ö¿âÁË¡£
+
+
+ å¼€å§‹æž„å»ºï¼ç™»å½•åˆ°ä½ çš„ Docker Hub è´¦æˆ·ï¼Œç‚¹å‡»å±å¹•å³ä¸Šæ–¹çš„ "+ Add Repository" æŒ‰é’®ï¼Œé€‰æ‹©è‡ªåŠ¨åŒ–æž„å»ºã€‚
+é€‰æ‹©GitHubæœåŠ¡
+ç„¶åŽæŒ‰ç…§è¯´æ˜ŽæŽˆæƒå’Œè¿žæŽ¥ä½ çš„ GitHub è´¦æˆ·åˆ° Docker Hubã€‚è¿žæŽ¥æˆåŠŸåŽï¼Œä½ å°±å¯ä»¥é€‰æ‹©ç”¨æ¥è‡ªåŠ¨åŒ–æž„å»ºçš„ä»“åº“äº†ã€‚
