@@ -1,13 +1,14 @@
 
 #docker serach  xx
-²éÕÒ¾µÏñ
+æŸ¥æ‰¾é•œåƒ
 
 
-# ¹¹½¨»·¾³ ¹¹½¨ÉÏÏÂÎÄ
+
+# æ„å»ºç¯å¢ƒ æ„å»ºä¸Šä¸‹æ–‡
 Sending build context to Docker daemon  5.997MB
  
-#ÈçºÎµ÷ÊÔDockerfile 
-Èç¹ûdockerfileÔÚÄ³Ò»ÌõÊ§°Ü£¬Ôò»áÌá½»Ò»¸ö¿ÉÓÃµÄ£¬ÔÚ´ËÊ§°ÜÓï¾äÖ®Ç°µÄ¾µÏñ£¬Æô¶¯¸Ä¾µÏñ £¬¾Í¿ÉÒÔµ÷ÊÔ¸Ãdockerfile 
+#å¦‚ä½•è°ƒè¯•Dockerfile 
+å¦‚æœdockerfileåœ¨æŸä¸€æ¡å¤±è´¥ï¼Œåˆ™ä¼šæäº¤ä¸€ä¸ªå¯ç”¨çš„ï¼Œåœ¨æ­¤å¤±è´¥è¯­å¥ä¹‹å‰çš„é•œåƒï¼Œå¯åŠ¨æ”¹é•œåƒ ï¼Œå°±å¯ä»¥è°ƒè¯•è¯¥dockerfile 
  
 
 
@@ -24,13 +25,13 @@ docker pull   jiudianren/helloworld
 #docker commit     
  https://www.cnblogs.com/wherein/p/6862911.html
 
- docker ÒÔµ±Ç°ÔËĞĞÇé¿ö £¬Ìá½»¾µÏñ £¬ exit´ÓÈİÆ÷ÍË³öºó£¬Ê¹ÓÃdocker commit container_id  imags_id  ½«µ±Ç°ÈİÆ÷Ìá½»Îª¾µÏñ
+ docker ä»¥å½“å‰è¿è¡Œæƒ…å†µ ï¼Œæäº¤é•œåƒ ï¼Œ exitä»å®¹å™¨é€€å‡ºåï¼Œä½¿ç”¨docker commit container_id  imags_id  å°†å½“å‰å®¹å™¨æäº¤ä¸ºé•œåƒ
 
 docker commit CONTAINER_ID wherein/ubuntu
 docker commit CONTAINER_ID jiudianren/helloworld
 
 #docker rmi 
-É¾³ı¾µÏñ
+åˆ é™¤é•œåƒ
 
  
 # docker build   
