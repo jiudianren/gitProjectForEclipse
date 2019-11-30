@@ -23,9 +23,9 @@ touch Dockerfile
 `docker build -t myhello:1.0 .`
 `docker build -t  jiudianren/helloworld:latest  . `
 
-jiudianren ÊÇ²Ö¿âÃû
-helloworld ÊÇ¾µÏñÃû
-latest    ÊÇ±êÇ©
+jiudianren æ˜¯ä»“åº“å
+helloworld æ˜¯é•œåƒå
+latest    æ˜¯æ ‡ç­¾
 
 
 gcc -static -o build/hello hello.c  
@@ -38,68 +38,69 @@ ldd hello
     
     
 
-¹¹½¨£º
-»ùÓÚ×îºóÒ»²½³É¹¦µÄ¾µÏñ£¬²âÊÔdockerfile
+æž„å»ºï¼š
+åŸºäºŽæœ€åŽä¸€æ­¥æˆåŠŸçš„é•œåƒï¼Œæµ‹è¯•dockerfile
 
 docker run -t -i secess_imagsId /bin/bash 
 
 
 
-DockerfileÓï·¨
+Dockerfileè¯­æ³•
 
 
-# RUNÃüÁîÓÐÁ½ÖÖ¸ñÊ½
+# RUNå‘½ä»¤æœ‰ä¸¤ç§æ ¼å¼
 
 1. RUN <command>
 2. RUN ["executable", "param1", "param2"]
-µÚÒ»ÖÖºó±ßÖ±½Ó¸úshellÃüÁî
-ÔÚlinux²Ù×÷ÏµÍ³ÉÏÄ¬ÈÏ /bin/sh -c
-ÔÚwindows²Ù×÷ÏµÍ³ÉÏÄ¬ÈÏ cmd /S /C
-µÚ¶þÖÖÊÇÀàËÆÓÚº¯Êýµ÷ÓÃ¡£
-¿É½«executableÀí½â³ÉÎª¿ÉÖ´ÐÐÎÄ¼þ£¬ºóÃæ¾ÍÊÇÁ½¸ö²ÎÊý¡£
+ç¬¬ä¸€ç§åŽè¾¹ç›´æŽ¥è·Ÿshellå‘½ä»¤
+åœ¨linuxæ“ä½œç³»ç»Ÿä¸Šé»˜è®¤ /bin/sh -c
+åœ¨windowsæ“ä½œç³»ç»Ÿä¸Šé»˜è®¤ cmd /S /C
+ç¬¬äºŒç§æ˜¯ç±»ä¼¼äºŽå‡½æ•°è°ƒç”¨ã€‚
+å¯å°†executableç†è§£æˆä¸ºå¯æ‰§è¡Œæ–‡ä»¶ï¼ŒåŽé¢å°±æ˜¯ä¸¤ä¸ªå‚æ•°ã€‚
 
 
 #ENV REFRESH_AT XXXX_XX_XX
 
 WORKDIR
 
-CMD ÄÜ¹»±» dockerÃüÁîÐÐ¸²¸Ç
 
-ENTRYPOINT ²»ÄÜ±»dockerÃüÁîÐÐ¸²¸Ç  £¬¿ÉÒÔ½ÓÊÜdockerÃüÁîÐÐµÄ²ÎÊý£¬Ò²¿ÉÒÔ½ÓÊÕ CMDµÄ²ÎÊý
+CMD èƒ½å¤Ÿè¢« dockerå‘½ä»¤è¡Œè¦†ç›–
+
+ENTRYPOINT ä¸èƒ½è¢«dockerå‘½ä»¤è¡Œè¦†ç›–  ï¼Œå¯ä»¥æŽ¥å—dockerå‘½ä»¤è¡Œçš„å‚æ•°ï¼Œä¹Ÿå¯ä»¥æŽ¥æ”¶ CMDçš„å‚æ•°
 
 USER  root
 USER   xxx 
-VOLUE ¾í
+VOLUE å·
 
 ARGS
 
 
-ADD   Ä¿Â¼»òÕßÎÄ¼þ  tar url 
+ADD   ç›®å½•æˆ–è€…æ–‡ä»¶  tar url 
 ADD  file  DestDir
-COPY  file£¨±ØÐëÊÇµ±Ç°dockerfileÂ·¾¶ÏÂµÄÎÄ¼þ£©  DestDir£¨¾ø¶ÔÂ·¾¶£©
+COPY  fileï¼ˆå¿…é¡»æ˜¯å½“å‰dockerfileè·¯å¾„ä¸‹çš„æ–‡ä»¶ï¼‰  DestDirï¼ˆç»å¯¹è·¯å¾„ï¼‰
 
-ONBULID µ±¸Ã¾µÏñ±»ÓÃ×÷ÆäËûµÄ¾µÏñµÄ»ù´¡¾µÏñÊ±£¬±»Ö´ÐÐ
-
-
+ONBULID å½“è¯¥é•œåƒè¢«ç”¨ä½œå…¶ä»–çš„é•œåƒçš„åŸºç¡€é•œåƒæ—¶ï¼Œè¢«æ‰§è¡Œ
 
 
-# CMD ºÍ ENTERPOINTµÄÇø±ð
-cmd ¿ÉÒÔÓÐ¶àÌõ£¬×îºóÒ»ÌõÓÐ×÷ÓÃ£¬cmd¿ÉÒÔ±»ÈÝÆ÷Æô¶¯Ê±µÄÆô¶¯ÃüÁîËù´úÌæ
-
-ENTERPINTÖ¸Áî²»»á±»¸²¸Ç£¬docker runµÄÖ¸¶¨µÄ²ÎÊý£¬»á±»¸½¼Óµ½ enterpointÖ®ºó  
 
 
-´ÓÉÏÃæµÄËµÃ÷£¬ÎÒÃÇ¿ÉÒÔ¿´µ½ÓÐÁ½¸ö¹²Í¬µã£º
+# CMD å’Œ ENTERPOINTçš„åŒºåˆ«
+cmd å¯ä»¥æœ‰å¤šæ¡ï¼Œæœ€åŽä¸€æ¡æœ‰ä½œç”¨ï¼Œcmdå¯ä»¥è¢«å®¹å™¨å¯åŠ¨æ—¶çš„å¯åŠ¨å‘½ä»¤æ‰€ä»£æ›¿
 
-¶¼¿ÉÒÔÖ¸¶¨shell»òexecº¯Êýµ÷ÓÃµÄ·½Ê½Ö´ÐÐÃüÁî£»
-µ±´æÔÚ¶à¸öCMDÖ¸Áî»òENTRYPOINTÖ¸ÁîÊ±£¬Ö»ÓÐ×îºóÒ»¸öÉúÐ§£»
-¶øËüÃÇÓÐÈçÏÂ²îÒì£º
+ENTERPINTæŒ‡ä»¤ä¸ä¼šè¢«è¦†ç›–ï¼Œdocker runçš„æŒ‡å®šçš„å‚æ•°ï¼Œä¼šè¢«é™„åŠ åˆ° enterpointä¹‹åŽ  
 
-       ²îÒì1£ºCMDÖ¸ÁîÖ¸¶¨µÄÈÝÆ÷Æô¶¯Ê±ÃüÁî¿ÉÒÔ±»docker runÖ¸¶¨µÄÃüÁî¸²¸Ç£¬¶øENTRYPOINTÖ¸ÁîÖ¸¶¨µÄÃüÁî²»ÄÜ±»¸²¸Ç£¬¶øÊÇ½«docker runÖ¸¶¨µÄ²ÎÊýµ±×öENTRYPOINTÖ¸¶¨ÃüÁîµÄ²ÎÊý¡£
 
-       ²îÒì2£ºCMDÖ¸Áî¿ÉÒÔÎªENTRYPOINTÖ¸ÁîÉèÖÃÄ¬ÈÏ²ÎÊý£¬¶øÇÒ¿ÉÒÔ±»docker runÖ¸¶¨µÄ²ÎÊý¸²¸Ç£»
+ä»Žä¸Šé¢çš„è¯´æ˜Žï¼Œæˆ‘ä»¬å¯ä»¥çœ‹åˆ°æœ‰ä¸¤ä¸ªå…±åŒç‚¹ï¼š
 
-ÏÂÃæ·Ö±ð¶ÔÉÏÃæÁ½¸ö²îÒìµã½øÐÐÏêÏ¸ËµÃ÷£¬
+éƒ½å¯ä»¥æŒ‡å®šshellæˆ–execå‡½æ•°è°ƒç”¨çš„æ–¹å¼æ‰§è¡Œå‘½ä»¤ï¼›
+å½“å­˜åœ¨å¤šä¸ªCMDæŒ‡ä»¤æˆ–ENTRYPOINTæŒ‡ä»¤æ—¶ï¼Œåªæœ‰æœ€åŽä¸€ä¸ªç”Ÿæ•ˆï¼›
+è€Œå®ƒä»¬æœ‰å¦‚ä¸‹å·®å¼‚ï¼š
+
+       å·®å¼‚1ï¼šCMDæŒ‡ä»¤æŒ‡å®šçš„å®¹å™¨å¯åŠ¨æ—¶å‘½ä»¤å¯ä»¥è¢«docker runæŒ‡å®šçš„å‘½ä»¤è¦†ç›–ï¼Œè€ŒENTRYPOINTæŒ‡ä»¤æŒ‡å®šçš„å‘½ä»¤ä¸èƒ½è¢«è¦†ç›–ï¼Œè€Œæ˜¯å°†docker runæŒ‡å®šçš„å‚æ•°å½“åšENTRYPOINTæŒ‡å®šå‘½ä»¤çš„å‚æ•°ã€‚
+
+       å·®å¼‚2ï¼šCMDæŒ‡ä»¤å¯ä»¥ä¸ºENTRYPOINTæŒ‡ä»¤è®¾ç½®é»˜è®¤å‚æ•°ï¼Œè€Œä¸”å¯ä»¥è¢«docker runæŒ‡å®šçš„å‚æ•°è¦†ç›–ï¼›
+
+ä¸‹é¢åˆ†åˆ«å¯¹ä¸Šé¢ä¸¤ä¸ªå·®å¼‚ç‚¹è¿›è¡Œè¯¦ç»†è¯´æ˜Žï¼Œ
 
 
 
