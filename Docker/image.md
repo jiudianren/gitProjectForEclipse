@@ -10,6 +10,18 @@ Sending build context to Docker daemon  5.997MB
 #如何调试Dockerfile 
 如果dockerfile在某一条失败，则会提交一个可用的，在此失败语句之前的镜像，启动改镜像 ，就可以调试该dockerfile 
  
+# 搜索镜像
+docker search certbot/certbot
+# 下载镜像
+docker pull wordpress
+docker pull mysql
+
+# 重命名镜像
+docker tag IMAGEID(镜像id) REPOSITORY:TAG（仓库：标签）
+jiudianren/coder-server
+
+# 删除镜像
+docker rmi IMAGEID  docker rmi REPOSITORY:TAG
 
 
  
