@@ -33,16 +33,20 @@ docker rmi IMAGEID  docker rmi REPOSITORY:TAG
 docker login  
 docker push    jiudianren/helloworld
 docker pull   jiudianren/helloworld
+docker push jiudianren/code-server:latest
  
-#docker commit     
+# docker commit     
  https://www.cnblogs.com/wherein/p/6862911.html
 
  docker 以当前运行情况 ，提交镜像 ， exit从容器退出后，使用docker commit container_id  imags_id  将当前容器提交为镜像
 
 docker commit CONTAINER_ID wherein/ubuntu
 docker commit CONTAINER_ID jiudianren/helloworld
+docker commit CONTAINER_ID jiudianren/helloworld
+docker commit vscode jiudianren/code-server:latest
+docker commit vscode jiudianren/code-server:latest
 
-#docker rmi 
+# docker rmi 
 删除镜像
 
  
@@ -55,7 +59,7 @@ docker commit CONTAINER_ID jiudianren/helloworld
     docker build --build-arg xx=xxx 
     docker buiold -t name  git@github.com:jiudianren/Projname
 
-#docker tag 
+# docker tag 
 docker tag old  new 
 docker tag jiudianren/boostdocker:latest   jiudianren/boostdocker:ok
 
