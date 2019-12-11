@@ -43,8 +43,8 @@ docker push jiudianren/code-server:latest
 docker commit CONTAINER_ID wherein/ubuntu
 docker commit CONTAINER_ID jiudianren/helloworld
 docker commit CONTAINER_ID jiudianren/helloworld
-docker commit vscode jiudianren/code-server:latest
-docker commit vscode jiudianren/code-server:latest
+
+docker commit vscode jiudianren/coder-server:latest
 
 # docker rmi 
 删除镜像
