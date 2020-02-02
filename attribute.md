@@ -17,3 +17,8 @@ https://blog.csdn.net/sadshen/article/details/9419267
 https://blog.csdn.net/guanhuhousheng/article/details/76301829
 
 
+# constructor
+
+https://blog.csdn.net/accumla/article/details/96161462
+__attribute__((constructor)) 先于main()函数调用  
+ __attribute__((destructor)) 在main()函数后调用 
