@@ -5,7 +5,18 @@ static int   g_C       = 30;         //数据段
 static int   g_D;                    //BSS段  
 int          g_E;                    //BSS段  
 char        *p1;                     //BSS段  
-  
+
+
+int add(int a , int b)
+{
+ int c =0 ;
+c = a+b;
+
+return c;
+}  
+
+
+
 void main( )  
 {  
     int           local_A;            //栈  
@@ -35,5 +46,10 @@ void main( )
     printf("-----------代码段------------\n");  
     printf( "代码段,全局初始化变量, 只读const,  g_A,     addr:0x%08x\n\n", &g_A);  
     printf("low address\n");  
+
+    	int x =10;
+	int  y =10;
+	int z =0;
+	z= add(x,y);
     return;  
 }  

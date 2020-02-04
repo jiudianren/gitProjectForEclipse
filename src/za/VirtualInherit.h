@@ -1,9 +1,4 @@
-/*
- * VirtualTest2.h
- *
- *  Created on: 2017дЙ6тб12ху
- *      Author: Administrator
- */
+
 
 #ifndef VIRTUALTEST2_H_
 #define VIRTUALTEST2_H_
@@ -15,7 +10,7 @@ class IIGx
 {
 public:
 	virtual  ~IIGx(){}
-	//╢©пИ╨╞йЩ©иртспд╛хой╣ож
+	//О©╫О©╫О©╫И╨╞О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫д╛О©╫О©╫й╣О©╫О©╫
 	virtual void FunGx() { std::cout<<"virtual void FunGx()"<<endl;}
 };
 
